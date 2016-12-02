@@ -14,10 +14,25 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    sqlip.cpp
+    sqlip.cpp \
+    adminmainwindow.cpp \
+    studentmainwindow.cpp \
+    editbook.cpp \
+    editreader.cpp \
+    bookdetail.cpp
 
 HEADERS  += mainwindow.h \
-    sqlip.h
+    sqlip.h \
+    adminmainwindow.h \
+    studentmainwindow.h \
+    editbook.h \
+    editreader.h \
+    bookdetail.h
 
 FORMS    += mainwindow.ui \
-    sqlip.ui
+    sqlip.ui \
+    adminmainwindow.ui \
+    studentmainwindow.ui \
+    editbook.ui \
+    editreader.ui \
+    bookdetail.ui
