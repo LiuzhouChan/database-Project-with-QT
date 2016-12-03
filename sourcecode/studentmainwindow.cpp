@@ -1,14 +1,171 @@
 #include "studentmainwindow.h"
 #include "ui_studentmainwindow.h"
 
-studentMainWindow::studentMainWindow(QWidget *parent) :
-    QMainWindow(parent),
+studentMainWindow::studentMainWindow(QWidget *parent,student * stu) :
+    QMainWindow(parent),stud(stu),
     ui(new Ui::studentMainWindow)
 {
     ui->setupUi(this);
+    QSqlQuery query(QSqlDatabase::database("myconnection"));
+    //学生的续借管理
+    query.exec(" ");
+    settable2(query);
 }
 
 studentMainWindow::~studentMainWindow()
 {
+    delete stud;
     delete ui;
+}
+
+void studentMainWindow::on_pushButton_clicked()
+{
+    QSqlQuery query(QSqlDatabase::database("myconnection"));
+
+    if(ui->lineEdit->text().isEmpty())
+    {
+        if(ui->radioButton->isChecked())
+        {
+            query.exec("select Book.Bname,Book.ISBN,Book.Bpublisher,"
+                       "Book.Bauthor,Book.Bdate,Book.Bprice,Book.Sno,count("
+                       "Book.ISBN) from Book join BookForRent on "
+                       "Book.ISBN=BookForRent.ISBN group by Book.ISBN having count(Book.ISBN)>0;");
+        }
+        else
+        {
+            query.exec("select Book.Bname,Book.ISBN,Book.Bpublisher,"
+                       "Book.Bauthor,Book.Bdate,Book.Bprice,Book.Sno,count("
+                       "Book.ISBN) from Book join BookForRent on "
+                       "Book.ISBN=BookForRent.ISBN group by Book.ISBN;");
+        }
+        settable(query);
+        ui->tableWidget->show();
+        return;
+    }
+
+    if(ui->comboBox->currentText()=="BookName")
+    {
+        if(ui->radioButton->isChecked())
+        {
+            query.exec("select Book.Bname,Book.ISBN,Book.Bpublisher,"
+                       "Book.Bauthor,Book.Bdate,Book.Bprice,Book.Sno,count("
+                       "Book.ISBN) from Book join BookForRent on "
+                       "Book.ISBN=BookForRent.ISBN where Book.Bname =\""+
+                       ui->lineEdit->text()+"\" group by Book.ISBN having count(Book.ISBN)>0;");
+        }
+        else
+        {
+            query.exec("select Book.Bname,Book.ISBN,Book.Bpublisher,"
+                       "Book.Bauthor,Book.Bdate,Book.Bprice,Book.Sno,count("
+                       "Book.ISBN) from Book join BookForRent on "
+                       "Book.ISBN=BookForRent.ISBN where Book.Bname =\""+
+                       ui->lineEdit->text()+"\" group by Book.ISBN;");
+        }
+        settable(query);
+    }
+    else if(ui->comboBox->currentText()=="Author")
+    {
+        if(ui->radioButton->isChecked())
+        {
+            query.exec("select Book.Bname,Book.ISBN,Book.Bpublisher,"
+                       "Book.Bauthor,Book.Bdate,Book.Bprice,Book.Sno,count("
+                       "Book.ISBN) from Book join BookForRent on "
+                       "Book.ISBN=BookForRent.ISBN where Book.Bauthor =\""+
+                       ui->lineEdit->text()+"\" group by Book.ISBN having count(Book.ISBN)>0;");
+        }
+        else
+        {
+            query.exec("select Book.Bname,Book.ISBN,Book.Bpublisher,"
+                       "Book.Bauthor,Book.Bdate,Book.Bprice,Book.Sno,count("
+                       "Book.ISBN) from Book join BookForRent on "
+                       "Book.ISBN=BookForRent.ISBN where Book.Bauthor =\""+
+                       ui->lineEdit->text()+"\" group by Book.ISBN;");
+        }
+        settable(query);
+    }
+    else
+    {
+        if(ui->radioButton->isChecked())
+        {
+            query.exec("select Book.Bname,Book.ISBN,Book.Bpublisher,"
+                       "Book.Bauthor,Book.Bdate,Book.Bprice,Book.Sno,count("
+                       "Book.ISBN) from Book join BookForRent on "
+                       "Book.ISBN=BookForRent.ISBN where Book.ISBN =\""+
+                       ui->lineEdit->text()+"\" group by Book.ISBN having count(Book.ISBN)>0;");
+        }
+        else
+        {
+            query.exec("select Book.Bname,Book.ISBN,Book.Bpublisher,"
+                       "Book.Bauthor,Book.Bdate,Book.Bprice,Book.Sno,count("
+                       "Book.ISBN) from Book join BookForRent on "
+                       "Book.ISBN=BookForRent.ISBN where Book.ISBN =\""+
+                       ui->lineEdit->text()+"\" group by Book.ISBN;");
+        }
+        settable(query);
+    }
+    ui->tableWidget->show();
+}
+
+void studentMainWindow::settable2(QSqlQuery &query)
+{
+    ui->tableWidget_2->clear();
+    QStringList header;
+    header<<"Name"<<"ISBN"<<"Publisher"<<"Author"<<"Date"<<"Price"<<"Start date"<<"Due data"<<"Fine";
+   // std::unique_ptr<QTableView>
+    ui->tableWidget_2->setColumnCount(9);
+    ui->tableWidget_2->setHorizontalHeaderLabels(header);
+    ui->tableWidget_2->horizontalHeader()->setStretchLastSection(true);
+
+    int i=0;
+    while(query.next())
+    {
+
+        if(ui->tableWidget_2->rowCount()<i+1)
+        {
+            ui->tableWidget_2->insertRow(i);
+        }
+        for(int j=0;j<9;++j)
+        {
+            ui->tableWidget_2->setItem(i,j,
+                   new QTableWidgetItem(query.value(j).toString()));
+        }
+         ++i;
+    }
+    int num=ui->tableWidget_2->rowCount();
+    for(int jj=0;jj<num-i;++jj)
+    {
+        ui->tableWidget_2->removeRow(i);
+    }
+}
+void studentMainWindow::settable(QSqlQuery &query)
+{
+    ui->tableWidget->clear();
+    QStringList header;
+    header<<"Name"<<"ISBN"<<"Publisher"<<"Author"<<"Data"<<"Price"<<"Shelf"
+         <<"Status";
+   // std::unique_ptr<QTableView>
+    ui->tableWidget->setColumnCount(8);
+    ui->tableWidget->setHorizontalHeaderLabels(header);
+    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
+
+    int i=0;
+    while(query.next())
+    {
+
+        if(ui->tableWidget->rowCount()<i+1)
+        {
+            ui->tableWidget->insertRow(i);
+        }
+        for(int j=0;j<8;++j)
+        {
+            ui->tableWidget->setItem(i,j,
+                   new QTableWidgetItem(query.value(j).toString()));
+        }
+         ++i;
+    }
+    int num=ui->tableWidget->rowCount();
+    for(int jj=0;jj<num-i;++jj)
+    {
+        ui->tableWidget->removeRow(i);
+    }
 }

@@ -9,6 +9,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->lineEdit_2->setText("20160000");
+    ui->lineEdit_3->setText("1234");
     ip=new sqlip(this);
 }
 
@@ -20,7 +22,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionSQL_server_IP_triggered()
 {
-
     ip->show();
 }
 
@@ -42,13 +43,14 @@ void MainWindow::on_loginButton_clicked()
         {
             login=1;
             this->hide();
-            adminMainWindow *admin = new adminMainWindow(this);
+            manager * man=new manager(new QString(name),new QString(password));
+            adminMainWindow *admin = new adminMainWindow(this,man);
             admin->show();
             return;
         }
     }
 
-    query.exec("select Rno,password from Reader");
+    query.exec("select * from Reader");
     while(query.next())
     {
         QString name = query.value(0).toString();
@@ -57,8 +59,13 @@ void MainWindow::on_loginButton_clicked()
         {
             login=1;
             this->hide();
-            studentMainWindow *student=new studentMainWindow(this);
-            student->show();
+            student *stu=new student(new QString(query.value(0).toString()),new QString(query.value(1).toString())
+                                     ,new QString(query.value(2).toString())
+                                    ,new QString(query.value(3).toString()),new QString(query.value(4).toString()),
+                                     new QString(query.value(5).toString())
+                                    ,query.value(6).toInt(),query.value(7).toDouble());
+            studentMainWindow *studen=new studentMainWindow(this,stu);
+            studen->show();
             return;
         }
     }

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>989</width>
+    <width>1093</width>
     <height>721</height>
    </rect>
   </property>
@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <property name="tabsClosable">
        <bool>false</bool>
@@ -38,16 +38,16 @@
             <item>
              <widget class="QComboBox" name="comboBox">
               <property name="currentText">
-               <string>书名</string>
+               <string>BookName</string>
               </property>
               <item>
                <property name="text">
-                <string>书名</string>
+                <string>BookName</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>作者</string>
+                <string>Author</string>
                </property>
               </item>
               <item>
@@ -213,7 +213,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>989</width>
+     <width>1093</width>
      <height>28</height>
     </rect>
    </property>

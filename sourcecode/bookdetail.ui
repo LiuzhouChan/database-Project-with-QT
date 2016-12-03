@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>625</width>
-    <height>441</height>
+    <height>472</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -68,9 +68,16 @@
         </widget>
        </item>
        <item>
+        <widget class="QLabel" name="label_12">
+         <property name="text">
+          <string>Book No.</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QLabel" name="label_4">
          <property name="text">
-          <string>Publish</string>
+          <string>Publisher</string>
          </property>
         </widget>
        </item>
@@ -143,6 +150,13 @@
        </item>
        <item>
         <widget class="QLineEdit" name="lineEdit_8">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit_10">
          <property name="readOnly">
           <bool>true</bool>
          </property>
@@ -228,5 +242,38 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>spinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>horizontalSlider</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>129</x>
+     <y>398</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>353</x>
+     <y>393</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>spinBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>455</x>
+     <y>393</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>129</x>
+     <y>398</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

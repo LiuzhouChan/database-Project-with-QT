@@ -7,7 +7,8 @@
 #include <QMessageBox>
 #include "adminmainwindow.h"
 #include "studentmainwindow.h"
-
+#include "manager.h"
+#include "student.h"
 namespace Ui {
 class MainWindow;
 }

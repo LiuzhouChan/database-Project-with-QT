@@ -19,7 +19,10 @@ SOURCES += main.cpp\
     studentmainwindow.cpp \
     editbook.cpp \
     editreader.cpp \
-    bookdetail.cpp
+    bookdetail.cpp \
+    manager.cpp \
+    student.cpp \
+    book.cpp
 
 HEADERS  += mainwindow.h \
     sqlip.h \
@@ -27,7 +30,10 @@ HEADERS  += mainwindow.h \
     studentmainwindow.h \
     editbook.h \
     editreader.h \
-    bookdetail.h
+    bookdetail.h \
+    manager.h \
+    student.h \
+    book.h
 
 FORMS    += mainwindow.ui \
     sqlip.ui \

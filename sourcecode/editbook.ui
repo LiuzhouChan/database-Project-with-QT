@@ -56,7 +56,7 @@
        <item>
         <widget class="QLabel" name="label_6">
          <property name="text">
-          <string>Data</string>
+          <string>Date</string>
          </property>
         </widget>
        </item>
@@ -105,6 +105,9 @@
         <widget class="QLineEdit" name="lineEdit_4"/>
        </item>
        <item>
+        <widget class="QLineEdit" name="lineEdit_10"/>
+       </item>
+       <item>
         <widget class="QLineEdit" name="lineEdit_5"/>
        </item>
        <item>
@@ -117,12 +120,12 @@
         <widget class="QLineEdit" name="lineEdit_8"/>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_9"/>
-       </item>
-       <item>
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
           <widget class="QSpinBox" name="spinBox">
+           <property name="readOnly">
+            <bool>false</bool>
+           </property>
            <property name="maximum">
             <number>30</number>
            </property>
