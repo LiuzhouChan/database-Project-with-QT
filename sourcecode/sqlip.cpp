@@ -22,6 +22,7 @@ sqlip::~sqlip()
     {
        QSqlDatabase db=QSqlDatabase::database("myconnection");
        db.close();
+       QSqlDatabase::removeDatabase("myconnection");
     }
     delete ui;
 }

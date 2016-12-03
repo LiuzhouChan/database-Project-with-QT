@@ -5,6 +5,8 @@
 #include "sqlip.h"
 #include <QString>
 #include <QMessageBox>
+#include "adminmainwindow.h"
+#include "studentmainwindow.h"
 
 namespace Ui {
 class MainWindow;
@@ -22,6 +24,8 @@ private slots:
     void on_actionSQL_server_IP_triggered();
 
     void on_actionAbout_QT_triggered();
+
+    void on_loginButton_clicked();
 
 private:
     Ui::MainWindow *ui;
