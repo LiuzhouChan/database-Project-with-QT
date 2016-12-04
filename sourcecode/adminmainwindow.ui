@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <property name="tabsClosable">
        <bool>false</bool>
@@ -222,6 +222,7 @@
      <string>Setti&amp;ng</string>
     </property>
     <addaction name="action_2"/>
+    <addaction name="separator"/>
     <addaction name="action"/>
    </widget>
    <addaction name="menuSetting"/>

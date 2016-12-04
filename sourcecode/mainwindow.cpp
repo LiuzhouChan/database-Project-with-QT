@@ -9,8 +9,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->lineEdit_2->setText("20160000");
-    ui->lineEdit_3->setText("1234");
+    ui->lineEdit_2->setText("00000000");
+    ui->lineEdit_3->setText("root");
     ip=new sqlip(this);
 }
 
@@ -43,8 +43,9 @@ void MainWindow::on_loginButton_clicked()
         {
             login=1;
             this->hide();
-            manager * man=new manager(new QString(name),new QString(password));
-            adminMainWindow *admin = new adminMainWindow(this,man);
+            manager * man=new manager(name,password);
+            adminMainWindow *admin = new adminMainWindow(this);
+            admin->setManager(man);
             admin->show();
             return;
         }
@@ -59,10 +60,10 @@ void MainWindow::on_loginButton_clicked()
         {
             login=1;
             this->hide();
-            student *stu=new student(new QString(query.value(0).toString()),new QString(query.value(1).toString())
-                                     ,new QString(query.value(2).toString())
-                                    ,new QString(query.value(3).toString()),new QString(query.value(4).toString()),
-                                     new QString(query.value(5).toString())
+            student *stu=new student(query.value(0).toString(),query.value(1).toString()
+                                     ,query.value(2).toString()
+                                    ,query.value(3).toString(),query.value(4).toString(),
+                                     query.value(5).toString()
                                     ,query.value(6).toInt(),query.value(7).toDouble());
             studentMainWindow *studen=new studentMainWindow(this,stu);
             studen->show();

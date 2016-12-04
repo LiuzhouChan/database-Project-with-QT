@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
+QT       += core gui sql  KWidgetsAddons
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -22,7 +22,10 @@ SOURCES += main.cpp\
     bookdetail.cpp \
     manager.cpp \
     student.cpp \
-    book.cpp
+    book.cpp \
+    util.cpp \
+    finemanager.cpp \
+    changepassword.cpp
 
 HEADERS  += mainwindow.h \
     sqlip.h \
@@ -33,7 +36,10 @@ HEADERS  += mainwindow.h \
     bookdetail.h \
     manager.h \
     student.h \
-    book.h
+    book.h \
+    util.h \
+    finemanager.h \
+    changepassword.h
 
 FORMS    += mainwindow.ui \
     sqlip.ui \
@@ -41,4 +47,6 @@ FORMS    += mainwindow.ui \
     studentmainwindow.ui \
     editbook.ui \
     editreader.ui \
-    bookdetail.ui
+    bookdetail.ui \
+    finemanager.ui \
+    changepassword.ui

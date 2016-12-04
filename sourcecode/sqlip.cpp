@@ -20,8 +20,7 @@ sqlip::~sqlip()
 
     if(QSqlDatabase::contains("myconnection"))
     {
-       QSqlDatabase db=QSqlDatabase::database("myconnection");
-       db.close();
+       QSqlDatabase::database("myconnection").close();
        QSqlDatabase::removeDatabase("myconnection");
     }
     delete ui;

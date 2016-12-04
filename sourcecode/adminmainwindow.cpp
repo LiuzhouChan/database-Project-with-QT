@@ -1,11 +1,16 @@
 #include "adminmainwindow.h"
 #include "ui_adminmainwindow.h"
 
-adminMainWindow::adminMainWindow(QWidget *parent, manager *mang) :
-    QMainWindow(parent),man(mang),
-    ui(new Ui::adminMainWindow)
+adminMainWindow::adminMainWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::adminMainWindow),man(nullptr)
 {
     ui->setupUi(this);
+}
+
+void adminMainWindow::setManager(manager *mang)
+{
+    man=mang;
 }
 
 adminMainWindow::~adminMainWindow()
@@ -14,29 +19,6 @@ adminMainWindow::~adminMainWindow()
     delete ui;
 }
 
-int adminMainWindow::settable(QSqlQuery &query,QTableWidget* table, QStringList &header,int i)
-{
-    int size(header.size());
-    table->setColumnCount(size);
-    table->setHorizontalHeaderLabels(header);
-    table->horizontalHeader()->setStretchLastSection(true);
-
-    while(query.next())
-    {
-        if(table->rowCount()<i+1)
-        {
-            table->insertRow(i);
-        }
-        for(int j=0;j<size;++j)
-        {
-            table->setItem(i,j,
-                   new QTableWidgetItem(query.value(j).toString()));
-        }
-         ++i;
-    }
-    return i;
-
-}
 
 void adminMainWindow::on_pushButton_clicked()
 {
@@ -144,14 +126,7 @@ void adminMainWindow::on_pushButton_clicked()
      ui->tableWidget->show();
 
 }
-void adminMainWindow::rmrow(int i,QTableWidget * table)
-{
-    int num=table->rowCount();
-    for(int jj=0;jj<num-i;++jj)
-    {
-        table->removeRow(i);
-    }
-}
+
 
 void adminMainWindow::on_pushButton_5_clicked()
 {
@@ -179,7 +154,7 @@ void adminMainWindow::on_pushButton_5_clicked()
        ui->tableWidget_2->show();
        return;
     }
-    if(ui->lineEdit_2->text()=="Id")
+    if(ui->comboBox_2->currentText()=="ID")
     {
         ui->tableWidget_2->clear();
         int i(0);
@@ -216,4 +191,16 @@ void adminMainWindow::on_pushButton_5_clicked()
        rmrow(i,ui->tableWidget_2);
     }
      ui->tableWidget_2->show();
+}
+
+void adminMainWindow::on_action_triggered()
+{
+    finemanager *fin=new finemanager;
+    fin->show();
+}
+
+void adminMainWindow::on_action_2_triggered()
+{
+    changepassword *ch=new changepassword(0,man);
+    ch->show();
 }

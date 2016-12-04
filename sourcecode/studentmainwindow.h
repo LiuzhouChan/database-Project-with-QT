@@ -13,6 +13,8 @@
 #include <QRadioButton>
 #include <QLineEdit>
 #include "student.h"
+#include "util.h"
+
 namespace Ui {
 class studentMainWindow;
 }
@@ -31,9 +33,6 @@ private slots:
 private:
     student * stud;
     Ui::studentMainWindow *ui;
-    void settable(QSqlQuery &query);
-    void settable2(QSqlQuery &query);
-
 };
 
 #endif // STUDENTMAINWINDOW_H
