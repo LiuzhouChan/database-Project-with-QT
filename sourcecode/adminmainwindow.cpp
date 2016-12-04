@@ -204,3 +204,9 @@ void adminMainWindow::on_action_2_triggered()
     changepassword *ch=new changepassword(0,man);
     ch->show();
 }
+
+void adminMainWindow::on_pushButton_4_clicked()
+{
+    bookdetail *book=new bookdetail;
+    book->show();
+}

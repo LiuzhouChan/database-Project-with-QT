@@ -47,13 +47,6 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label_8">
-         <property name="text">
-          <string>Site</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QLabel" name="label_6">
          <property name="text">
           <string>Data</string>
@@ -88,13 +81,6 @@
          </property>
         </widget>
        </item>
-       <item>
-        <widget class="QLabel" name="label_10">
-         <property name="text">
-          <string>续借</string>
-         </property>
-        </widget>
-       </item>
       </layout>
      </item>
      <item>
@@ -102,100 +88,65 @@
        <item>
         <widget class="QLineEdit" name="lineEdit">
          <property name="readOnly">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QLineEdit" name="lineEdit_2">
          <property name="readOnly">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QLineEdit" name="lineEdit_3">
          <property name="readOnly">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QLineEdit" name="lineEdit_4">
          <property name="readOnly">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QLineEdit" name="lineEdit_5">
          <property name="readOnly">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QLineEdit" name="lineEdit_6">
          <property name="readOnly">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QLineEdit" name="lineEdit_7">
          <property name="readOnly">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QLineEdit" name="lineEdit_8">
          <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="lineEdit_10">
-         <property name="readOnly">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QLineEdit" name="lineEdit_9">
          <property name="readOnly">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
         </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
-         <item>
-          <widget class="QSpinBox" name="spinBox">
-           <property name="maximum">
-            <number>30</number>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_11">
-           <property name="text">
-            <string>天</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSlider" name="horizontalSlider">
-           <property name="maximum">
-            <number>30</number>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-        </layout>
        </item>
       </layout>
      </item>
@@ -244,34 +195,18 @@
  <resources/>
  <connections>
   <connection>
-   <sender>spinBox</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>horizontalSlider</receiver>
-   <slot>setValue(int)</slot>
+   <sender>pushButton_2</sender>
+   <signal>pressed()</signal>
+   <receiver>pushButton</receiver>
+   <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>129</x>
-     <y>398</y>
+     <x>392</x>
+     <y>414</y>
     </hint>
     <hint type="destinationlabel">
-     <x>353</x>
-     <y>393</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSlider</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBox</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>455</x>
-     <y>393</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>129</x>
-     <y>398</y>
+     <x>493</x>
+     <y>411</y>
     </hint>
    </hints>
   </connection>

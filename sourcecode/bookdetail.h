@@ -3,6 +3,10 @@
 
 #include <QWidget>
 #include "book.h"
+#include <QLineEdit>
+#include <QSqlQuery>
+#include <QMessageBox>
+#include <QSqlError>
 namespace Ui {
 class bookdetail;
 }
@@ -12,12 +16,19 @@ class bookdetail : public QWidget
     Q_OBJECT
 
 public:
-    explicit bookdetail(QWidget *parent,book * boo);
+    explicit bookdetail(QWidget *parent=0,book * boo=nullptr);
     ~bookdetail();
 
+private slots:
+    void on_pushButton_3_clicked();
+
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_clicked();
+
 private:
-    Ui::bookdetail *ui;
     book *bo;
+    Ui::bookdetail *ui;
 };
 
 #endif // BOOKDETAIL_H

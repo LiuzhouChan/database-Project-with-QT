@@ -12,6 +12,7 @@
 #include "finemanager.h"
 #include "changepassword.h"
 #include <QAction>
+#include "bookdetail.h"
 
 namespace Ui {
 class adminMainWindow;
@@ -33,6 +34,8 @@ private slots:
     void on_action_triggered();
 
     void on_action_2_triggered();
+
+    void on_pushButton_4_clicked();
 
 private:
     Ui::adminMainWindow *ui;

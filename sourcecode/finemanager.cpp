@@ -8,14 +8,13 @@ finemanager::finemanager(QWidget *parent) :
     ui->setupUi(this);
 
     QSqlQuery query(QSqlDatabase::database("myconnection"));
+    query.exec("select * from Fine;");
+    if(query.next())
+    {
+        ui->lineEdit->setText(query.value(0).toString());
+        ui->lineEdit_2->setText(query.value(1).toString());
+    }
 
-    query.exec("select @maxday;");
-    QString s1(query.value(0).toString());
-    ui->lineEdit->setText(s1);
-
-    query.exec("select @finerate;");
-
-    ui->lineEdit_2->setText(query.value(0).toString());
 
 }
 
@@ -32,7 +31,7 @@ void finemanager::on_pushButton_2_clicked()
 void finemanager::on_pushButton_clicked()
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
-    query.exec("set @maxday ="+ ui->lineEdit->text());
-    query.exec("set @finerate ="+ui->lineEdit_2->text());
+    query.exec("update Fine set maxday ="+ ui->lineEdit->text());
+    query.exec("update Fine set rate ="+ui->lineEdit_2->text());
     this->hide();
 }
