@@ -1,0 +1,34 @@
+#include "returnrecord.h"
+
+ReturnRecord::ReturnRecord(const QString &rrrno,
+                           const QString &roperno,
+                           const QString &rbrno,
+                           const QString &rreturn_time):
+    rrno(rrrno),operno(roperno),brno(rbrno),return_time(rreturn_time)
+{
+
+}
+
+QString ReturnRecord::get_rrno()const{
+    return rrno;
+}
+QString ReturnRecord::get_operno()const{
+    return operno;
+}
+QString ReturnRecord::get_brno()const{
+    return brno;
+}
+QString ReturnRecord::get_return_time()const{
+    return return_time;
+}
+
+void ReturnRecord::save() const{
+    QSqlQuery query(QSqlDatabase::database("myconnection"));
+    query.exec("insert into ReturnRecord values("
+               "\""+rrno+"\","
+               "\""+operno+"\","
+               "\""+brno+"\","
+               "\""+return_time+"\","
+               ")"
+                );
+}

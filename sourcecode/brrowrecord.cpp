@@ -8,14 +8,36 @@ brrowRecord::brrowRecord(const QString &bbrno,const QString &boperno,
 
 }
 
-void brrowRecord::set_brno(const QString & s);
-void brrowRecord::set_operno(const QString & s);
-void brrowRecord::set_rno(const QString & s);
-void brrowRecord::set_bno(const QString & s);
-void brrowRecord::set_start_time(const QString & s);
+//void brrowRecord::set_brno(const QString & s);
+//void brrowRecord::set_operno(const QString & s);
+//void brrowRecord::set_rno(const QString & s);
+//void brrowRecord::set_bno(const QString & s);
+//void brrowRecord::set_start_time(const QString & s);
 
-QString brrowRecord::get_brno()const;
-QString brrowRecord::get_operno()const;
-QString brrowRecord::get_rno()const;
-QString brrowRecord::get_bno()const;
-QString brrowRecord::get_start_time()const;
+QString brrowRecord::get_brno()const{
+    return brno;
+}
+QString brrowRecord::get_operno()const{
+    return operno;
+}
+QString brrowRecord::get_rno()const{
+    return rno;
+}
+QString brrowRecord::get_bno()const{
+    return bno;
+}
+QString brrowRecord::get_start_time()const{
+    return start_time;
+}
+
+void brrowRecord::save() const{
+    QSqlQuery query(QSqlDatabase::database("myconnection"));
+    query.exec("insert into BorrowRecord values("
+               "\""+brno+"\","
+               "\""+operno+"\","
+               "\""+rno+"\","
+               "\""+bno+"\","
+               "\""+start_time+"\","
+               ")"
+                );
+}

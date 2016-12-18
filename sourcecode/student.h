@@ -9,27 +9,28 @@ private:
     QString birth;
     QString sex;
     QString dept;
+    int max_num;
     int debt;
 public:
     student(const QString &hid,const QString &hpassword,const QString &hname
             ,const QString &hbirth, const QString &hsex, const QString &hdept
-            ,const int hdebt);
+            ,const int hmax_num,const int hdebt);
 
     void set_name(const QString &s);
     void set_birth(const QString &s);
     void set_sex(const QString &s);
     void set_dept(const QString &s);
     void set_debt(const int s);
+    void set_max(const int s);
 
-    QString get_name();
-    QString get_birth();
-    QString get_sex();
-    QString get_dept();
-    int get_debt();
-
-    void save();    //change the information of student
-    void save_new(); //insert a new student
-
+    QString get_name()const;
+    QString get_birth()const;
+    QString get_sex()const;
+    QString get_dept()const;
+    int get_debt()const;
+    int get_max()const;
+    void save()const;    //change the information of student
+    void save_new()const; //insert a new student
 };
 
 #endif // STUDENT_H

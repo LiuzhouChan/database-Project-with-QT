@@ -2,62 +2,87 @@
 
 student::student(const QString &hid, const QString &hpassword, const QString &hname
                  , const QString &hbirth, const QString &hsex, const QString &hdept
-                 , const int hdebt):
+                 , const int hmax_num, const int hdebt):
     manager(hid,hpassword),name(hname),birth(hbirth),
-    sex(hsex),dept(hdept),debt(hdebt)
+    sex(hsex),dept(hdept),max_num(hmax_num),debt(hdebt)
 {
 
 }
 
 
 
-void set_name(const QString &s){
+void student::set_name(const QString &s){
     name=s;
 }
 
-void set_birth(const QString &s){
+void student::set_birth(const QString &s){
     birth=s;
 }
 
-void set_sex(const QString &s){
+void student::set_sex(const QString &s){
     sex=s;
 }
 
-void set_dept(const QString &s){
+void student::set_dept(const QString &s){
     dept=s;
 }
 
-void set_debt(const int s){
+void student::set_debt(const int s){
     debt=s;
 }
 
-QString student::get_name(){
+QString student::get_name()const{
     return name;
 }
 
-QString student::get_birth(){
+QString student::get_birth()const{
     return birth;
 }
 
-QString student::get_sex(){
+QString student::get_sex()const{
     return sex;
 }
 
-QString student::get_dept(){
+QString student::get_dept()const{
     return dept;
 }
 
-int student::get_debt(){
+int student::get_debt()const{
     return debt;
 }
 
-void student::save(){
-    QSqlQuery query(QSqlDatabase::database("myconnection"));
-    query.exec("update Manager set password = \""
-               +passwd+"\" where Mon = \""+
-               id+"\"")
+void student::set_max(const int s){
+    max_num=s;
 }
 
-void student::save_new(){
+int student::get_max()const{
+     return max_num;
+}
 
+void student::save()const{
+    QSqlQuery query(QSqlDatabase::database("myconnection"));
+    query.exec("update Reader "
+               "set password = \""+get_passwd()+"\", "
+               "set Rname= \""+name+"\", "
+               "set Rbirth= \""+birth+"\", "
+               "set Rsex = \""+sex+"\", "
+               "set Rdept= \""+dept+"\", "
+               "set BmaxNum= \""+QString::number(max_num)+"\", "
+               "set isDebt= \""+QString::number(debt)+"\", "
+               "where Rno = \" "+get_id()+"\" ");
+}
+
+void student::save_new()const{
+    QSqlQuery query(QSqlDatabase::database("myconnection"));
+    query.exec("insert into Reader values("
+               "\""+get_id()+"\","
+               "\""+get_passwd()+"\","
+               "\""+name+"\","
+               "\""+birth+"\","
+               "\""+sex+"\","
+               "\""+dept+"\","
+               "\""+QString::number(max_num)+"\","
+               "\""+QString::number(debt)+"\","
+               ")"
+                );
 }

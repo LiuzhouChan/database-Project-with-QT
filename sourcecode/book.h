@@ -20,25 +20,25 @@ public:
          ,QString pprice, QString pbookno,
          QString ppublish,QString pstate);
 
-    void set_name(QString & s);
-    void set_isbn(QString & s);
-    void set_auther(QString & s);
-    void set_type(QString & s);
-    void set_date(QString & s);
-    void set_price(QString & s);
-    void set_bookno(QString & s);
-    void set_publish(QString & s);
-    void set_state(QString & s);
+    void set_name(const QString & s);
+    void set_isbn(const QString & s);
+    void set_auther(const QString & s);
+    void set_type(const QString & s);
+    void set_date(const QString & s);
+    void set_price(const QString & s);
+    void set_bookno(const QString & s);
+    void set_publish(const QString & s);
+    void set_state(const QString & s);
 
-    QString get_name();
-    QString get_isbn();
-    QString get_auther();
-    QString get_type();
-    QString get_date();
-    QString get_price();
-    QString get_bookno();
-    QString get_publish();
-    QString get_state();
+    QString get_name()const;
+    QString get_isbn()const;
+    QString get_auther()const;
+    QString get_type()const;
+    QString get_date()const;
+    QString get_price()const;
+    QString get_bookno()const;
+    QString get_publish()const;
+    QString get_state()const;
 
 };
 
