@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     book.cpp \
     util.cpp \
     finemanager.cpp \
-    changepassword.cpp
+    changepassword.cpp \
+    brrowrecord.cpp
 
 HEADERS  += mainwindow.h \
     sqlip.h \
@@ -39,7 +40,8 @@ HEADERS  += mainwindow.h \
     book.h \
     util.h \
     finemanager.h \
-    changepassword.h
+    changepassword.h \
+    brrowrecord.h
 
 FORMS    += mainwindow.ui \
     sqlip.ui \

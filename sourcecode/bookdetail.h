@@ -7,6 +7,7 @@
 #include <QSqlQuery>
 #include <QMessageBox>
 #include <QSqlError>
+#include <QPushButton>
 namespace Ui {
 class bookdetail;
 }

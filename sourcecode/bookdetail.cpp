@@ -5,6 +5,8 @@ bookdetail::bookdetail(QWidget *parent,book *boo):
      QWidget(parent),bo(boo),ui(new Ui::bookdetail)
 {
     ui->setupUi(this);
+    ui->pushButton_2->setEnabled(false);
+    ui->pushButton->setEnabled(false);
     if(bo!=nullptr)
     {
 

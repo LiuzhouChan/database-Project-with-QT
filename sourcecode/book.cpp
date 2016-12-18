@@ -1,12 +1,81 @@
 #include "book.h"
 
-book::book(QString pname,QString pISBN
-           ,QString pauther,QString ptype, QString pdate
-           ,QString pprice, QString pbookno,
-           QString ppublish,QString pstate) :
+book::book(const QString pname,const QString pISBN
+           ,const QString pauther,const QString ptype, const QString pdate
+           ,const QString pprice, const QString pbookno,
+           const QString ppublish,const QString pstate) :
             name(pname),ISBN(pISBN),auther(pauther),
             type(ptype),date(pdate),price(pprice),bookno(pbookno),
             publish(ppublish),state(pstate)
 {
 
+}
+
+void book::set_name(const QString & s){
+    name=s;
+}
+
+void book::set_isbn(const QString & s){
+    ISBN=s;
+}
+
+void book::set_auther(const QString & s){
+    auther=s;
+}
+
+void book::set_type(const QString & s){
+    type=s;
+}
+
+void book::set_date(const QString & s){
+    date=s;
+}
+
+void book::set_price(const QString & s){
+    price =s;
+}
+
+void book::set_bookno(const QString & s){
+    bookno=s;
+}
+
+void book::set_publish(const QString & s){
+    publish=s;
+}
+
+void book::set_state(const QString & s){
+    state=s;
+}
+
+QString book::get_name()const{
+    return name;
+}
+
+QString book::get_isbn()const{
+    return ISBN;
+}
+
+QString book::get_auther()const{
+    return auther;
+}
+
+QString book::get_type()const{
+    return type;
+}
+
+QString book::get_date()const{
+    return date;
+}
+
+QString book::get_price()const{
+    return price;
+}
+QString book::get_bookno()const{
+    return bookno;
+}
+QString book::get_publish()const{
+    return publish;
+}
+QString book::get_state()const{
+    return state;
 }

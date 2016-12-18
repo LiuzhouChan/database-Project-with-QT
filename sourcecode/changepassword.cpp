@@ -24,10 +24,10 @@ void changepassword::on_pushButton_clicked()
     if(ui->lineEdit->text()==man->passwd)
     {
         man->passwd=ui->knewpasswordwidget->password();
-        QSqlQuery query(QSqlDatabase::database("myconnection"));
-        query.exec("update Manager set password = \""
-                       +man->passwd+"\" where Mon = \""+
-                       man->id+"\"");
+//        QSqlQuery query(QSqlDatabase::database("myconnection"));
+//        query.exec("update Manager set password = \""
+//                       +man->passwd+"\" where Mon = \""+
+//                       man->id+"\"");
         QMessageBox::information(this,"password","Change the password successfully");
         this->hide();
     }
