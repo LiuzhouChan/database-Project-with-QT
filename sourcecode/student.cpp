@@ -2,7 +2,7 @@
 
 student::student(const QString &hid, const QString &hpassword, const QString &hname
                  , const QString &hbirth, const QString &hsex, const QString &hdept
-                 , const int hmax_num, const int hdebt):
+                 , const int hmax_num, const double hdebt):
     account(hid,hpassword),name(hname),birth(hbirth),
     sex(hsex),dept(hdept),max_num(hmax_num),debt(hdebt)
 {
@@ -27,7 +27,7 @@ void student::set_dept(const QString &s){
     dept=s;
 }
 
-void student::set_debt(const int s){
+void student::set_debt(const double s){
     debt=s;
 }
 
@@ -47,7 +47,7 @@ QString student::get_dept()const{
     return dept;
 }
 
-int student::get_debt()const{
+double student::get_debt()const{
     return debt;
 }
 
@@ -91,9 +91,50 @@ void student::borrowBook(const account &a, book &b)
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     QDate date=QDate::currentDate();
-    brrowRecord brecord(a.get_id(),id,b.get_bookno(),date.toString());
+    brrowRecord brecord(a.get_id(),get_id(),b.get_bookno(),date.toString());
     brecord.save();
     query.exec("update BookForRent "
-               "set Bposi = \""+id+"\", "
+               "set Bposi = \""+get_id()+"\" "
                "where Bno = \" "+b.get_bookno()+"\" ");
+
+}
+
+void student::returnBook(const account &a, book &b)
+{
+    QSqlQuery query(QSqlDatabase::database("myconnection"));
+
+    QDate lastTime;
+    QString brno;
+    int day;
+    double rate;
+    double fine;
+    query.exec("select BRno,startTime from BorrowRecord where "
+               "Bno=\""+b.get_bookno()+"\" order by startTime decrease");
+    if(query.next())
+    {
+        brno=query.value(0).toString();
+        lastTime=query.value(1).toDate();
+    }
+    QDate date=QDate::currentDate();
+    ReturnRecord r(a.get_id(),brno,date.toString());
+    r.save();
+    query.exec("update BookForRent "
+               "set Bposi = \"null\", "
+               "where Bno = \" "+b.get_bookno()+"\" ");
+
+    query.exec("select restartTime from renewrecord where "
+               "BRno="+brno+"");
+    if(query.next())
+    {
+        lastTime=query.value(0).toDate();
+    }
+
+}
+
+void student::renewBook(const account &a, book &b)
+{
+    QSqlQuery query(QSqlDatabase::database("myconnection"));
+    QDate date=QDate::currentDate();
+    RenewRecord r(a.get_id(),b.get_bookno(),date.toString());
+    r.save();
 }

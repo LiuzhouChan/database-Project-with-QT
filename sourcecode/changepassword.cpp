@@ -21,13 +21,15 @@ void changepassword::on_pushButton_2_clicked()
 
 void changepassword::on_pushButton_clicked()
 {
-    if(ui->lineEdit->text()==man->passwd)
+    if(ui->lineEdit->text()==man->get_passwd())
     {
-        man->passwd=ui->knewpasswordwidget->password();
+        man->set_passwd(ui->knewpasswordwidget->password());
+//        man->passwd=ui->knewpasswordwidget->password();
 //        QSqlQuery query(QSqlDatabase::database("myconnection"));
 //        query.exec("update Manager set password = \""
 //                       +man->passwd+"\" where Mon = \""+
 //                       man->id+"\"");
+        man->save();
         QMessageBox::information(this,"password","Change the password successfully");
         this->hide();
     }

@@ -61,10 +61,10 @@ void manager::modifybook(book &b,const QString &pname,const QString &pISBN
     b.save();
 }
 
-void manager::deleteBook(const QString &bookno)
+void manager::deleteBook(const QString &ISBN)
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
-    query.exec("delete from BookForRent where Bno=\""+bookno+"\"");
+    query.exec("delete from Book where ISBN=\""+ISBN+"\"");
 }
 void manager::deletReader(const QString &id)
 {

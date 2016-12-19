@@ -2,6 +2,7 @@
 #define BOOK_H
 #include <QString>
 #include <QSqlQuery>
+#include <QVariant>
 class book
 {
 private:

@@ -5,17 +5,17 @@ account::account(const QString &hid, const QString &hpasswd):
 {
 }
 
-void manager::set_id(const QString &s){
+void account::set_id(const QString &s){
     id=s;
 }
 
-void manager::set_passwd(const QString &s){
+void account::set_passwd(const QString &s){
     passwd=s;
 }
 
-QString manager::get_id() const{
+QString account::get_id() const{
     return id;
 }
-QString manager::get_passwd()const{
+QString account::get_passwd()const{
     return passwd;
 }
