@@ -116,10 +116,10 @@ DROP TABLE IF EXISTS `Fine`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Fine` (
-  `day` int(4) NOT NULL,
-  `fineMoney` double NOT NULL,
-  PRIMARY KEY (`day`),
-  UNIQUE KEY `day_UNIQUE` (`day`)
+  `maxday` int(4) NOT NULL,
+  `rate` double(2,1) NOT NULL,
+  PRIMARY KEY (`maxday`),
+  UNIQUE KEY `day_UNIQUE` (`maxday`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -129,6 +129,7 @@ CREATE TABLE `Fine` (
 
 LOCK TABLES `Fine` WRITE;
 /*!40000 ALTER TABLE `Fine` DISABLE KEYS */;
+INSERT INTO `Fine` VALUES (30,0.2);
 /*!40000 ALTER TABLE `Fine` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,7 +173,7 @@ CREATE TABLE `Reader` (
   `Rsex` tinyint(1) NOT NULL COMMENT '0: male\n1: female',
   `Rdept` varchar(50) NOT NULL,
   `BmaxNum` int(11) NOT NULL DEFAULT '5',
-  `isDebt` tinyint(1) NOT NULL DEFAULT '0',
+  `Rdebt` double NOT NULL DEFAULT '0',
   PRIMARY KEY (`Rno`),
   UNIQUE KEY `Rno_UNIQUE` (`Rno`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -278,4 +279,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-19 21:56:55
+-- Dump completed on 2016-12-20  0:03:10
