@@ -1,5 +1,7 @@
 #include "book.h"
 #include <QSqlQuery>
+
+//position is the shelf number, while state is in the table of BookForRent
 book::book(const QString &pname,const QString &pISBN
            ,const QString &pauther,const QString &ptype, const QString &pdate
            ,const QString &pprice, const QString &pbookno,
@@ -138,7 +140,7 @@ void book::save_new()
     query.exec("insert into Book values("
                "\""+ISBN+"\","
                "\""+name+"\","
-               "\""+state+"\","
+               "\""+position+"\","
                "\""+publish+"\","
                "\""+auther+"\","
                "\""+date+"\","

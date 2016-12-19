@@ -2,6 +2,10 @@
 #define STUDENT_H
 #include <QString>
 #include "account.h"
+#include <QSqlQuery>
+#include "book.h"
+#include <QDate>
+#include "brrowrecord.h"
 
 class student:public account
 {
@@ -32,6 +36,8 @@ public:
     int get_max()const;
     void save()const;    //change the information of student
     void save_new()const; //insert a new student
+
+    void borrowBook(const account &a, book &b);
 };
 
 #endif // STUDENT_H

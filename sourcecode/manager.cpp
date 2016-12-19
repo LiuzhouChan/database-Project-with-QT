@@ -6,9 +6,6 @@ manager::manager(const QString &hid,const QString &hpasswd):
 
 }
 
-
-
-
 void manager::save(){
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("update Manager set password = \""
@@ -38,12 +35,39 @@ void manager::modifyreader(student &s,QString &hpassword,const QString &hname
     s.save();
 }
 
-void addNewBook()
+void manager::addNewBook(const QString &pname,const QString &pISBN
+                ,const QString &pauther,const QString &ptype,const QString &pdate
+                ,const QString &pprice,const QString &pbookno,
+                const QString &ppublish,const QString &pstate)
 {
-
+    book b(pname,pISBN,pauther,ptype,pdate,pprice,pbookno,ppublish,pstate);
+    b.save_new();
 }
 
-void modifybook()
+void manager::modifybook(book &b,const QString &pname,const QString &pISBN
+                ,const QString &pauther,const QString &ptype,const QString &pdate
+                ,const QString &pprice,const QString &pbookno,
+                const QString &ppublish,const QString &pstate)
 {
+    b.set_name(pname);
+    b.set_isbn(pISBN);
+    b.set_auther(pauther);
+    b.set_type(ptype);
+    b.set_date(pdate);
+    b.set_price(pprice);
+    b.set_bookno(pbookno);
+    b.set_publish(ppublish);
+    b.set_state(pstate);
+    b.save();
+}
 
+void manager::deleteBook(const QString &bookno)
+{
+    QSqlQuery query(QSqlDatabase::database("myconnection"));
+    query.exec("delete from BookForRent where Bno=\""+bookno+"\"");
+}
+void manager::deletReader(const QString &id)
+{
+    QSqlQuery query(QSqlDatabase::database("myconnection"));
+    query.exec("delete from Reader where Rno=\""+id+"\"");
 }

@@ -4,6 +4,7 @@
 #include <qsqlquery.h>
 #include "student.h"
 #include "account.h"
+#include "book.h"
 class manager:public account
 {
 public:
@@ -18,8 +19,18 @@ public:
                       ,const QString &hbirth, const QString &hsex, const QString &hdept
                       ,const int hmax_num,const int hdebt);
 
-    void addNewBook();
-    void modifybook();
+    void addNewBook(const QString &pname,const QString &pISBN
+                    ,const QString &pauther,const QString &ptype,const QString &pdate
+                    ,const QString &pprice,const QString &pbookno,
+                    const QString &ppublish,const QString &pstate);
+
+    void modifybook(book &b,const QString &pname,const QString &pISBN
+                    ,const QString &pauther,const QString &ptype,const QString &pdate
+                    ,const QString &pprice,const QString &pbookno,
+                    const QString &ppublish,const QString &pstate);
+
+    void deleteBook(const QString &bookno);
+    void deletReader(const QString &id);
 };
 
 #endif // MANAGER_H

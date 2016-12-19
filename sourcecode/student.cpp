@@ -86,3 +86,14 @@ void student::save_new()const{
                ")"
                 );
 }
+
+void student::borrowBook(const account &a, book &b)
+{
+    QSqlQuery query(QSqlDatabase::database("myconnection"));
+    QDate date=QDate::currentDate();
+    brrowRecord brecord(a.get_id(),id,b.get_bookno(),date.toString());
+    brecord.save();
+    query.exec("update BookForRent "
+               "set Bposi = \""+id+"\", "
+               "where Bno = \" "+b.get_bookno()+"\" ");
+}

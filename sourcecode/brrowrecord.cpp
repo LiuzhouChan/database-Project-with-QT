@@ -1,9 +1,9 @@
 #include "brrowrecord.h"
 
-brrowRecord::brrowRecord(const QString &bbrno,const QString &boperno,
+brrowRecord::brrowRecord(const QString &boperno,
                          const QString &brno,const QString &bbno,
                          const QString &bstart_time):
-    brno(bbrno),operno(boperno),rno(brno),bno(bbno),start_time(bstart_time)
+    operno(boperno),rno(brno),bno(bbno),start_time(bstart_time)
 {
 
 }
@@ -14,9 +14,9 @@ brrowRecord::brrowRecord(const QString &bbrno,const QString &boperno,
 //void brrowRecord::set_bno(const QString & s);
 //void brrowRecord::set_start_time(const QString & s);
 
-QString brrowRecord::get_brno()const{
-    return brno;
-}
+//QString brrowRecord::get_brno()const{
+//    return brno;
+//}
 QString brrowRecord::get_operno()const{
     return operno;
 }
@@ -32,8 +32,7 @@ QString brrowRecord::get_start_time()const{
 
 void brrowRecord::save() const{
     QSqlQuery query(QSqlDatabase::database("myconnection"));
-    query.exec("insert into BorrowRecord values("
-               "\""+brno+"\","
+    query.exec("insert into BorrowRecord(operNo,Rno,Bno,startTime) values("
                "\""+operno+"\","
                "\""+rno+"\","
                "\""+bno+"\","
