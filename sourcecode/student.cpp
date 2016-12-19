@@ -9,8 +9,6 @@ student::student(const QString &hid, const QString &hpassword, const QString &hn
 
 }
 
-
-
 void student::set_name(const QString &s){
     name=s;
 }
@@ -120,7 +118,7 @@ void student::returnBook(const account &a, book &b)
     r.save();
     query.exec("update BookForRent "
                "set Bposi = \"null\", "
-               "where Bno = \" "+b.get_bookno()+"\" ");
+               "where Bno = \""+b.get_bookno()+"\" ");
 
     query.exec("select restartTime from renewrecord where "
                "BRno="+brno+"");
@@ -128,13 +126,33 @@ void student::returnBook(const account &a, book &b)
     {
         lastTime=query.value(0).toDate();
     }
-
+    query.exec("select * from Fine");
+    if(query.next())
+    {
+        day=query.value(0).toInt();
+        rate=query.value(1).toDouble();
+    }
+    auto days=lastTime.daysTo(date);
+    if(days>day)
+    {
+        fine=(days-day)*rate;
+        query.exec("update Reader "
+                   "set Rdebt = Rdebt+"+QString::number(fine)+""
+                   "where Rno = \""+get_id()+"\" ");
+    }
 }
 
 void student::renewBook(const account &a, book &b)
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
+    query.exec("select BRno from BorrowRecord where "
+               "Bno=\""+b.get_bookno()+"\" order by startTime decrease");
+    QString brno;
+    if(query.next())
+    {
+        brno=query.value(0).toString();
+    }
     QDate date=QDate::currentDate();
-    RenewRecord r(a.get_id(),b.get_bookno(),date.toString());
+    RenewRecord r(a.get_id(),brno,date.toString());
     r.save();
 }

@@ -47,13 +47,6 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label_8">
-         <property name="text">
-          <string>Site</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QLabel" name="label_6">
          <property name="text">
           <string>Date</string>
@@ -68,6 +61,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QLabel" name="label_8">
+         <property name="text">
+          <string>BookNumber</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QLabel" name="label_4">
          <property name="text">
           <string>Publish</string>
@@ -78,13 +78,6 @@
         <widget class="QLabel" name="label_9">
          <property name="text">
           <string>State</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_10">
-         <property name="text">
-          <string>续借</string>
          </property>
         </widget>
        </item>
@@ -105,13 +98,13 @@
         <widget class="QLineEdit" name="lineEdit_4"/>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_10"/>
-       </item>
-       <item>
         <widget class="QLineEdit" name="lineEdit_5"/>
        </item>
        <item>
         <widget class="QLineEdit" name="lineEdit_6"/>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit_9"/>
        </item>
        <item>
         <widget class="QLineEdit" name="lineEdit_7"/>
@@ -120,35 +113,7 @@
         <widget class="QLineEdit" name="lineEdit_8"/>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
-         <item>
-          <widget class="QSpinBox" name="spinBox">
-           <property name="readOnly">
-            <bool>false</bool>
-           </property>
-           <property name="maximum">
-            <number>30</number>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_11">
-           <property name="text">
-            <string>天</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSlider" name="horizontalSlider">
-           <property name="maximum">
-            <number>30</number>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <layout class="QHBoxLayout" name="horizontalLayout_3"/>
        </item>
       </layout>
      </item>
@@ -177,13 +142,6 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton">
-       <property name="text">
-        <string>Apply</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QPushButton" name="pushButton_3">
        <property name="text">
         <string>Cancel</string>
@@ -195,38 +153,5 @@
   </layout>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>spinBox</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>horizontalSlider</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>104</x>
-     <y>341</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>213</x>
-     <y>343</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>horizontalSlider</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>spinBox</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>300</x>
-     <y>343</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>98</x>
-     <y>337</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

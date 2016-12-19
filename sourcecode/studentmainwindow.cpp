@@ -5,10 +5,40 @@ studentMainWindow::studentMainWindow(QWidget *parent,student * stu) :
     QMainWindow(parent),stud(stu),
     ui(new Ui::studentMainWindow)
 {
-    ui->setupUi(this);
+
+}
+void studentMainWindow::refresh()
+{
+    QStringList header;
+    header<<"Name"<<"ISBN";
+    ui->tableWidget_2->clear();
     QSqlQuery query(QSqlDatabase::database("myconnection"));
-    //学生的续借管理
-    query.exec(" ");
+//    int maxday;
+//    query.exec("select maxday from Fine");
+//    if(query.next())
+//    {
+//        maxday=query.value(0).toInt();
+//    }
+    query.exec("select Book.Bname,BookForRent.Bno from Book,BookForRent where"
+               "Book.ISBN=BookForRent.ISBN and BookForRent.Bposi=\""+stud->get_id()+"\"");
+    int size(header.size());
+    ui->tableWidget_2->setColumnCount(size);
+    ui->tableWidget_2->setHorizontalHeaderLabels(header);
+    ui->tableWidget_2->horizontalHeader()->setStretchLastSection(true);
+    int i(0);
+    while(query.next())
+    {
+        if(ui->tableWidget_2->rowCount()<i+1)
+        {
+            ui->tableWidget_2->insertRow(i);
+        }
+        for(int j=0;j<size;++j)
+        {
+               ui->tableWidget_2->setItem(i,j,
+                  new QTableWidgetItem(query.value(j).toString()));
+        }
+           ++i;
+   }
 }
 
 studentMainWindow::~studentMainWindow()

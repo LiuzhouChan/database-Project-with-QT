@@ -207,6 +207,12 @@ void adminMainWindow::on_action_2_triggered()
 
 void adminMainWindow::on_pushButton_4_clicked()
 {
-    bookdetail *book=new bookdetail;
-    book->show();
+     editbook *book=new editbook;
+     book->show();
+}
+
+void adminMainWindow::on_pushButton_6_clicked()
+{
+    editreader *e=new editreader(0);
+    e->show();
 }

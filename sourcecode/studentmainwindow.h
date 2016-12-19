@@ -14,7 +14,7 @@
 #include <QLineEdit>
 #include "student.h"
 #include "util.h"
-
+#include <QTableWidgetItem>
 namespace Ui {
 class studentMainWindow;
 }
@@ -24,6 +24,7 @@ class studentMainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+    void refresh();
     explicit studentMainWindow(QWidget *parent,student *stu);
     ~studentMainWindow();
 

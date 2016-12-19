@@ -13,6 +13,8 @@
 #include "changepassword.h"
 #include <QAction>
 #include "bookdetail.h"
+#include "editreader.h"
+#include "editbook.h"
 
 namespace Ui {
 class adminMainWindow;
@@ -36,6 +38,8 @@ private slots:
     void on_action_2_triggered();
 
     void on_pushButton_4_clicked();
+
+    void on_pushButton_6_clicked();
 
 private:
     Ui::adminMainWindow *ui;
