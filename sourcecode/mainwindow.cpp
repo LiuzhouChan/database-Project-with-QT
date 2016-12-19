@@ -65,7 +65,8 @@ void MainWindow::on_loginButton_clicked()
                                     ,query.value(3).toString(),query.value(4).toString(),
                                      query.value(5).toString()
                                     ,query.value(6).toInt(),query.value(7).toDouble());
-            studentMainWindow *studen=new studentMainWindow(this,stu);
+            studentMainWindow *studen=new studentMainWindow(this);
+            studen->setstu(stu);
             studen->show();
             return;
         }

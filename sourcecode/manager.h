@@ -15,9 +15,9 @@ public:
                       ,const QString &hbirth, const QString &hsex, const QString &hdept
                       ,const int hmax_num,const int hdebt);
 
-    void modifyreader(student &s,QString &hpassword,const QString &hname
-                      ,const QString &hbirth, const QString &hsex, const QString &hdept
-                      ,const int hmax_num,const int hdebt);
+    void modifyreader(student &s, const QString &hpassword, const QString &hname
+                      , const QString &hbirth, const QString &hsex, const QString &hdept
+                      , const int hmax_num, const double hdebt);
 
     void addNewBook(const QString &pname,const QString &pISBN
                     ,const QString &pauther,const QString &ptype,const QString &pdate

@@ -25,8 +25,9 @@ class studentMainWindow : public QMainWindow
 
 public:
     void refresh();
-    explicit studentMainWindow(QWidget *parent,student *stu);
+    explicit studentMainWindow(QWidget *parent);
     ~studentMainWindow();
+    void setstu(student *ss);
 
 private slots:
     void on_pushButton_clicked();

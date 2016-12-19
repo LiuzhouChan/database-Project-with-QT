@@ -15,6 +15,8 @@
 #include "bookdetail.h"
 #include "editreader.h"
 #include "editbook.h"
+#include "modifybook.h"
+#include "modifyreader.h"
 
 namespace Ui {
 class adminMainWindow;
@@ -40,6 +42,10 @@ private slots:
     void on_pushButton_4_clicked();
 
     void on_pushButton_6_clicked();
+
+    void on_pushButton_3_clicked();
+
+    void on_pushButton_7_clicked();
 
 private:
     Ui::adminMainWindow *ui;

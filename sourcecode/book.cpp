@@ -124,7 +124,7 @@ void book::save()
                "set Bpublisher= \""+publish+"\", "
                "set Bauthor = "+auther+", "
                "set Bdate= \""+date+"\", "
-               "set Bprice= \""+date+"\", "
+               "set Bprice= "+price+", "
                "where ISBN = \" "+ISBN+"\" ");
 }
 

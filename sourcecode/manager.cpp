@@ -21,9 +21,9 @@ void manager::addNewReader(const QString &hid,const QString &hpassword,const QSt
     s.save_new();
 }
 
-void manager::modifyreader(student &s,QString &hpassword,const QString &hname
+void manager::modifyreader(student &s,const QString &hpassword,const QString &hname
                   ,const QString &hbirth, const QString &hsex, const QString &hdept
-                  ,const int hmax_num,const int hdebt)
+                  ,const int hmax_num,const double hdebt)
 {
     s.set_passwd(hpassword);
     s.set_name(hname);

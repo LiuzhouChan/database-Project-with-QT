@@ -1,12 +1,18 @@
 #include "studentmainwindow.h"
 #include "ui_studentmainwindow.h"
 
-studentMainWindow::studentMainWindow(QWidget *parent,student * stu) :
-    QMainWindow(parent),stud(stu),
+studentMainWindow::studentMainWindow(QWidget *parent) :
+    QMainWindow(parent),stud(nullptr),
     ui(new Ui::studentMainWindow)
 {
 
 }
+
+void studentMainWindow::setstu(student *ss)
+{
+    stud=ss;
+}
+
 void studentMainWindow::refresh()
 {
     QStringList header;

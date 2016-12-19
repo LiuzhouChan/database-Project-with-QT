@@ -24,5 +24,5 @@ void editbook::on_pushButton_2_clicked()
            ,ui->lineEdit_4->text(),ui->lineEdit_5->text(),ui->lineEdit_6->text(),
            ui->lineEdit_9->text(),ui->lineEdit_7->text(),"null");
     b.save_new();
-    hide();
+    this->hide();
 }

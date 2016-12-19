@@ -29,7 +29,9 @@ SOURCES += main.cpp\
     brrowrecord.cpp \
     returnrecord.cpp \
     renewrecord.cpp \
-    account.cpp
+    account.cpp \
+    modifybook.cpp \
+    modifyreader.cpp
 
 HEADERS  += mainwindow.h \
     sqlip.h \
@@ -47,7 +49,9 @@ HEADERS  += mainwindow.h \
     brrowrecord.h \
     returnrecord.h \
     renewrecord.h \
-    account.h
+    account.h \
+    modifybook.h \
+    modifyreader.h
 
 FORMS    += mainwindow.ui \
     sqlip.ui \
@@ -57,4 +61,6 @@ FORMS    += mainwindow.ui \
     editreader.ui \
     bookdetail.ui \
     finemanager.ui \
-    changepassword.ui
+    changepassword.ui \
+    modifybook.ui \
+    modifyreader.ui

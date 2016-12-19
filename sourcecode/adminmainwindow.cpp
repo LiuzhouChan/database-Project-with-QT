@@ -216,3 +216,40 @@ void adminMainWindow::on_pushButton_6_clicked()
     editreader *e=new editreader(0);
     e->show();
 }
+
+void adminMainWindow::on_pushButton_3_clicked()
+{
+    QString bno=ui->tableWidget->currentItem()->text();
+    QString name;
+    QString ISBN;
+    QString auther;
+    QString type="PE";
+    QString date;
+    QString price;
+    QString publish;
+    QString state;
+    QSqlQuery query(QSqlDatabase::database("myconnection"));
+    query.exec("select Book.ISBN,Book.Bname,Book.publisher,Book.author,"
+               "Book.Bdate,Book.Bprice,BookForRent.Bposi"
+               " from Book,BookForRent where BookForRent.ISBN=Book.ISBN and "
+               "BookForRent.Bno=\""+bno+"\"");
+    if(query.next())
+    {
+        ISBN=query.value(0).toString();
+        name=query.value(1).toString();
+        publish=query.value(2).toString();
+        auther=query.value(3).toString();
+        date=query.value(4).toString();
+        price=query.value(5).toString();
+        state=query.value(6).toString();
+    }
+
+    book *b=new book(name,ISBN,auther,type,date,price,bno,publish,state);
+    modifybook *mb=new modifybook(0,b);
+    mb->show();
+}
+
+void adminMainWindow::on_pushButton_7_clicked()
+{
+    QString bno=ui->tableWidget->currentItem()->text();
+}
