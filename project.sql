@@ -85,12 +85,13 @@ DROP TABLE IF EXISTS `BorrowRecord`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `BorrowRecord` (
-  `BRno` varchar(8) NOT NULL,
+  `BRno` int(20) NOT NULL,
   `operNo` varchar(8) NOT NULL COMMENT 'FK of Reader&Manager',
   `Rno` varchar(8) NOT NULL COMMENT 'FK of Reader',
   `Bno` varchar(8) NOT NULL COMMENT 'FK of Book',
   `startTime` datetime NOT NULL,
   PRIMARY KEY (`BRno`),
+  UNIQUE KEY `BRno_UNIQUE` (`BRno`),
   KEY `Rno_idx` (`Rno`),
   KEY `Bno_idx` (`Bno`),
   CONSTRAINT `Bno` FOREIGN KEY (`Bno`) REFERENCES `BookForRent` (`Bno`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -195,14 +196,14 @@ DROP TABLE IF EXISTS `ReturnRecord`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ReturnRecord` (
-  `RRno` varchar(8) NOT NULL,
+  `RRno` int(20) NOT NULL,
   `operNo` varchar(8) NOT NULL,
-  `BRno` varchar(8) NOT NULL COMMENT 'FK of BorrowRecord',
+  `BRno` int(20) NOT NULL COMMENT 'FK of BorrowRecord',
   `returnTime` datetime NOT NULL,
   PRIMARY KEY (`RRno`),
   UNIQUE KEY `RRno_UNIQUE` (`RRno`),
   KEY `BRno_idx` (`BRno`),
-  CONSTRAINT `BRno` FOREIGN KEY (`BRno`) REFERENCES `BorrowRecord` (`BRno`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `FKBR2` FOREIGN KEY (`BRno`) REFERENCES `BorrowRecord` (`BRno`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -248,14 +249,14 @@ DROP TABLE IF EXISTS `renewrecord`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `renewrecord` (
-  `NRno` varchar(8) NOT NULL,
+  `NRno` int(20) NOT NULL,
   `operNo` varchar(8) NOT NULL,
-  `BRno` varchar(8) NOT NULL,
+  `BRno` int(20) NOT NULL,
   `restartTime` datetime NOT NULL,
   PRIMARY KEY (`NRno`),
   UNIQUE KEY `NRno_UNIQUE` (`NRno`),
-  KEY `BRnoFK` (`BRno`),
-  CONSTRAINT `BRnoFK` FOREIGN KEY (`BRno`) REFERENCES `BorrowRecord` (`BRno`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `FKbr_idx` (`BRno`),
+  CONSTRAINT `FKbr` FOREIGN KEY (`BRno`) REFERENCES `BorrowRecord` (`BRno`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -277,4 +278,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-19  0:57:10
+-- Dump completed on 2016-12-19 21:56:55
