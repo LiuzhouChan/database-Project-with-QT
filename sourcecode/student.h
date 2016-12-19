@@ -1,8 +1,9 @@
 #ifndef STUDENT_H
 #define STUDENT_H
 #include <QString>
-#include "manager.h"
-class student:public manager
+#include "account.h"
+
+class student:public account
 {
 private:
     QString name;

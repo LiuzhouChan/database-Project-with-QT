@@ -3,7 +3,7 @@
 student::student(const QString &hid, const QString &hpassword, const QString &hname
                  , const QString &hbirth, const QString &hsex, const QString &hdept
                  , const int hmax_num, const int hdebt):
-    manager(hid,hpassword),name(hname),birth(hbirth),
+    account(hid,hpassword),name(hname),birth(hbirth),
     sex(hsex),dept(hdept),max_num(hmax_num),debt(hdebt)
 {
 
@@ -65,10 +65,10 @@ void student::save()const{
                "set password = \""+get_passwd()+"\", "
                "set Rname= \""+name+"\", "
                "set Rbirth= \""+birth+"\", "
-               "set Rsex = \""+sex+"\", "
+               "set Rsex = "+sex+", "
                "set Rdept= \""+dept+"\", "
-               "set BmaxNum= \""+QString::number(max_num)+"\", "
-               "set isDebt= \""+QString::number(debt)+"\", "
+               "set BmaxNum= "+QString::number(max_num)+", "
+               "set isDebt= "+QString::number(debt)+", "
                "where Rno = \" "+get_id()+"\" ");
 }
 

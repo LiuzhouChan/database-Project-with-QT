@@ -7,7 +7,6 @@ int settable(QSqlQuery &query,QTableWidget* table, QStringList &header,int i)
     table->setColumnCount(size);
     table->setHorizontalHeaderLabels(header);
     table->horizontalHeader()->setStretchLastSection(true);
-
     while(query.next())
     {
         if(table->rowCount()<i+1)

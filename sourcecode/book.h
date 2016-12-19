@@ -1,7 +1,7 @@
 #ifndef BOOK_H
 #define BOOK_H
 #include <QString>
-
+#include <QSqlQuery>
 class book
 {
 private:
@@ -14,11 +14,12 @@ private:
     QString bookno;
     QString publish;
     QString state;
+    QString position;
 public:
-    book(QString pname,QString pISBN
-         ,QString pauther,QString ptype,QString pdate
-         ,QString pprice, QString pbookno,
-         QString ppublish,QString pstate);
+    book(const QString &pname,const QString &pISBN
+         ,const QString &pauther,const QString &ptype,const QString &pdate
+         ,const QString &pprice,const QString &pbookno,
+         const QString &ppublish,const QString &pstate);
 
     void set_name(const QString & s);
     void set_isbn(const QString & s);
@@ -30,6 +31,7 @@ public:
     void set_publish(const QString & s);
     void set_state(const QString & s);
 
+    QString get_position()const;
     QString get_name()const;
     QString get_isbn()const;
     QString get_auther()const;
@@ -39,6 +41,9 @@ public:
     QString get_bookno()const;
     QString get_publish()const;
     QString get_state()const;
+
+    void save();
+    void save_new();
 
 };
 

@@ -28,7 +28,8 @@ SOURCES += main.cpp\
     changepassword.cpp \
     brrowrecord.cpp \
     returnrecord.cpp \
-    renewrecord.cpp
+    renewrecord.cpp \
+    account.cpp
 
 HEADERS  += mainwindow.h \
     sqlip.h \
@@ -45,7 +46,8 @@ HEADERS  += mainwindow.h \
     changepassword.h \
     brrowrecord.h \
     returnrecord.h \
-    renewrecord.h
+    renewrecord.h \
+    account.h
 
 FORMS    += mainwindow.ui \
     sqlip.ui \

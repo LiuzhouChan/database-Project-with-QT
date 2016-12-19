@@ -2,19 +2,24 @@
 #define MANAGER_H
 #include <QString>
 #include <qsqlquery.h>
-class manager
+#include "student.h"
+#include "account.h"
+class manager:public account
 {
-private:
-    QString id;
-    QString passwd;
 public:
     manager(const QString &hid,const QString &hpasswd);
-    void set_id(const QString &s);
-    void set_passwd(const QString &s);
-    QString get_id() const;
-    QString get_passwd()const;
 
     void save();
+    void addNewReader(const QString &hid,const QString &hpassword,const QString &hname
+                      ,const QString &hbirth, const QString &hsex, const QString &hdept
+                      ,const int hmax_num,const int hdebt);
+
+    void modifyreader(student &s,QString &hpassword,const QString &hname
+                      ,const QString &hbirth, const QString &hsex, const QString &hdept
+                      ,const int hmax_num,const int hdebt);
+
+    void addNewBook();
+    void modifybook();
 };
 
 #endif // MANAGER_H
