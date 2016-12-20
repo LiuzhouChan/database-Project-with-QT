@@ -15,7 +15,7 @@ class editbook : public QWidget
     Q_OBJECT
 
 public:
-    explicit editbook(QWidget *parent = 0,adminMainWindow *pp);
+    explicit editbook(QWidget *parent = 0);
     ~editbook();
 
 private slots:
@@ -24,7 +24,6 @@ private slots:
     void on_pushButton_2_clicked();
 
 private:
-    adminMainWindow *p;
     Ui::editbook *ui;
 };
 

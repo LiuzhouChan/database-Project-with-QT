@@ -1,8 +1,8 @@
 #include "editbook.h"
 #include "ui_editbook.h"
 
-editbook::editbook(QWidget *parent, adminMainWindow *pp) :
-    QWidget(parent),p(pp),
+editbook::editbook(QWidget *parent):
+    QWidget(parent),
     ui(new Ui::editbook)
 {
     ui->setupUi(this);
@@ -25,5 +25,4 @@ void editbook::on_pushButton_2_clicked()
            ui->lineEdit_9->text(),ui->lineEdit_7->text(),"null");
     b.save_new();
     this->hide();
-    p->on_pushButton_5_clicked();
 }

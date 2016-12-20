@@ -5,8 +5,9 @@
 #include "book.h"
 #include <QLineEdit>
 #include <kdatecombobox.h>
-#include "adminmainwindow.h"
-
+#include "manager.h"
+#include <QPushButton>
+#include <QRadioButton>
 namespace Ui {
 class modifybook;
 }
@@ -16,7 +17,7 @@ class modifybook : public QWidget
     Q_OBJECT
 
 public:
-    explicit modifybook(QWidget *parent = 0, book *boo=nullptr, adminMainWindow *pp);
+    explicit modifybook(QWidget *parent, book *boo,manager *man);
     ~modifybook();
 
 private slots:
@@ -25,7 +26,7 @@ private slots:
     void on_pushButton_2_clicked();
 
 private:
-    adminMainWindow *p;
+    manager * m;
     book *b;
     Ui::modifybook *ui;
 };
