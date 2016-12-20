@@ -20,7 +20,7 @@ public:
                       , const int hmax_num, const double hdebt);
 
     void addNewBook(const QString &pname,const QString &pISBN
-                    ,const QString &pauther,const QString &ptype,const QString &pdate
+                    ,const QString &pauther,const QString &psno,const QString &pdate
                     ,const QString &pprice,const QString &pbookno,
                     const QString &ppublish,const QString &pstate);
 
