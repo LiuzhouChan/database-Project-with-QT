@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>579</width>
-    <height>483</height>
+    <width>594</width>
+    <height>358</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -42,7 +42,7 @@
        <item>
         <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>Type</string>
+          <string>Shelf number</string>
          </property>
         </widget>
        </item>
@@ -70,14 +70,7 @@
        <item>
         <widget class="QLabel" name="label_4">
          <property name="text">
-          <string>Publish</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_9">
-         <property name="text">
-          <string>State</string>
+          <string>Publisher</string>
          </property>
         </widget>
        </item>
@@ -98,7 +91,7 @@
         <widget class="QLineEdit" name="lineEdit_4"/>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_5"/>
+        <widget class="KDateComboBox" name="kdatecombobox"/>
        </item>
        <item>
         <widget class="QLineEdit" name="lineEdit_6"/>
@@ -108,9 +101,6 @@
        </item>
        <item>
         <widget class="QLineEdit" name="lineEdit_7"/>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="lineEdit_8"/>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_3"/>
@@ -152,6 +142,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KDateComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kdatecombobox.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

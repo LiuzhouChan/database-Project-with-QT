@@ -42,7 +42,7 @@
        <item>
         <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>Type</string>
+          <string>Shelf No.</string>
          </property>
         </widget>
        </item>
@@ -98,7 +98,7 @@
         <widget class="QLineEdit" name="lineEdit_4"/>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_5"/>
+        <widget class="KDateComboBox" name="kdatecombobox"/>
        </item>
        <item>
         <widget class="QLineEdit" name="lineEdit_6"/>
@@ -110,7 +110,11 @@
         <widget class="QLineEdit" name="lineEdit_7"/>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_8"/>
+        <widget class="QLineEdit" name="lineEdit_8">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_3"/>
@@ -171,6 +175,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KDateComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kdatecombobox.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

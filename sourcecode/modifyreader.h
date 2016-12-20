@@ -6,7 +6,9 @@
 #include <QSqlQuery>
 #include "student.h"
 #include "manager.h"
-
+#include <kdatecombobox.h>
+#include <QRadioButton>
+#include <QSpinBox>
 namespace Ui {
 class modifyreader;
 }

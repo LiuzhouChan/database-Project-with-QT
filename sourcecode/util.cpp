@@ -32,3 +32,37 @@ void rmrow(int i,QTableWidget * table)
         table->removeRow(i);
     }
 }
+
+QDate ulastborrow(QString &brno,const QString &bookno)
+{
+    QSqlQuery query(QSqlDatabase::database("myconnection"));
+
+    QDate lastTime;
+    query.exec("select BRno,startTime from BorrowRecord where "
+               "Bno=\""+bookno+"\" order by startTime decrease");
+    if(query.next())
+    {
+        brno=query.value(0).toString();
+        lastTime=QDate::fromString(query.value(1).toString(),"yyyy-MM-dd");
+        query.exec("select restartTime from renewrecord where "
+                   "BRno="+brno+"");
+        if(query.next())
+        {
+            lastTime=QDate::fromString(query.value(0).toString(),"yyyy-MM-dd");
+        }
+    }
+    return lastTime;
+
+}
+
+int umaxday()
+{
+    QSqlQuery query(QSqlDatabase::database("myconnection"));
+    int day;
+    query.exec("select maxday from Fine");
+    if(query.next())
+    {
+        day=query.value(0).toInt();
+    }
+    return day;
+}

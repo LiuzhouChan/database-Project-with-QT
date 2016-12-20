@@ -57,7 +57,8 @@ int student::get_max()const{
      return max_num;
 }
 
-void student::save()const{
+void student::save()const
+{
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("update Reader "
                "set password = \""+get_passwd()+"\", "
@@ -66,11 +67,12 @@ void student::save()const{
                "set Rsex = "+sex+", "
                "set Rdept= \""+dept+"\", "
                "set BmaxNum= "+QString::number(max_num)+", "
-               "set isDebt= "+QString::number(debt)+", "
+               "set isDebt= "+QString::number(debt)+" "
                "where Rno = \" "+get_id()+"\" ");
 }
 
-void student::save_new()const{
+void student::save_new()const
+{
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("insert into Reader values("
                "\""+get_id()+"\","
@@ -79,8 +81,8 @@ void student::save_new()const{
                "\""+birth+"\","
                "\""+sex+"\","
                "\""+dept+"\","
-               "\""+QString::number(max_num)+"\","
-               "\""+QString::number(debt)+"\","
+               ""+QString::number(max_num)+","
+               ""+QString::number(debt)+""
                ")"
                 );
 }
@@ -100,32 +102,17 @@ void student::borrowBook(const account &a, book &b)
 void student::returnBook(const account &a, book &b)
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
-
-    QDate lastTime;
     QString brno;
+    QDate lastTime=b.lastborrow(brno);
     int day;
     double rate;
     double fine;
-    query.exec("select BRno,startTime from BorrowRecord where "
-               "Bno=\""+b.get_bookno()+"\" order by startTime decrease");
-    if(query.next())
-    {
-        brno=query.value(0).toString();
-        lastTime=query.value(1).toDate();
-    }
     QDate date=QDate::currentDate();
     ReturnRecord r(a.get_id(),brno,date.toString());
     r.save();
     query.exec("update BookForRent "
                "set Bposi = \"null\", "
                "where Bno = \""+b.get_bookno()+"\" ");
-
-    query.exec("select restartTime from renewrecord where "
-               "BRno="+brno+"");
-    if(query.next())
-    {
-        lastTime=query.value(0).toDate();
-    }
     query.exec("select * from Fine");
     if(query.next())
     {

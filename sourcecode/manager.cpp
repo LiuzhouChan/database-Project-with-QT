@@ -36,23 +36,23 @@ void manager::modifyreader(student &s,const QString &hpassword,const QString &hn
 }
 
 void manager::addNewBook(const QString &pname,const QString &pISBN
-                ,const QString &pauther,const QString &ptype,const QString &pdate
+                ,const QString &pauther,const QString &psno,const QString &pdate
                 ,const QString &pprice,const QString &pbookno,
                 const QString &ppublish,const QString &pstate)
 {
-    book b(pname,pISBN,pauther,ptype,pdate,pprice,pbookno,ppublish,pstate);
+    book b(pname,pISBN,pauther,psno,pdate,pprice,pbookno,ppublish,pstate);
     b.save_new();
 }
 
 void manager::modifybook(book &b,const QString &pname,const QString &pISBN
-                ,const QString &pauther,const QString &ptype,const QString &pdate
+                ,const QString &pauther,const QString &psno,const QString &pdate
                 ,const QString &pprice,const QString &pbookno,
                 const QString &ppublish,const QString &pstate)
 {
     b.set_name(pname);
     b.set_isbn(pISBN);
     b.set_auther(pauther);
-    b.set_type(ptype);
+    b.set_sno(psno);
     b.set_date(pdate);
     b.set_price(pprice);
     b.set_bookno(pbookno);

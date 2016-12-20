@@ -2,8 +2,12 @@
 #define EDITREADER_H
 
 #include <QWidget>
+#include <QtWidgets>
 #include "student.h"
 #include <QLineEdit>
+#include <QRadioButton>
+#include <QSpinBox>
+#include <kdatecombobox.h>
 namespace Ui {
 class editreader;
 }

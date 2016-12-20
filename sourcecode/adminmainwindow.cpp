@@ -15,7 +15,6 @@ void adminMainWindow::setManager(manager *mang)
 
 adminMainWindow::~adminMainWindow()
 {
-    delete man;
     delete ui;
 }
 
@@ -219,37 +218,50 @@ void adminMainWindow::on_pushButton_6_clicked()
 
 void adminMainWindow::on_pushButton_3_clicked()
 {
-    QString bno=ui->tableWidget->currentItem()->text();
-    QString name;
-    QString ISBN;
-    QString auther;
-    QString type="PE";
-    QString date;
-    QString price;
-    QString publish;
-    QString state;
+    int row=ui->tableWidget->currentRow();
+    QString bno=ui->tableWidget->item(row,6)->text();
+
     QSqlQuery query(QSqlDatabase::database("myconnection"));
-    query.exec("select Book.ISBN,Book.Bname,Book.publisher,Book.author,"
-               "Book.Bdate,Book.Bprice,BookForRent.Bposi"
+    query.exec("select Book.Bname,Book.ISBN,Book.Bauthor,Book.Sno,"
+               "Book.Bdate,Book.Bprice,Book.Bpublisher,"
+               "BookForRent.Bposi"
                " from Book,BookForRent where BookForRent.ISBN=Book.ISBN and "
                "BookForRent.Bno=\""+bno+"\"");
+    book *b;
     if(query.next())
     {
-        ISBN=query.value(0).toString();
-        name=query.value(1).toString();
-        publish=query.value(2).toString();
-        auther=query.value(3).toString();
-        date=query.value(4).toString();
-        price=query.value(5).toString();
-        state=query.value(6).toString();
+        b=new book(query.value(0).toString(),query.value(1).toString(),
+                         query.value(2).toString(),query.value(3).toString(),
+                         query.value(4).toString(),query.value(5).toString(),
+                         bno,query.value(6).toString(),query.value(7).toString());
     }
 
-    book *b=new book(name,ISBN,auther,type,date,price,bno,publish,state);
+
     modifybook *mb=new modifybook(0,b);
     mb->show();
 }
 
 void adminMainWindow::on_pushButton_7_clicked()
 {
-    QString bno=ui->tableWidget->currentItem()->text();
+    int row=ui->tableWidget_2->currentRow();
+    student *s = new student(ui->tableWidget_2->item(row,0)->text(),ui->tableWidget_2->item(row,1)->text(),
+                             ui->tableWidget_2->item(row,2)->text(),ui->tableWidget_2->item(row,3)->text(),
+                             ui->tableWidget_2->item(row,4)->text(),ui->tableWidget_2->item(row,5)->text(),
+                             ui->tableWidget_2->item(row,6)->text().toInt(),
+                             ui->tableWidget_2->item(row,7)->text().toDouble());
+    modifyreader *m=new modifyreader(0,s,man);
+    m->show();
+}
+
+void adminMainWindow::on_pushButton_8_clicked()
+{
+    int row=ui->tableWidget_2->currentRow();
+    man->deletReader(ui->tableWidget_2->item(row,0)->text());
+    on_pushButton_5_clicked();
+}
+
+void adminMainWindow::on_pushButton_2_clicked()
+{
+    int row=ui->tableWidget->currentRow();
+    man->deleteBook(ui->tableWidget->item(row,0)->text());
 }

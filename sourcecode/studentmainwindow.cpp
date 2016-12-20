@@ -5,7 +5,8 @@ studentMainWindow::studentMainWindow(QWidget *parent) :
     QMainWindow(parent),stud(nullptr),
     ui(new Ui::studentMainWindow)
 {
-
+    ui->setupUi(this);
+    refresh();
 }
 
 void studentMainWindow::setstu(student *ss)
@@ -16,15 +17,10 @@ void studentMainWindow::setstu(student *ss)
 void studentMainWindow::refresh()
 {
     QStringList header;
-    header<<"Name"<<"ISBN";
+    header<<"Name"<<"Book NO."<<"Start date"<<"Due date";
     ui->tableWidget_2->clear();
     QSqlQuery query(QSqlDatabase::database("myconnection"));
-//    int maxday;
-//    query.exec("select maxday from Fine");
-//    if(query.next())
-//    {
-//        maxday=query.value(0).toInt();
-//    }
+
     query.exec("select Book.Bname,BookForRent.Bno from Book,BookForRent where"
                "Book.ISBN=BookForRent.ISBN and BookForRent.Bposi=\""+stud->get_id()+"\"");
     int size(header.size());
@@ -38,18 +34,23 @@ void studentMainWindow::refresh()
         {
             ui->tableWidget_2->insertRow(i);
         }
-        for(int j=0;j<size;++j)
-        {
-               ui->tableWidget_2->setItem(i,j,
-                  new QTableWidgetItem(query.value(j).toString()));
-        }
-           ++i;
+        QString name=query.value(0).toString();
+        QString booknumber=query.value(1).toString();
+        QString brno;
+        QDate startday=ulastborrow(brno,booknumber);
+        QDate dueday=startday.addDays(umaxday());
+        ui->tableWidget_2->setItem(i,0,new QTableWidgetItem(name));
+        ui->tableWidget_2->setItem(i,1,new QTableWidgetItem(booknumber));
+        ui->tableWidget_2->setItem(i,2,new QTableWidgetItem(startday.toString()));
+        ui->tableWidget_2->setItem(i,3,new QTableWidgetItem(dueday.toString()));
+        ++i;
    }
+    rmrow(i,ui->tableWidget_2);
+    ui->tableWidget_2->show();
 }
 
 studentMainWindow::~studentMainWindow()
 {
-    delete stud;
     delete ui;
 }
 
