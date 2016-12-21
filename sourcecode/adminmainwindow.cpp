@@ -221,51 +221,67 @@ void adminMainWindow::on_pushButton_6_clicked()
 void adminMainWindow::on_pushButton_3_clicked()
 {
     int row=ui->tableWidget->currentRow();
-    QString bno=ui->tableWidget->item(row,6)->text();
+    if(row>=0)
+    {
+        QString bno=ui->tableWidget->item(row,6)->text();
 
-//    QSqlQuery query(QSqlDatabase::database("myconnection"));
-//    query.exec("select Book.Bname,Book.ISBN,Book.Bauthor,Book.Sno,"
-//               "Book.Bdate,Book.Bprice,Book.Bpublisher,"
-//               "BookForRent.Bposi"
-//               " from Book,BookForRent where BookForRent.ISBN=Book.ISBN and "
-//               "BookForRent.Bno=\""+bno+"\"");
-//    book *b;
-//    if(query.next())
-//    {
-//        b=new book(query.value(0).toString(),query.value(1).toString(),
-//                         query.value(2).toString(),query.value(3).toString(),
-//                         query.value(4).toString(),query.value(5).toString(),
-//                         bno,query.value(6).toString(),query.value(7).toString());
-//    }
+    //    QSqlQuery query(QSqlDatabase::database("myconnection"));
+    //    query.exec("select Book.Bname,Book.ISBN,Book.Bauthor,Book.Sno,"
+    //               "Book.Bdate,Book.Bprice,Book.Bpublisher,"
+    //               "BookForRent.Bposi"
+    //               " from Book,BookForRent where BookForRent.ISBN=Book.ISBN and "
+    //               "BookForRent.Bno=\""+bno+"\"");
+    //    book *b;
+    //    if(query.next())
+    //    {
+    //        b=new book(query.value(0).toString(),query.value(1).toString(),
+    //                         query.value(2).toString(),query.value(3).toString(),
+    //                         query.value(4).toString(),query.value(5).toString(),
+    //                         bno,query.value(6).toString(),query.value(7).toString());
+    //    }
 
 
-    dmodifybook *mb=new dmodifybook(this,new book(bno),man);
-    mb->show();
+        dmodifybook *mb=new dmodifybook(this,new book(bno),man);
+        mb->show();
+    }
+
 }
 
 void adminMainWindow::on_pushButton_7_clicked()
 {
     int row=ui->tableWidget_2->currentRow();
-    student *s = new student(ui->tableWidget_2->item(row,0)->text());
-//    student *s = new student(ui->tableWidget_2->item(row,0)->text(),ui->tableWidget_2->item(row,1)->text(),
-//                             ui->tableWidget_2->item(row,2)->text(),ui->tableWidget_2->item(row,3)->text(),
-//                             ui->tableWidget_2->item(row,4)->text(),ui->tableWidget_2->item(row,5)->text(),
-//                             ui->tableWidget_2->item(row,6)->text().toInt(),
-//                             ui->tableWidget_2->item(row,7)->text().toDouble());
-    dmodifyreader *m=new dmodifyreader(this,s,man);
-    m->show();
+    if(row>=0)
+    {
+        student *s = new student(ui->tableWidget_2->item(row,0)->text());
+    //    student *s = new student(ui->tableWidget_2->item(row,0)->text(),ui->tableWidget_2->item(row,1)->text(),
+    //                             ui->tableWidget_2->item(row,2)->text(),ui->tableWidget_2->item(row,3)->text(),
+    //                             ui->tableWidget_2->item(row,4)->text(),ui->tableWidget_2->item(row,5)->text(),
+    //                             ui->tableWidget_2->item(row,6)->text().toInt(),
+    //                             ui->tableWidget_2->item(row,7)->text().toDouble());
+        dmodifyreader *m=new dmodifyreader(this,s,man);
+        m->show();
+    }
+
 }
 
 void adminMainWindow::on_pushButton_8_clicked()
 {
     int row=ui->tableWidget_2->currentRow();
-    man->deletReader(ui->tableWidget_2->item(row,0)->text());
-    on_pushButton_5_clicked();
+    if(row>=0)
+    {
+        man->deletReader(ui->tableWidget_2->item(row,0)->text());
+        on_pushButton_5_clicked();
+    }
+
 }
 
 void adminMainWindow::on_pushButton_2_clicked()
 {
     int row=ui->tableWidget->currentRow();
-    man->deleteBook(ui->tableWidget->item(row,1)->text());
-    on_pushButton_clicked();
+    if(row>=0)
+    {
+        man->deleteBook(ui->tableWidget->item(row,1)->text());
+        on_pushButton_clicked();
+    }
+
 }

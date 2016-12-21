@@ -45,8 +45,8 @@ public:
     QString get_publish()const;
     QString get_state()const;
     QString get_type()const;
-    QDate lastborrow(QString &brno) const;
-    QDate duedate() const;
+    QDateTime lastborrow(QString &brno) const;
+    QDateTime duedate() const;
     void save();
     void save_new();
 

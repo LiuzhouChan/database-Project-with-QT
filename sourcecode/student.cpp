@@ -89,13 +89,13 @@ void student::save()const
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("update Reader "
                "set password = \""+get_passwd()+"\", "
-               "set Rname= \""+name+"\", "
-               "set Rbirth= \""+birth+"\", "
-               "set Rsex = "+sex+", "
-               "set Rdept= \""+dept+"\", "
-               "set BmaxNum= "+QString::number(max_num)+", "
-               "set isDebt= "+QString::number(debt)+" "
-               "where Rno = \" "+get_id()+"\" ");
+               "Rname= \""+name+"\", "
+               "Rbirth= \""+birth+"\", "
+               "Rsex = "+sex+", "
+               "Rdept= \""+dept+"\", "
+               "BmaxNum= "+QString::number(max_num)+", "
+               "Rdebt= "+QString::number(debt)+" "
+               "where Rno = \""+get_id()+"\" ");
 }
 
 void student::save_new()const
@@ -117,12 +117,12 @@ void student::save_new()const
 void student::borrowBook(const account &a, book &b)
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
-    QDate date=QDate::currentDate();
-    brrowRecord brecord(a.get_id(),get_id(),b.get_bookno(),date.toString());
+    QDateTime date=QDateTime::currentDateTime();
+    brrowRecord brecord(a.get_id(),get_id(),b.get_bookno(),date.toString("yyyy-MM-dd HH:mm:ss"));
     brecord.save();
     query.exec("update BookForRent "
                "set Bposi = \""+get_id()+"\" "
-               "where Bno = \" "+b.get_bookno()+"\" ");
+               "where Bno = \""+b.get_bookno()+"\" ");
     ++num;
 }
 
@@ -130,12 +130,12 @@ void student::returnBook(const account &a, book &b)
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     QString brno;
-    QDate lastTime=b.lastborrow(brno);
+    QDateTime lastTime=b.lastborrow(brno);
     int day;
     double rate;
     double fine;
-    QDate date=QDate::currentDate();
-    ReturnRecord r(a.get_id(),brno,date.toString());
+    QDateTime date=QDateTime::currentDateTime();
+    ReturnRecord r(a.get_id(),brno,date.toString("yyyy-MM-dd HH:mm:ss"));
     r.save();
     query.exec("update BookForRent "
                "set Bposi = \"null\", "
@@ -151,7 +151,7 @@ void student::returnBook(const account &a, book &b)
     {
         fine=(days-day)*rate;
         query.exec("update Reader "
-                   "set Rdebt = Rdebt+"+QString::number(fine)+""
+                   "set Rdebt = Rdebt+"+QString::number(fine)+" "
                    "where Rno = \""+get_id()+"\" ");
     }
     --num;
@@ -167,7 +167,7 @@ void student::renewBook(const account &a, book &b)
     {
         brno=query.value(0).toString();
     }
-    QDate date=QDate::currentDate();
-    RenewRecord r(a.get_id(),brno,date.toString());
+    QDateTime date=QDateTime::currentDateTime();
+    RenewRecord r(a.get_id(),brno,date.toString("yyyy-MM-dd HH:mm:ss"));
     r.save();
 }

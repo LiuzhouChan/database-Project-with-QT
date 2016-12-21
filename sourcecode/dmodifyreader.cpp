@@ -45,7 +45,8 @@ void dmodifyreader::on_pushButton_2_clicked()
     {
         sex="1";
     }
-    m->modifyreader(*s,ui->lineEdit_3->text(),ui->lineEdit->text(),ui->kdatecombobox->date().toString(),
+
+    m->modifyreader(*s,ui->lineEdit_3->text(),ui->lineEdit->text(),ui->kdatecombobox->date().toString("yyyy-MM-dd"),
                     sex,ui->lineEdit_6->text(),ui->spinBox->value(),ui->lineEdit_8->text().toDouble());
     this->close();
 }

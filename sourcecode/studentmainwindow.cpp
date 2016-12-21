@@ -194,17 +194,21 @@ void studentMainWindow::on_pushButton_clicked()
 void studentMainWindow::on_pushButton_2_clicked()
 {
     int row=ui->tableWidget->currentRow();
-    QString isbn=ui->tableWidget->item(row,1)->text();
-    QSqlQuery query(QSqlDatabase::database("myconnection"));
-    query.exec("SELECT Bno from BookForRent where ISBN= \""+isbn+"\" and Bposi is NULL");
-    QString bno;
-    if(query.next())
+    if(row>-1)
     {
-        bno=query.value(0).toString();
+        QString isbn=ui->tableWidget->item(row,1)->text();
+        QSqlQuery query(QSqlDatabase::database("myconnection"));
+        query.exec("SELECT Bno from BookForRent where ISBN= \""+isbn+"\" and Bposi is NULL");
+        QString bno;
+        if(query.next())
+        {
+            bno=query.value(0).toString();
+        }
+        book *b=new book(bno);
+        stud->borrowBook(*stud,*b);
+        delete b;
     }
-    book *b=new book(bno);
-    stud->borrowBook(*stud,*b);
-    delete b;
+
 
 }
 

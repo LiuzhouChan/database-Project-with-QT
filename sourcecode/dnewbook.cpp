@@ -22,7 +22,7 @@ void dnewbook::on_pushButton_2_clicked()
 {
     //ok
     book b(ui->lineEdit->text(),ui->lineEdit_2->text(),ui->lineEdit_3->text()
-           ,ui->lineEdit_4->text(),ui->kdatecombobox->date().toString(),ui->lineEdit_6->text(),
+           ,ui->lineEdit_4->text(),ui->kdatecombobox->date().toString("yyyy-MM-dd"),ui->lineEdit_6->text(),
            ui->lineEdit_9->text(),ui->lineEdit_7->text(),"null");
     b.save_new();
     QMessageBox::about(this,"add new book","successful");

@@ -138,29 +138,29 @@ QString book::get_sno()const
     return sno;
 }
 
-QDate book::lastborrow(QString &brno) const
+QDateTime book::lastborrow(QString &brno) const
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
 
-    QDate lastTime;
+    QDateTime lastTime;
     query.exec("select BRno,startTime from BorrowRecord where "
                "Bno=\""+bookno+"\" order by startTime decrease");
     if(query.next())
     {
         brno=query.value(0).toString();
-        lastTime=QDate::fromString(query.value(1).toString(),"yyyy-MM-dd");
+        lastTime=QDateTime::fromString(query.value(1).toString(),"yyyy-MM-dd HH:mm:ss");
         query.exec("select restartTime from renewrecord where "
                    "BRno="+brno+"");
         if(query.next())
         {
-            lastTime=QDate::fromString(query.value(0).toString(),"yyyy-MM-dd");
+            lastTime=QDateTime::fromString(query.value(0).toString(),"yyyy-MM-dd HH:mm:ss");
         }
     }
     return lastTime;
 
 }
 
-QDate book::duedate() const
+QDateTime book::duedate() const
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     int day;
@@ -178,16 +178,16 @@ void book::save()
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("update BookForRent "
                "set ISBN = \""+ISBN+"\", "
-               "set Bposi= \""+state+"\", "
+               "Bposi= \""+state+"\", "
                "where Bno = \" "+bookno+"\" ");
 
     query.exec("update Book "
                "set Bname = \""+name+"\", "
-               "set Sno= \""+sno+"\", "
-               "set Bpublisher= \""+publish+"\", "
-               "set Bauthor = "+auther+", "
-               "set Bdate= \""+date+"\", "
-               "set Bprice= "+price+", "
+               "Sno= \""+sno+"\", "
+               "Bpublisher= \""+publish+"\", "
+               "Bauthor = "+auther+", "
+               "Bdate= \""+date+"\", "
+               "Bprice= "+price+", "
                "where ISBN = \" "+ISBN+"\" ");
 }
 

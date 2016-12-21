@@ -16,7 +16,7 @@ dmodifybook::dmodifybook(QWidget *parent,book *boo,manager *man):
     ui->lineEdit_7->setText(b->get_publish());
     if(b->get_state()=="")//in library
     {
-        ui->lineEdit_8->setText("sno:"+b->get_sno());
+        ui->lineEdit_8->setText("shelf:"+b->get_sno());
         ui->lineEdit_8->setReadOnly(false);
         ui->radioButton->setVisible(false);
         ui->radioButton_3->setVisible(false);
@@ -24,7 +24,7 @@ dmodifybook::dmodifybook(QWidget *parent,book *boo,manager *man):
     else//in student
     {
         ui->kdatecombobox->setEnabled(false);
-        ui->lineEdit_8->setText("stuid:"+b->get_state());
+        ui->lineEdit_8->setText("student id:"+b->get_state());
         ui->radioButton_2->setVisible(false);
         ui->lineEdit->setReadOnly(true);
         ui->lineEdit_7->setReadOnly(true);
@@ -53,7 +53,7 @@ void dmodifybook::on_pushButton_2_clicked()
     if(ui->radioButton_2->isChecked())//in library, borrow book
     {
         m->modifybook(*b,ui->lineEdit->text(),ui->lineEdit_2->text(),ui->lineEdit_3->text(),
-                      ui->lineEdit_4->text(),ui->kdatecombobox->date().toString(),ui->lineEdit_6->text()
+                      ui->lineEdit_4->text(),ui->kdatecombobox->date().toString("yyyy-MM-dd"),ui->lineEdit_6->text()
                       ,ui->lineEdit_9->text(),ui->lineEdit_7->text(),"NULL");
         student *s = new student(ui->lineEdit_8->text());
         if(s->get_debt()>0)
@@ -77,13 +77,13 @@ void dmodifybook::on_pushButton_2_clicked()
     }
     if(ui->radioButton->isChecked()) //return book
     {
-        student *s=new student(ui->lineEdit_8->text());
+        student *s=new student(b->get_state());
         m->returnbook(s,b);
         delete s;
     }
     if(ui->radioButton_3->isChecked()) //renew book
     {
-        student *s=new student(ui->lineEdit_8->text());
+        student *s=new student(b->get_state());
         if(s->get_debt()>0)
         {
             QMessageBox::about(this,"debt","Can not borrow this book since this student is in debt");
