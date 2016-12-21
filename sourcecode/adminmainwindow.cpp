@@ -6,6 +6,7 @@ adminMainWindow::adminMainWindow(QWidget *parent) :
     ui(new Ui::adminMainWindow),man(nullptr)
 {
     ui->setupUi(this);
+    setAttribute(Qt::WA_DeleteOnClose);
 }
 
 void adminMainWindow::setManager(manager *mang)
@@ -15,6 +16,7 @@ void adminMainWindow::setManager(manager *mang)
 
 adminMainWindow::~adminMainWindow()
 {
+    this->parentWidget()->show();
     delete ui;
 }
 
@@ -194,25 +196,25 @@ void adminMainWindow::on_pushButton_5_clicked()
 
 void adminMainWindow::on_action_triggered()
 {
-    finemanager *fin=new finemanager;
+    dfinemanager *fin=new dfinemanager(this);
     fin->show();
 }
 
 void adminMainWindow::on_action_2_triggered()
 {
-    changepassword *ch=new changepassword(0,man);
+    dchangepassword *ch=new dchangepassword(this,man);
     ch->show();
 }
 
 void adminMainWindow::on_pushButton_4_clicked()
 {
-     editbook *book=new editbook;
+     dnewbook *book=new dnewbook(this);
      book->show();
 }
 
 void adminMainWindow::on_pushButton_6_clicked()
 {
-    editreader *e=new editreader(0);
+    dnewreader *e=new dnewreader(this);
     e->show();
 }
 
@@ -221,35 +223,36 @@ void adminMainWindow::on_pushButton_3_clicked()
     int row=ui->tableWidget->currentRow();
     QString bno=ui->tableWidget->item(row,6)->text();
 
-    QSqlQuery query(QSqlDatabase::database("myconnection"));
-    query.exec("select Book.Bname,Book.ISBN,Book.Bauthor,Book.Sno,"
-               "Book.Bdate,Book.Bprice,Book.Bpublisher,"
-               "BookForRent.Bposi"
-               " from Book,BookForRent where BookForRent.ISBN=Book.ISBN and "
-               "BookForRent.Bno=\""+bno+"\"");
-    book *b;
-    if(query.next())
-    {
-        b=new book(query.value(0).toString(),query.value(1).toString(),
-                         query.value(2).toString(),query.value(3).toString(),
-                         query.value(4).toString(),query.value(5).toString(),
-                         bno,query.value(6).toString(),query.value(7).toString());
-    }
+//    QSqlQuery query(QSqlDatabase::database("myconnection"));
+//    query.exec("select Book.Bname,Book.ISBN,Book.Bauthor,Book.Sno,"
+//               "Book.Bdate,Book.Bprice,Book.Bpublisher,"
+//               "BookForRent.Bposi"
+//               " from Book,BookForRent where BookForRent.ISBN=Book.ISBN and "
+//               "BookForRent.Bno=\""+bno+"\"");
+//    book *b;
+//    if(query.next())
+//    {
+//        b=new book(query.value(0).toString(),query.value(1).toString(),
+//                         query.value(2).toString(),query.value(3).toString(),
+//                         query.value(4).toString(),query.value(5).toString(),
+//                         bno,query.value(6).toString(),query.value(7).toString());
+//    }
 
 
-    modifybook *mb=new modifybook(0,b);
+    dmodifybook *mb=new dmodifybook(this,new book(bno));
     mb->show();
 }
 
 void adminMainWindow::on_pushButton_7_clicked()
 {
     int row=ui->tableWidget_2->currentRow();
-    student *s = new student(ui->tableWidget_2->item(row,0)->text(),ui->tableWidget_2->item(row,1)->text(),
-                             ui->tableWidget_2->item(row,2)->text(),ui->tableWidget_2->item(row,3)->text(),
-                             ui->tableWidget_2->item(row,4)->text(),ui->tableWidget_2->item(row,5)->text(),
-                             ui->tableWidget_2->item(row,6)->text().toInt(),
-                             ui->tableWidget_2->item(row,7)->text().toDouble());
-    modifyreader *m=new modifyreader(0,s,man);
+    student *s = new student(ui->tableWidget_2->item(row,0)->text());
+//    student *s = new student(ui->tableWidget_2->item(row,0)->text(),ui->tableWidget_2->item(row,1)->text(),
+//                             ui->tableWidget_2->item(row,2)->text(),ui->tableWidget_2->item(row,3)->text(),
+//                             ui->tableWidget_2->item(row,4)->text(),ui->tableWidget_2->item(row,5)->text(),
+//                             ui->tableWidget_2->item(row,6)->text().toInt(),
+//                             ui->tableWidget_2->item(row,7)->text().toDouble());
+    dmodifyreader *m=new dmodifyreader(this,s,man);
     m->show();
 }
 

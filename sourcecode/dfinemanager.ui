@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>finemanager</class>
- <widget class="QWidget" name="finemanager">
+ <class>dfinemanager</class>
+ <widget class="QDialog" name="dfinemanager">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>292</width>
-    <height>170</height>
+    <width>299</width>
+    <height>135</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Dialog</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

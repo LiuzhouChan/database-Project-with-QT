@@ -9,14 +9,14 @@
 #include <QLineEdit>
 #include <util.h>
 #include <QComboBox>
-#include "finemanager.h"
-#include "changepassword.h"
+#include "dfinemanager.h"
+#include "dchangepassword.h"
 #include <QAction>
 #include "bookdetail.h"
-#include "editreader.h"
-#include "editbook.h"
-#include "modifybook.h"
-#include "modifyreader.h"
+#include "dnewreader.h"
+#include "dnewbook.h"
+#include "dmodifybook.h"
+#include "dmodifyreader.h"
 
 namespace Ui {
 class adminMainWindow;

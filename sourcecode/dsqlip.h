@@ -1,5 +1,5 @@
-#ifndef SQLIP_H
-#define SQLIP_H
+#ifndef DSQLIP_H
+#define DSQLIP_H
 
 #include <QDialog>
 #include <QLineEdit>
@@ -7,18 +7,17 @@
 #include <QSql>
 #include <QSqlDatabase>
 #include <QMessageBox>
-
 namespace Ui {
-class sqlip;
+class dsqlip;
 }
 
-class sqlip : public QDialog
+class dsqlip : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit sqlip(QWidget *parent = 0);
-    ~sqlip();
+    explicit dsqlip(QWidget *parent = 0);
+    ~dsqlip();
 
 private slots:
     void on_pushButton_2_clicked();
@@ -26,12 +25,11 @@ private slots:
     void on_pushButton_clicked();
 
 private:
-    Ui::sqlip *ui;
+    Ui::dsqlip *ui;
     QString server_ip;
     QString user_name;
     QString pass_wd;
     QString database_name;
-
 };
 
-#endif // SQLIP_H
+#endif // DSQLIP_H

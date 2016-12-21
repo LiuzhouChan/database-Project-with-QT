@@ -23,7 +23,7 @@ public:
          ,const QString &pauther,const QString &psno,const QString &pdate
          ,const QString &pprice,const QString &pbookno,
          const QString &ppublish,const QString &pstate);
-
+    book(const QString &bnoo);
     void set_name(const QString & s);
     void set_isbn(const QString & s);
     void set_auther(const QString & s);

@@ -6,7 +6,8 @@ studentMainWindow::studentMainWindow(QWidget *parent) :
     ui(new Ui::studentMainWindow)
 {
     ui->setupUi(this);
-    refresh();
+    setAttribute(Qt::WA_DeleteOnClose);
+   // refresh();
 }
 
 void studentMainWindow::setstu(student *ss)
@@ -222,3 +223,8 @@ void studentMainWindow::on_pushButton_clicked()
 //        ui->tableWidget->removeRow(i);
 //    }
 //}
+
+void studentMainWindow::on_pushButton_2_clicked()
+{
+
+}

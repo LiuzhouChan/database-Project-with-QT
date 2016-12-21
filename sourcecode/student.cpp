@@ -9,6 +9,24 @@ student::student(const QString &hid, const QString &hpassword, const QString &hn
 
 }
 
+student::student(const QString & id):account("","")
+{
+    QSqlQuery query(QSqlDatabase::database("myconnection"));
+    query.exec("select * from Reader where Rno=\""+id+"\"");
+
+    if(query.next())
+    {
+        set_id(query.value(0).toString());
+        set_passwd(query.value(1).toString());
+        name=query.value(2).toString();
+        birth=query.value(3).toString();
+        sex=query.value(4).toString();
+        dept=query.value(5).toString();
+        max_num=query.value(6).toInt();
+        debt=query.value(7).toDouble();
+    }
+}
+
 void student::set_name(const QString &s){
     name=s;
 }

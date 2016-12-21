@@ -1,33 +1,31 @@
-#ifndef CHANGEPASSWORD_H
-#define CHANGEPASSWORD_H
+#ifndef DCHANGEPASSWORD_H
+#define DCHANGEPASSWORD_H
 
+#include <QDialog>
 #include <QWidget>
 #include <QLineEdit>
 #include "manager.h"
 #include <QMessageBox>
 #include <QSqlQuery>
 namespace Ui {
-class changepassword;
+class dchangepassword;
 }
 
-class changepassword : public QWidget
+class dchangepassword : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit changepassword(QWidget *parent,manager *mang);
-    ~changepassword();
+    explicit dchangepassword(QWidget *parent,manager *mang);
+    ~dchangepassword();
 
 private slots:
     void on_pushButton_2_clicked();
-
     void on_pushButton_clicked();
-
     void on_knewpasswordwidget_passwordStatusChanged();
-
 private:
     manager *man;
-    Ui::changepassword *ui;
+    Ui::dchangepassword *ui;
 };
 
-#endif // CHANGEPASSWORD_H
+#endif // DCHANGEPASSWORD_H

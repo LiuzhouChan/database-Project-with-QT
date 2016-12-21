@@ -1,24 +1,25 @@
-#ifndef MODIFYBOOK_H
-#define MODIFYBOOK_H
+#ifndef DMODIFYBOOK_H
+#define DMODIFYBOOK_H
 
-#include <QWidget>
+#include <QDialog>
 #include "book.h"
 #include <QLineEdit>
 #include <kdatecombobox.h>
 #include "manager.h"
 #include <QPushButton>
 #include <QRadioButton>
+
 namespace Ui {
-class modifybook;
+class dmodifybook;
 }
 
-class modifybook : public QWidget
+class dmodifybook : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit modifybook(QWidget *parent, book *boo,manager *man);
-    ~modifybook();
+    explicit dmodifybook(QWidget *parent,book *boo,manager *man);
+    ~dmodifybook();
 
 private slots:
     void on_pushButton_3_clicked();
@@ -28,7 +29,7 @@ private slots:
 private:
     manager * m;
     book *b;
-    Ui::modifybook *ui;
+    Ui::dmodifybook *ui;
 };
 
-#endif // MODIFYBOOK_H
+#endif // DMODIFYBOOK_H

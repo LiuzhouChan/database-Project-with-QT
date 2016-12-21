@@ -1,9 +1,9 @@
-#include "sqlip.h"
-#include "ui_sqlip.h"
+#include "dsqlip.h"
+#include "ui_dsqlip.h"
 
-sqlip::sqlip(QWidget *parent) :
+dsqlip::dsqlip(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::sqlip),server_ip("127.0.0.1"),user_name("root"),pass_wd("xiaoliuliu"),
+    ui(new Ui::dsqlip),server_ip("127.0.0.1"),user_name("root"),pass_wd("xiaoliuliu"),
     database_name("sqlproject")
 {
     ui->setupUi(this);
@@ -11,30 +11,21 @@ sqlip::sqlip(QWidget *parent) :
     ui->sqlusername->setText(user_name);
     ui->sqlpassword->setText(pass_wd);
     ui->databasename->setText(database_name);
-
 }
 
-
-sqlip::~sqlip()
+dsqlip::~dsqlip()
 {
-
-    if(QSqlDatabase::contains("myconnection"))
-    {
-       QSqlDatabase::database("myconnection").close();
-       QSqlDatabase::removeDatabase("myconnection");
-    }
     delete ui;
 }
 
-
-
-void sqlip::on_pushButton_2_clicked()
+void dsqlip::on_pushButton_2_clicked()
 {
-    this->hide();
+    this->close();
 }
 
-void sqlip::on_pushButton_clicked()
+void dsqlip::on_pushButton_clicked()
 {
+    //ok
     server_ip=QString(ui->serverip->text());
     user_name=QString(ui->sqlusername->text());
     pass_wd=QString(ui->sqlpassword->text());
@@ -54,7 +45,7 @@ void sqlip::on_pushButton_clicked()
     if(db.open())
     {
         QMessageBox::about(this,QString("messages"),"Connect to the database successfully");
-        this->hide();
+        this->close();
     }
     else
     {

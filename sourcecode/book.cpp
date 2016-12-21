@@ -18,6 +18,34 @@ book::book(const QString &pname,const QString &pISBN
     }
 }
 
+book::book(const QString &bnoo):bookno(bnoo)
+{
+    QSqlQuery query(QSqlDatabase::database("myconnection"));
+    query.exec("select Book.Bname,Book.ISBN,Book.Bauthor,Book.Sno,"
+               "Book.Bdate,Book.Bprice,Book.Bpublisher,"
+               "BookForRent.Bposi"
+               " from Book,BookForRent where BookForRent.ISBN=Book.ISBN and "
+               "BookForRent.Bno=\""+bnoo+"\"");
+    if(query.next())
+    {
+        name=query.value(0).toString();
+        ISBN=query.value(1).toString();
+        auther=query.value(2).toString();
+        sno=query.value(3).toString();
+        date=query.value(4).toString();
+        price=query.value(5).toString(),
+        publish=query.value(6).toString();
+        state=query.value(7).toString();
+    }
+    query.exec("select Stype from Shelf where Sno=\""+sno+"\" ");
+    if(query.next())
+    {
+        type = query.value(0).toString();
+    }
+
+}
+
+
 void book::set_name(const QString & s)
 {
     name=s;

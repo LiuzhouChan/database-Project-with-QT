@@ -1,9 +1,9 @@
-#include "modifybook.h"
-#include "ui_modifybook.h"
+#include "dmodifybook.h"
+#include "ui_dmodifybook.h"
 
-modifybook::modifybook(QWidget *parent, book *boo,manager *man) :
-    QWidget(parent),b(boo),m(man),
-    ui(new Ui::modifybook)
+dmodifybook::dmodifybook(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::dmodifybook)
 {
     ui->setupUi(this);
     ui->lineEdit->setText(b->get_name());
@@ -34,20 +34,21 @@ modifybook::modifybook(QWidget *parent, book *boo,manager *man) :
     }
 }
 
-modifybook::~modifybook()
+dmodifybook::~dmodifybook()
 {
     delete b;
     delete ui;
 }
 
-void modifybook::on_pushButton_3_clicked()
+void dmodifybook::on_pushButton_3_clicked()
 {
-    this->hide();
+    //cancle
+    this->close();
 }
 
-void modifybook::on_pushButton_2_clicked()
+void dmodifybook::on_pushButton_2_clicked()
 {
-
+    //ok
     if(ui->radioButton_2->isChecked())
     {
         m->modifybook(*b,ui->lineEdit->text(),ui->lineEdit_2->text(),ui->lineEdit_3->text(),

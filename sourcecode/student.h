@@ -19,6 +19,7 @@ private:
     int max_num;
     double debt;
 public:
+    student(const QString & id);
     student(const QString &hid,const QString &hpassword,const QString &hname
             ,const QString &hbirth, const QString &hsex, const QString &hdept
             ,const int hmax_num,const double hdebt);

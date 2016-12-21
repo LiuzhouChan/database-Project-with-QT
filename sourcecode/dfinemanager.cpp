@@ -1,9 +1,9 @@
-#include "finemanager.h"
-#include "ui_finemanager.h"
+#include "dfinemanager.h"
+#include "ui_dfinemanager.h"
 
-finemanager::finemanager(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::finemanager)
+dfinemanager::dfinemanager(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::dfinemanager)
 {
     ui->setupUi(this);
 
@@ -14,24 +14,23 @@ finemanager::finemanager(QWidget *parent) :
         ui->lineEdit->setText(query.value(0).toString());
         ui->lineEdit_2->setText(query.value(1).toString());
     }
-
-
 }
 
-finemanager::~finemanager()
+dfinemanager::~dfinemanager()
 {
     delete ui;
 }
 
-void finemanager::on_pushButton_2_clicked()
+void dfinemanager::on_pushButton_2_clicked()
 {
-    this->hide();
+    this->close();
 }
 
-void finemanager::on_pushButton_clicked()
+void dfinemanager::on_pushButton_clicked()
 {
+    //ok
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("update Fine set maxday ="+ ui->lineEdit->text());
     query.exec("update Fine set rate ="+ui->lineEdit_2->text());
-    this->hide();
+    this->close();
 }

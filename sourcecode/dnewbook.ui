@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>modifybook</class>
- <widget class="QWidget" name="modifybook">
+ <class>dnewbook</class>
+ <widget class="QDialog" name="dnewbook">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>495</width>
-    <height>401</height>
+    <width>482</width>
+    <height>359</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Dialog</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
@@ -42,7 +42,7 @@
        <item>
         <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>Shelf No.</string>
+          <string>Shelf number</string>
          </property>
         </widget>
        </item>
@@ -70,14 +70,7 @@
        <item>
         <widget class="QLabel" name="label_4">
          <property name="text">
-          <string>Publish</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_9">
-         <property name="text">
-          <string>Status</string>
+          <string>Publisher</string>
          </property>
         </widget>
        </item>
@@ -104,21 +97,10 @@
         <widget class="QLineEdit" name="lineEdit_6"/>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_9">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
+        <widget class="QLineEdit" name="lineEdit_9"/>
        </item>
        <item>
         <widget class="QLineEdit" name="lineEdit_7"/>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="lineEdit_8">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_3"/>
@@ -129,27 +111,6 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QRadioButton" name="radioButton_2">
-       <property name="text">
-        <string>借书</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="radioButton_3">
-       <property name="text">
-        <string>续借</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="radioButton">
-       <property name="text">
-        <string>还书</string>
-       </property>
-      </widget>
-     </item>
      <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">

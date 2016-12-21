@@ -1,22 +1,22 @@
-#ifndef EDITBOOK_H
-#define EDITBOOK_H
+#ifndef DNEWBOOK_H
+#define DNEWBOOK_H
 
-#include <QWidget>
+#include <QDialog>
 #include "book.h"
 #include <QLineEdit>
 #include <kdatecombobox.h>
 #include "adminmainwindow.h"
 namespace Ui {
-class editbook;
+class dnewbook;
 }
 
-class editbook : public QWidget
+class dnewbook : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit editbook(QWidget *parent = 0);
-    ~editbook();
+    explicit dnewbook(QWidget *parent = 0);
+    ~dnewbook();
 
 private slots:
     void on_pushButton_3_clicked();
@@ -24,7 +24,7 @@ private slots:
     void on_pushButton_2_clicked();
 
 private:
-    Ui::editbook *ui;
+    Ui::dnewbook *ui;
 };
 
-#endif // EDITBOOK_H
+#endif // DNEWBOOK_H

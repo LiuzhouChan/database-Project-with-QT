@@ -1,27 +1,27 @@
-#include "editreader.h"
-#include "ui_editreader.h"
+#include "dnewreader.h"
+#include "ui_dnewreader.h"
 
-editreader::editreader(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::editreader)
+dnewreader::dnewreader(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::dnewreader)
 {
     ui->setupUi(this);
     ui->radioButton->setChecked(true);
 }
 
-editreader::~editreader()
+dnewreader::~dnewreader()
 {
     delete ui;
 }
 
-void editreader::on_pushButton_3_clicked()
+void dnewreader::on_pushButton_3_clicked()
 {
-    this->hide();
+    this->close();
 }
 
-void editreader::on_pushButton_2_clicked()
+void dnewreader::on_pushButton_2_clicked()
 {
-
+    //ok
     int sex;
     if(ui->radioButton->isChecked())
     {
@@ -35,5 +35,5 @@ void editreader::on_pushButton_2_clicked()
               ui->lineEdit->text(),ui->kdatecombobox->data().toString(),QString::number(sex)
               ,ui->lineEdit_6->text(),ui->spinBox->value(),0);
     s.save_new();
-    this->hide();
+    this->close();
 }

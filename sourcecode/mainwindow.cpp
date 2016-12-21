@@ -16,6 +16,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    if(QSqlDatabase::contains("myconnection"))
+    {
+       QSqlDatabase::database("myconnection").close();
+       QSqlDatabase::removeDatabase("myconnection");
+    }
     delete ip;
     delete ui;
 }

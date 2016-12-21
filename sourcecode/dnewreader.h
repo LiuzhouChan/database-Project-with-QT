@@ -1,23 +1,23 @@
-#ifndef EDITREADER_H
-#define EDITREADER_H
+#ifndef DNEWREADER_H
+#define DNEWREADER_H
 
-#include <QWidget>
-#include <QtWidgets>
+#include <QDialog>
 #include "student.h"
 #include <QLineEdit>
 #include <QRadioButton>
 #include <QSpinBox>
 #include <kdatecombobox.h>
 namespace Ui {
-class editreader;
+class dnewreader;
 }
 
-class editreader : public QWidget
+class dnewreader : public QDialog
 {
     Q_OBJECT
+
 public:
-    explicit editreader(QWidget *parent = 0);
-    ~editreader();
+    explicit dnewreader(QWidget *parent = 0);
+    ~dnewreader();
 
 private slots:
     void on_pushButton_3_clicked();
@@ -25,7 +25,7 @@ private slots:
     void on_pushButton_2_clicked();
 
 private:
-    Ui::editreader *ui;
+    Ui::dnewreader *ui;
 };
 
-#endif // EDITREADER_H
+#endif // DNEWREADER_H

@@ -1,28 +1,29 @@
-#include "editbook.h"
-#include "ui_editbook.h"
+#include "dnewbook.h"
+#include "ui_dnewbook.h"
 
-editbook::editbook(QWidget *parent):
-    QWidget(parent),
-    ui(new Ui::editbook)
+dnewbook::dnewbook(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::dnewbook)
 {
     ui->setupUi(this);
 }
 
-editbook::~editbook()
+dnewbook::~dnewbook()
 {
     delete ui;
 }
 
-void editbook::on_pushButton_3_clicked()
+void dnewbook::on_pushButton_3_clicked()
 {
-    this->hide();
+    this->close();
 }
 
-void editbook::on_pushButton_2_clicked()
+void dnewbook::on_pushButton_2_clicked()
 {
+    //ok
     book b(ui->lineEdit->text(),ui->lineEdit_2->text(),ui->lineEdit_3->text()
            ,ui->lineEdit_4->text(),ui->kdatecombobox->date().toString(),ui->lineEdit_6->text(),
            ui->lineEdit_9->text(),ui->lineEdit_7->text(),"null");
     b.save_new();
-    this->hide();
+    this->close();
 }
