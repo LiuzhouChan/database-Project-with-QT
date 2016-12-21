@@ -99,7 +99,7 @@
        <item>
         <widget class="QLineEdit" name="lineEdit_2">
          <property name="readOnly">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -214,5 +214,38 @@
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>spinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>horizontalSlider</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>169</x>
+     <y>224</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>230</x>
+     <y>227</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>spinBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>306</x>
+     <y>240</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>181</x>
+     <y>246</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

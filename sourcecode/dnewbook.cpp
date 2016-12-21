@@ -25,5 +25,6 @@ void dnewbook::on_pushButton_2_clicked()
            ,ui->lineEdit_4->text(),ui->kdatecombobox->date().toString(),ui->lineEdit_6->text(),
            ui->lineEdit_9->text(),ui->lineEdit_7->text(),"null");
     b.save_new();
+    QMessageBox::about(this,"add new book","successful");
     this->close();
 }

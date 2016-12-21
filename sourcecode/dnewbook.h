@@ -6,6 +6,7 @@
 #include <QLineEdit>
 #include <kdatecombobox.h>
 #include "adminmainwindow.h"
+#include <QMessageBox>
 namespace Ui {
 class dnewbook;
 }

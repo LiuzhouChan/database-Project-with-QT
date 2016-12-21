@@ -17,6 +17,7 @@ private:
     QString sex;
     QString dept;
     int max_num;
+    int num;
     double debt;
 public:
     student(const QString & id);
@@ -37,6 +38,7 @@ public:
     QString get_dept()const;
     double get_debt()const;
     int get_max()const;
+    int get_booknum() const;
     void save()const;    //change the information of student
     void save_new()const; //insert a new student
 

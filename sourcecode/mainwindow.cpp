@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->lineEdit_2->setText("00000000");
     ui->lineEdit_3->setText("root");
-    ip=new sqlip(this);
+    ip=new dsqlip(this);
 }
 
 MainWindow::~MainWindow()

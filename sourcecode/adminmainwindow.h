@@ -12,7 +12,6 @@
 #include "dfinemanager.h"
 #include "dchangepassword.h"
 #include <QAction>
-#include "bookdetail.h"
 #include "dnewreader.h"
 #include "dnewbook.h"
 #include "dmodifybook.h"

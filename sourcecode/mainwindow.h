@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "sqlip.h"
+#include "dsqlip.h"
 #include <QString>
 #include <QMessageBox>
 #include "adminmainwindow.h"
@@ -30,7 +30,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    sqlip *ip;
+    dsqlip *ip;
 };
 
 #endif // MAINWINDOW_H

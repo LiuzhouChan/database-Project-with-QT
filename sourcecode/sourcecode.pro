@@ -30,7 +30,8 @@ SOURCES += main.cpp\
     dfinemanager.cpp \
     dsqlip.cpp \
     dchangepassword.cpp \
-    dmodifyreader.cpp
+    dmodifyreader.cpp \
+    schangepassword.cpp
 
 HEADERS  += mainwindow.h \
     adminmainwindow.h \
@@ -49,7 +50,8 @@ HEADERS  += mainwindow.h \
     dfinemanager.h \
     dsqlip.h \
     dchangepassword.h \
-    dmodifyreader.h
+    dmodifyreader.h \
+    schangepassword.h
 
 FORMS    += mainwindow.ui \
     adminmainwindow.ui \
@@ -60,4 +62,5 @@ FORMS    += mainwindow.ui \
     dfinemanager.ui \
     dsqlip.ui \
     dchangepassword.ui \
-    dmodifyreader.ui
+    dmodifyreader.ui \
+    schangepassword.ui

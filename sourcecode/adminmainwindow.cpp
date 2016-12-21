@@ -239,7 +239,7 @@ void adminMainWindow::on_pushButton_3_clicked()
 //    }
 
 
-    dmodifybook *mb=new dmodifybook(this,new book(bno));
+    dmodifybook *mb=new dmodifybook(this,new book(bno),man);
     mb->show();
 }
 
@@ -266,5 +266,6 @@ void adminMainWindow::on_pushButton_8_clicked()
 void adminMainWindow::on_pushButton_2_clicked()
 {
     int row=ui->tableWidget->currentRow();
-    man->deleteBook(ui->tableWidget->item(row,0)->text());
+    man->deleteBook(ui->tableWidget->item(row,1)->text());
+    on_pushButton_clicked();
 }

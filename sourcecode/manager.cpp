@@ -61,6 +61,21 @@ void manager::modifybook(book &b,const QString &pname,const QString &pISBN
     b.save();
 }
 
+void manager::borrowbook(student *s,book *b)
+{
+    s->borrowBook(*this,*b);
+}
+
+void manager::returnbook(student *s,book *b)
+{
+    s->returnBook(*this,*b);
+}
+
+void manager::renewbook(student *s,book *b)
+{
+    s->renewBook(*this,*b);
+}
+
 void manager::deleteBook(const QString &ISBN)
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));

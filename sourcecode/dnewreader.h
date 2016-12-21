@@ -7,6 +7,7 @@
 #include <QRadioButton>
 #include <QSpinBox>
 #include <kdatecombobox.h>
+#include <QMessageBox>
 namespace Ui {
 class dnewreader;
 }

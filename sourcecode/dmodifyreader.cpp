@@ -36,7 +36,18 @@ void dmodifyreader::on_pushButton_clicked()
 
 void dmodifyreader::on_pushButton_2_clicked()
 {
-
+    QString sex;
+    if(ui->radioButton->isChecked())
+    {
+        sex="0";
+    }
+    if(ui->radioButton_2->isChecked())
+    {
+        sex="1";
+    }
+    m->modifyreader(*s,ui->lineEdit_3->text(),ui->lineEdit->text(),ui->kdatecombobox->date().toString(),
+                    sex,ui->lineEdit_6->text(),ui->spinBox->value(),ui->lineEdit_8->text().toDouble());
+    this->close();
 }
 
 void dmodifyreader::on_pushButton_3_clicked()

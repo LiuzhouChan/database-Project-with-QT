@@ -18,7 +18,7 @@ class dmodifyreader : public QDialog
     Q_OBJECT
 
 public:
-    explicit dmodifyreader(QWidget *parent,,student *ss,manager *mm);
+    explicit dmodifyreader(QWidget *parent,student *ss,manager *mm);
     ~dmodifyreader();
 
 private slots:

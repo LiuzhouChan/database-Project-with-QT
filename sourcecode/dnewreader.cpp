@@ -32,8 +32,10 @@ void dnewreader::on_pushButton_2_clicked()
         sex=1;
     }
     student s(ui->lineEdit_2->text(),ui->lineEdit_3->text(),
-              ui->lineEdit->text(),ui->kdatecombobox->data().toString(),QString::number(sex)
+              ui->lineEdit->text(),ui->kdatecombobox->date().toString(),QString::number(sex)
               ,ui->lineEdit_6->text(),ui->spinBox->value(),0);
     s.save_new();
+    QMessageBox::about(this,"add new reader","successful");
     this->close();
+
 }

@@ -29,6 +29,9 @@ public:
                     ,const QString &pprice,const QString &pbookno,
                     const QString &ppublish,const QString &pstate);
 
+    void borrowbook(student *s,book *b);
+    void returnbook(student *s,book *b);
+    void renewbook(student *s,book *b);
     void deleteBook(const QString &bookno);
     void deletReader(const QString &id);
 };

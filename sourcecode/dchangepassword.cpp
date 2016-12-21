@@ -33,3 +33,18 @@ void dchangepassword::on_pushButton_clicked()
         QMessageBox::information(this,"password","the old password is not correct");
     }
 }
+
+
+void dchangepassword::on_knewpasswordwidget_passwordStatusChanged()
+{
+    switch (ui->knewpasswordwidget->passwordStatus())
+    {
+        case KNewPasswordWidget::WeakPassword:
+        case KNewPasswordWidget::PasswordNotVerified:
+            ui->pushButton->setEnabled(false);
+            break;
+        default:
+            ui->pushButton->setEnabled(true);
+            break;
+        }
+}

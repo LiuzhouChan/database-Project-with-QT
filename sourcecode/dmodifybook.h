@@ -8,6 +8,7 @@
 #include "manager.h"
 #include <QPushButton>
 #include <QRadioButton>
+#include <QMessageBox>
 
 namespace Ui {
 class dmodifybook;
@@ -27,8 +28,8 @@ private slots:
     void on_pushButton_2_clicked();
 
 private:
-    manager * m;
     book *b;
+    manager * m;
     Ui::dmodifybook *ui;
 };
 
