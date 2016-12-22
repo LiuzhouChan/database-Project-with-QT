@@ -15,6 +15,7 @@
 #include "student.h"
 #include "util.h"
 #include <QTableWidgetItem>
+#include "schangepassword.h"
 namespace Ui {
 class studentMainWindow;
 }
@@ -40,6 +41,9 @@ private slots:
 
     void on_pushButton_5_clicked();
 
+    void on_pushButton_4_clicked();
+
+    void on_pushButton_12_clicked();
 private:
     student * stud;
     Ui::studentMainWindow *ui;

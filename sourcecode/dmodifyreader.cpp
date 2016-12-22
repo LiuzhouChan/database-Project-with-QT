@@ -6,6 +6,8 @@ dmodifyreader::dmodifyreader(QWidget *parent, student *ss, manager *mm) :
     ui(new Ui::dmodifyreader)
 {
     ui->setupUi(this);
+    setAttribute(Qt::WA_DeleteOnClose);
+
     ui->lineEdit->setText(s->get_name());
     ui->lineEdit_2->setText(s->get_id());
     ui->lineEdit_3->setText(s->get_passwd());

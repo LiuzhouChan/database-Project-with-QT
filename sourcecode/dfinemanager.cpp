@@ -6,6 +6,7 @@ dfinemanager::dfinemanager(QWidget *parent) :
     ui(new Ui::dfinemanager)
 {
     ui->setupUi(this);
+    setAttribute(Qt::WA_DeleteOnClose);
 
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("select * from Fine;");

@@ -100,7 +100,7 @@ void adminMainWindow::on_pushButton_clicked()
          }
         rmrow(i,ui->tableWidget);
      }
-     else
+     else if(ui->comboBox->currentText()=="ISBN")
      {
          ui->tableWidget->clear();
          int i(0);
@@ -124,8 +124,21 @@ void adminMainWindow::on_pushButton_clicked()
          }
         rmrow(i,ui->tableWidget);
      }
+     else
+     {
+         ui->tableWidget->clear();
+         int i(0);
+         if(ui->checkBox_4->isChecked())
+         {
+             query.exec("select Book.Bname,Book.ISBN,Book.Bpublisher,"
+                        "Book.Bauthor,Book.Bdate,Book.Bprice,BookForRent.Bno,BookForRent.Bposi"
+                        " from Book join BookForRent on "
+                        "Book.ISBN=BookForRent.ISBN where BookForRent.Bposi =\""+ui->lineEdit->text()+"\" ");
+             i=settable(query,ui->tableWidget,header,i);
+         }
+         rmrow(i,ui->tableWidget);
+     }
      ui->tableWidget->show();
-
 }
 
 
@@ -283,5 +296,116 @@ void adminMainWindow::on_pushButton_2_clicked()
         man->deleteBook(ui->tableWidget->item(row,1)->text());
         on_pushButton_clicked();
     }
+
+}
+
+void adminMainWindow::on_pushButton_17_clicked()
+{
+    if(ui->lineEdit_5->text().isEmpty())
+    {
+        //jieshu huanshu
+        i=0;
+        QStringList bheader;
+        bheader<<"流水号"<<"操作者"<<"读者"<<"书编号"<<"借书时间";
+        query.exec("select BRno,operNo,Rno,Bno,startTime from BorrowRecord");
+        ui->tableWidget_3->clear();
+        i=settable(query,ui->tableWidget_3,bheader,i);
+        rmrow(i,ui->tableWidget_3);
+
+        //huan shu
+        i=0;
+        QStringList hheader;
+        hheader<<"流水号"<<"操作者"<<"读者"<<"书编号"<<"还书时间";
+        query.exec("SELECT ReturnRecord.RRno,ReturnRecord.operNo,BorrowRecord.Rno,BorrowRecord.Bno,ReturnRecord.returnTime "
+                   "FROM ReturnRecord,BorrowRecord "
+                   "WHERE ReturnRecord.BRno=BorrowRecord.BRno ");
+        ui->tableWidget_7->clear();
+        i=settable(query,ui->tableWidget_7,hheader,i);
+        rmrow(i,ui->tableWidget_7);
+
+        //xujie
+        i=0;
+        QStringList hheader;
+        hheader<<"流水号"<<"操作者"<<"读者"<<"书编号"<<"续借时间";
+        query.exec("SELECT renewrecord.NRno,renewrecord.operNo,BorrowRecord.Bno,renewrecord.restartTime "
+                   "FROM renewrecord,BorrowRecord "
+                   "WHERE renewrecord.BRno=BorrowRecord.BRno ");
+        ui->tableWidget_8->clear();
+        i=settable(query,ui->tableWidget_8,hheader,i);
+        rmrow(i,ui->tableWidget_8);
+    }
+    else if(ui->comboBox_5->currentText()=="student id")
+    {
+        //jieshu huanshu
+        i=0;
+        QStringList bheader;
+        bheader<<"流水号"<<"操作者"<<"读者"<<"书编号"<<"借书时间";
+        query.exec("select BRno,operNo,Rno,Bno,startTime from BorrowRecord where Rno = \""+ui->lineEdit_5->text()+"\"");
+        ui->tableWidget_3->clear();
+        i=settable(query,ui->tableWidget_3,bheader,i);
+        rmrow(i,ui->tableWidget_3);
+
+        //huan shu
+        i=0;
+        QStringList hheader;
+        hheader<<"流水号"<<"操作者"<<"读者"<<"书编号"<<"还书时间";
+        query.exec("SELECT ReturnRecord.RRno,ReturnRecord.operNo,BorrowRecord.Rno,BorrowRecord.Bno,ReturnRecord.returnTime "
+                   "FROM ReturnRecord,BorrowRecord "
+                   "WHERE ReturnRecord.BRno=BorrowRecord.BRno "
+                   "AND where BorrowRecord.Rno = \""+ui->lineEdit_5->text()+"\"");
+        ui->tableWidget_7->clear();
+        i=settable(query,ui->tableWidget_7,hheader,i);
+        rmrow(i,ui->tableWidget_7);
+
+        //xujie
+        i=0;
+        QStringList hheader;
+        hheader<<"流水号"<<"操作者"<<"读者"<<"书编号"<<"续借时间";
+        query.exec("SELECT renewrecord.NRno,renewrecord.operNo,BorrowRecord.Bno,renewrecord.restartTime "
+                   "FROM renewrecord,BorrowRecord "
+                   "WHERE renewrecord.BRno=BorrowRecord.BRno "
+                   "AND where BorrowRecord.Rno = \""+ui->lineEdit_5->text()+"\"");
+        ui->tableWidget_8->clear();
+        i=settable(query,ui->tableWidget_8,hheader,i);
+        rmrow(i,ui->tableWidget_8);
+    }
+    else  //bno
+    {
+        //jieshu huanshu
+        i=0;
+        QStringList bheader;
+        bheader<<"流水号"<<"操作者"<<"读者"<<"书编号"<<"借书时间";
+        query.exec("select BRno,operNo,Rno,Bno,startTime from BorrowRecord where Bno = \""+ui->lineEdit_5->text()+"\"");
+        ui->tableWidget_3->clear();
+        i=settable(query,ui->tableWidget_3,bheader,i);
+        rmrow(i,ui->tableWidget_3);
+
+        //huan shu
+        i=0;
+        QStringList hheader;
+        hheader<<"流水号"<<"操作者"<<"读者"<<"书编号"<<"还书时间";
+        query.exec("SELECT ReturnRecord.RRno,ReturnRecord.operNo,BorrowRecord.Rno,BorrowRecord.Bno,ReturnRecord.returnTime "
+                   "FROM ReturnRecord,BorrowRecord "
+                   "WHERE ReturnRecord.BRno=BorrowRecord.BRno "
+                   "AND where BorrowRecord.Bno = \""+ui->lineEdit_5->text()+"\"");
+        ui->tableWidget_7->clear();
+        i=settable(query,ui->tableWidget_7,hheader,i);
+        rmrow(i,ui->tableWidget_7);
+
+        //xujie
+        i=0;
+        QStringList hheader;
+        hheader<<"流水号"<<"操作者"<<"读者"<<"书编号"<<"续借时间";
+        query.exec("SELECT renewrecord.NRno,renewrecord.operNo,BorrowRecord.Bno,renewrecord.restartTime "
+                   "FROM renewrecord,BorrowRecord "
+                   "WHERE renewrecord.BRno=BorrowRecord.BRno "
+                   "AND where BorrowRecord.Bno = \""+ui->lineEdit_5->text()+"\"");
+        ui->tableWidget_8->clear();
+        i=settable(query,ui->tableWidget_8,hheader,i);
+        rmrow(i,ui->tableWidget_8);
+    }
+    ui->tableWidget_3->show();
+    ui->tableWidget_7->show();
+    ui->tableWidget_8->show();
 
 }

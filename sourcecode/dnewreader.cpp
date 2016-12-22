@@ -6,6 +6,8 @@ dnewreader::dnewreader(QWidget *parent) :
     ui(new Ui::dnewreader)
 {
     ui->setupUi(this);
+    setAttribute(Qt::WA_DeleteOnClose);
+
     ui->radioButton->setChecked(true);
 }
 

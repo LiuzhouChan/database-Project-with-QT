@@ -6,6 +6,8 @@ schangepassword::schangepassword(QWidget *parent,student *ss) :
     ui(new Ui::schangepassword)
 {
     ui->setupUi(this);
+    setAttribute(Qt::WA_DeleteOnClose);
+
 }
 
 schangepassword::~schangepassword()
@@ -15,7 +17,17 @@ schangepassword::~schangepassword()
 
 void schangepassword::on_pushButton_11_clicked() //ok
 {
-
+    if(ui->lineEdit->text()==man->get_passwd())
+    {
+        s->set_passwd(ui->knewpasswordwidget->password());
+        s->save();
+        QMessageBox::information(this,"password","Change the password successfully");
+        this->close();
+    }
+    else
+    {
+        QMessageBox::information(this,"password","the old password is not correct");
+    }
 }
 
 void schangepassword::on_knewpasswordwidget_passwordStatusChanged()
@@ -34,5 +46,5 @@ void schangepassword::on_knewpasswordwidget_passwordStatusChanged()
 
 void schangepassword::on_pushButton_clicked()//cancle
 {
-
+    this->close();
 }

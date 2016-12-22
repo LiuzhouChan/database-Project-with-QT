@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <property name="tabsClosable">
        <bool>false</bool>
@@ -170,6 +170,16 @@
              </item>
              <item>
               <widget class="QTableWidget" name="tableWidget_4"/>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_6">
+               <property name="text">
+                <string>续借记录</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QTableWidget" name="tableWidget_5"/>
              </item>
              <item>
               <widget class="QPushButton" name="pushButton_5">
@@ -346,12 +356,6 @@
      <height>28</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuSetting">
-    <property name="title">
-     <string>Settin&amp;g</string>
-    </property>
-   </widget>
-   <addaction name="menuSetting"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>

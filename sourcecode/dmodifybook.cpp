@@ -6,6 +6,8 @@ dmodifybook::dmodifybook(QWidget *parent,book *boo,manager *man):
     ui(new Ui::dmodifybook)
 {
     ui->setupUi(this);
+    setAttribute(Qt::WA_DeleteOnClose);
+
     ui->lineEdit->setText(b->get_name());
     ui->lineEdit_2->setText(b->get_isbn());
     ui->lineEdit_3->setText(b->get_auther());

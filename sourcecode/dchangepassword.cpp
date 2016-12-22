@@ -6,6 +6,7 @@ dchangepassword::dchangepassword(QWidget *parent,manager *mang) :
     ui(new Ui::dchangepassword)
 {
     ui->setupUi(this);
+    setAttribute(Qt::WA_DeleteOnClose);
 }
 
 dchangepassword::~dchangepassword()

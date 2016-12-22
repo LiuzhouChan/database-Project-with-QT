@@ -7,6 +7,20 @@ studentMainWindow::studentMainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setAttribute(Qt::WA_DeleteOnClose);
+    if(stud->get_sex()=="0")
+    {
+        ui->radioButton_3->setChecked(true);
+    }
+    else
+    {
+        ui->radioButton_4->setChecked(true);
+    }
+    ui->lineEdit_3->setText(stud->get_name());
+    ui->lineEdit_4->setText(stud->get_id());
+    ui->kdatecombobox->setDate(QDate::fromString(stud->get_birth(),"yyyy-MM-dd"));
+    ui->lineEdit_6->setText(stud->get_dept());
+    ui->lineEdit_7->setText(QString::number(stud->get_max()));
+    ui->lineEdit_8->setText(QString::number(stud->get_debt()));
    // refresh();
 }
 
@@ -193,6 +207,11 @@ void studentMainWindow::on_pushButton_clicked()
 
 void studentMainWindow::on_pushButton_2_clicked()
 {
+    if(stud->get_debt()>1)
+    {
+        QMessageBox::about(this,"debt","You are in debt");
+        return;
+    }
     int row=ui->tableWidget->currentRow();
     if(row>-1)
     {
@@ -214,12 +233,19 @@ void studentMainWindow::on_pushButton_2_clicked()
 
 void studentMainWindow::on_pushButton_13_clicked()
 {
-
+    schangepassword *sc=new schangepassword(this,stud);
+    sc->show();
 }
 
 void studentMainWindow::on_pushButton_3_clicked()
 {
-
+    int row=ui->tableWidget_2->currentRow();
+    if(row>-1)
+    {
+        book b(ui->tableWidget_2->item(row,1));
+        stud->borrowBook(*stud,b);
+        on_pushButton_5_clicked();
+    }
 }
 
 void studentMainWindow::on_pushButton_5_clicked()//refresh
@@ -228,7 +254,6 @@ void studentMainWindow::on_pushButton_5_clicked()//refresh
     header<<"Name"<<"Book NO."<<"Start date"<<"Due date";
     ui->tableWidget_2->clear();
     QSqlQuery query(QSqlDatabase::database("myconnection"));
-
     query.exec("select Book.Bname,BookForRent.Bno from Book,BookForRent where"
                "Book.ISBN=BookForRent.ISBN and BookForRent.Bposi=\""+stud->get_id()+"\"");
     int size(header.size());
@@ -255,4 +280,75 @@ void studentMainWindow::on_pushButton_5_clicked()//refresh
    }
     rmrow(i,ui->tableWidget_2);
     ui->tableWidget_2->show();
+
+    //jieshu huanshu
+    i=0;
+    QStringList bheader;
+    bheader<<"流水号"<<"操作者"<<"书编号"<<"借书时间";
+    query.exec("select BRno,operNo,Bno,startTime from BorrowRecord where Rno = \""+stud->get_id()+"\"");
+    ui->tableWidget_3->clear();
+    i=settable(query,ui->tableWidget_3,bheader,i);
+    rmrow(i,ui->tableWidget_3);
+
+    //huan shu
+    i=0;
+    QStringList hheader;
+    hheader<<"流水号"<<"操作者"<<"书编号"<<"还书时间";
+    query.exec("SELECT ReturnRecord.RRno,ReturnRecord.operNo,BorrowRecord.Bno,ReturnRecord.returnTime "
+               "FROM ReturnRecord,BorrowRecord "
+               "WHERE ReturnRecord.BRno=BorrowRecord.BRno "
+               "AND where BorrowRecord.Rno = \""+stud->get_id()+"\"");
+    ui->tableWidget_4->clear();
+    i=settable(query,ui->tableWidget_4,hheader,i);
+    rmrow(i,ui->tableWidget_4);
+
+    //xujie
+    i=0;
+    QStringList hheader;
+    hheader<<"流水号"<<"操作者"<<"书编号"<<"续借时间";
+    query.exec("SELECT renewrecord.NRno,renewrecord.operNo,BorrowRecord.Bno,renewrecord.restartTime "
+               "FROM renewrecord,BorrowRecord "
+               "WHERE renewrecord.BRno=BorrowRecord.BRno "
+               "AND where BorrowRecord.Rno = \""+stud->get_id()+"\"");
+    ui->tableWidget_5->clear();
+    i=settable(query,ui->tableWidget_5,hheader,i);
+    rmrow(i,ui->tableWidget_5);
+
+    ui->tableWidget_2->show();
+    ui->tableWidget_3->show();
+    ui->tableWidget_4->show();
+    ui->tableWidget_5->show();
 }
+
+void studentMainWindow::on_pushButton_4_clicked()
+{
+    if(stud->get_debt()>1)
+    {
+        QMessageBox::about(this,"debt","You are in debt");
+        return;
+    }
+    int row=ui->tableWidget_2->currentRow();
+    if(row>-1)
+    {
+        book b(ui->tableWidget_2->item(row,1));
+        stud->renewBook(*stud,b);
+        on_pushButton_5_clicked();
+    }
+}
+
+void studentMainWindow::on_pushButton_12_clicked()
+{
+    stud->set_name(ui->lineEdit_3->text());
+    stud->set_birth(ui->kdatecombobox->date().toString("yyyy-MM-dd"));
+    if(ui->radioButton_3->isChecked())
+    {
+        stud->set_sex("0");
+    }
+    else
+    {
+        stud->set_sex("1");
+    }
+    stud->set_dept(ui->lineEdit_6->text());
+    stud->save();
+}
+
