@@ -26,9 +26,8 @@ class adminMainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit adminMainWindow(QWidget *parent);
+    explicit adminMainWindow(QWidget *parent, manager *m);
     ~adminMainWindow();
-    void setManager(manager *mang);
 private slots:
     void on_pushButton_clicked();
 

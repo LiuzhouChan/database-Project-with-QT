@@ -25,7 +25,7 @@ void ReturnRecord::save() const{
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("insert into ReturnRecord(operNo,BRno,returnTime) values("
                "\""+operno+"\","
-               "\""+brno+"\","
+               ""+brno+","
                "\""+return_time+"\""
                ")"
                 );

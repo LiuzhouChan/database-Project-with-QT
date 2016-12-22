@@ -1,18 +1,14 @@
 #include "adminmainwindow.h"
 #include "ui_adminmainwindow.h"
 
-adminMainWindow::adminMainWindow(QWidget *parent) :
+adminMainWindow::adminMainWindow(QWidget *parent,manager *m) :
     QMainWindow(parent),
-    ui(new Ui::adminMainWindow),man(nullptr)
+    ui(new Ui::adminMainWindow),man(m)
 {
     ui->setupUi(this);
     setAttribute(Qt::WA_DeleteOnClose);
 }
 
-void adminMainWindow::setManager(manager *mang)
-{
-    man=mang;
-}
 
 adminMainWindow::~adminMainWindow()
 {

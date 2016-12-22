@@ -49,8 +49,7 @@ void MainWindow::on_loginButton_clicked()
             login=1;
             this->hide();
             manager * man=new manager(name,password);
-            adminMainWindow *admin = new adminMainWindow(this);
-            admin->setManager(man);
+            adminMainWindow *admin = new adminMainWindow(this,man);
             admin->show();
             return;
         }
@@ -70,8 +69,7 @@ void MainWindow::on_loginButton_clicked()
                                     ,query.value(3).toString(),query.value(4).toString(),
                                      query.value(5).toString()
                                     ,query.value(6).toInt(),query.value(7).toDouble());
-            studentMainWindow *studen=new studentMainWindow(this);
-            studen->setstu(stu);
+            studentMainWindow *studen=new studentMainWindow(this,stu);
             studen->show();
             return;
         }

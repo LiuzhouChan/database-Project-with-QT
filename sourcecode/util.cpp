@@ -45,7 +45,7 @@ QDateTime ulastborrow(QString &brno,const QString &bookno)
         brno=query.value(0).toString();
         lastTime=query.value(1).toDateTime();
         query.exec("select restartTime from renewrecord where "
-                   "BRno="+brno+"");
+                   "BRno="+brno+" order by restartTime desc");
         if(query.next())
         {
             auto llastTime=query.value(0).toDateTime();

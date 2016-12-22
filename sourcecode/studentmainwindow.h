@@ -16,6 +16,8 @@
 #include "util.h"
 #include <QTableWidgetItem>
 #include "schangepassword.h"
+#include <QPushButton>
+
 namespace Ui {
 class studentMainWindow;
 }
@@ -25,9 +27,9 @@ class studentMainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit studentMainWindow(QWidget *parent);
+    explicit studentMainWindow(QWidget *parent,student * ss);
     ~studentMainWindow();
-    void setstu(student *ss);
+
 
 private slots:
     void on_pushButton_clicked();

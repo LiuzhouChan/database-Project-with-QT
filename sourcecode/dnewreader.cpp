@@ -7,7 +7,7 @@ dnewreader::dnewreader(QWidget *parent) :
 {
     ui->setupUi(this);
     setAttribute(Qt::WA_DeleteOnClose);
-
+    ui->spinBox->setValue(5);
     ui->radioButton->setChecked(true);
 }
 

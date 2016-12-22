@@ -1,8 +1,8 @@
 #include "studentmainwindow.h"
 #include "ui_studentmainwindow.h"
 
-studentMainWindow::studentMainWindow(QWidget *parent) :
-    QMainWindow(parent),stud(nullptr),
+studentMainWindow::studentMainWindow(QWidget *parent,student * ss) :
+    QMainWindow(parent),stud(ss),
     ui(new Ui::studentMainWindow)
 {
     ui->setupUi(this);
@@ -21,12 +21,7 @@ studentMainWindow::studentMainWindow(QWidget *parent) :
     ui->lineEdit_6->setText(stud->get_dept());
     ui->lineEdit_7->setText(QString::number(stud->get_max()));
     ui->lineEdit_8->setText(QString::number(stud->get_debt()));
-   // refresh();
-}
-
-void studentMainWindow::setstu(student *ss)
-{
-    stud=ss;
+    on_pushButton_5_clicked();
 }
 
 
@@ -43,8 +38,6 @@ void studentMainWindow::on_pushButton_clicked()
     header<<"Name"<<"ISBN"<<"Publisher"<<"Author"<<"Data"<<"Price"<<"Shelf"
          <<"Status";
 
-//    int settable(QSqlQuery &query,QTableWidget* table, QStringList &header,int i);
-//    void rmrow(int i,QTableWidget * table);
     if(ui->lineEdit->text().isEmpty())
     {
         ui->tableWidget->clear();
@@ -54,7 +47,7 @@ void studentMainWindow::on_pushButton_clicked()
             query.exec("select Book.Bname,Book.ISBN,Book.Bpublisher,"
                        "Book.Bauthor,Book.Bdate,Book.Bprice,Book.Sno,count("
                        "Book.ISBN) from Book join BookForRent on "
-                       "Book.ISBN=BookForRent.ISBN group by Book.ISBN having count(Book.ISBN)>0;");
+                       "Book.ISBN=BookForRent.ISBN WHERE Bposi is NULL group by Book.ISBN having count(Book.ISBN)>0;");
         }
         else
         {
@@ -79,7 +72,7 @@ void studentMainWindow::on_pushButton_clicked()
                        "Book.Bauthor,Book.Bdate,Book.Bprice,Book.Sno,count("
                        "Book.ISBN) from Book join BookForRent on "
                        "Book.ISBN=BookForRent.ISBN where Book.Bname =\""+
-                       ui->lineEdit->text()+"\" group by Book.ISBN having count(Book.ISBN)>0;");
+                       ui->lineEdit->text()+"\" and Bposi is NULL group by Book.ISBN having count(Book.ISBN)>0;");
         }
         else
         {
@@ -102,7 +95,7 @@ void studentMainWindow::on_pushButton_clicked()
                        "Book.Bauthor,Book.Bdate,Book.Bprice,Book.Sno,count("
                        "Book.ISBN) from Book join BookForRent on "
                        "Book.ISBN=BookForRent.ISBN where Book.Bauthor =\""+
-                       ui->lineEdit->text()+"\" group by Book.ISBN having count(Book.ISBN)>0;");
+                       ui->lineEdit->text()+"\" and Bposi is NULL group by Book.ISBN having count(Book.ISBN)>0;");
         }
         else
         {
@@ -125,7 +118,7 @@ void studentMainWindow::on_pushButton_clicked()
                        "Book.Bauthor,Book.Bdate,Book.Bprice,Book.Sno,count("
                        "Book.ISBN) from Book join BookForRent on "
                        "Book.ISBN=BookForRent.ISBN where Book.ISBN =\""+
-                       ui->lineEdit->text()+"\" group by Book.ISBN having count(Book.ISBN)>0;");
+                       ui->lineEdit->text()+"\" and Bposi is NULL group by Book.ISBN having count(Book.ISBN)>0;");
         }
         else
         {
@@ -141,75 +134,16 @@ void studentMainWindow::on_pushButton_clicked()
     ui->tableWidget->show();
 }
 
-//void studentMainWindow::settable2(QSqlQuery &query)
-//{
-//    ui->tableWidget_2->clear();
-//    QStringList header;
-//    header<<"Name"<<"ISBN"<<"Publisher"<<"Author"<<"Date"<<"Price"<<"Start date"<<"Due data"<<"Fine";
-//   // std::unique_ptr<QTableView>
-//    ui->tableWidget_2->setColumnCount(9);
-//    ui->tableWidget_2->setHorizontalHeaderLabels(header);
-//    ui->tableWidget_2->horizontalHeader()->setStretchLastSection(true);
-
-//    int i=0;
-//    while(query.next())
-//    {
-
-//        if(ui->tableWidget_2->rowCount()<i+1)
-//        {
-//            ui->tableWidget_2->insertRow(i);
-//        }
-//        for(int j=0;j<9;++j)
-//        {
-//            ui->tableWidget_2->setItem(i,j,
-//                   new QTableWidgetItem(query.value(j).toString()));
-//        }
-//         ++i;
-//    }
-//    int num=ui->tableWidget_2->rowCount();
-//    for(int jj=0;jj<num-i;++jj)
-//    {
-//        ui->tableWidget_2->removeRow(i);
-//    }
-//}
-//void studentMainWindow::settable(QSqlQuery &query)
-//{
-//    ui->tableWidget->clear();
-//    QStringList header;
-//    header<<"Name"<<"ISBN"<<"Publisher"<<"Author"<<"Data"<<"Price"<<"Shelf"
-//         <<"Status";
-//   // std::unique_ptr<QTableView>
-//    ui->tableWidget->setColumnCount(8);
-//    ui->tableWidget->setHorizontalHeaderLabels(header);
-//    ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
-
-//    int i=0;
-//    while(query.next())
-//    {
-
-//        if(ui->tableWidget->rowCount()<i+1)
-//        {
-//            ui->tableWidget->insertRow(i);
-//        }
-//        for(int j=0;j<8;++j)
-//        {
-//            ui->tableWidget->setItem(i,j,
-//                   new QTableWidgetItem(query.value(j).toString()));
-//        }
-//         ++i;
-//    }
-//    int num=ui->tableWidget->rowCount();
-//    for(int jj=0;jj<num-i;++jj)
-//    {
-//        ui->tableWidget->removeRow(i);
-//    }
-//}
-
 void studentMainWindow::on_pushButton_2_clicked()
 {
-    if(stud->get_debt()>1)
+    if(stud->get_debt()>0)
     {
         QMessageBox::about(this,"debt","You are in debt");
+        return;
+    }
+    if(stud->get_booknum()==stud->get_max())
+    {
+        QMessageBox::about(this,"book number","You can not borrow more books, please return some fist");
         return;
     }
     int row=ui->tableWidget->currentRow();
@@ -223,12 +157,20 @@ void studentMainWindow::on_pushButton_2_clicked()
         {
             bno=query.value(0).toString();
         }
-        book *b=new book(bno);
-        stud->borrowBook(*stud,*b);
-        delete b;
+        if(bno.isEmpty())
+        {
+            QMessageBox::about(this,"no book","All this kind of books are not in library");
+        }
+        else
+        {
+            book *b=new book(bno);
+            stud->borrowBook(*stud,*b);
+            QMessageBox::about(this,"Borrow book","successful");
+            delete b;
+            on_pushButton_clicked();
+        }
+
     }
-
-
 }
 
 void studentMainWindow::on_pushButton_13_clicked()
@@ -237,14 +179,15 @@ void studentMainWindow::on_pushButton_13_clicked()
     sc->show();
 }
 
-void studentMainWindow::on_pushButton_3_clicked()
+void studentMainWindow::on_pushButton_3_clicked() //return books
 {
     int row=ui->tableWidget_2->currentRow();
     if(row>-1)
     {
         book b(ui->tableWidget_2->item(row,1)->text());
-        stud->borrowBook(*stud,b);
+        stud->returnBook(*stud,b);
         on_pushButton_5_clicked();
+        ui->lineEdit_8->setText(QString::number(stud->get_debt()));
     }
 }
 
@@ -253,14 +196,14 @@ void studentMainWindow::on_pushButton_5_clicked()//refresh
     QStringList header;
     header<<"Name"<<"Book NO."<<"Start date"<<"Due date";
     ui->tableWidget_2->clear();
-    QSqlQuery query(QSqlDatabase::database("myconnection"));
-    query.exec("select Book.Bname,BookForRent.Bno from Book,BookForRent where"
-               "Book.ISBN=BookForRent.ISBN and BookForRent.Bposi=\""+stud->get_id()+"\"");
-    int size(header.size());
-    ui->tableWidget_2->setColumnCount(size);
+    ui->tableWidget_2->setColumnCount(header.size());
     ui->tableWidget_2->setHorizontalHeaderLabels(header);
     ui->tableWidget_2->horizontalHeader()->setStretchLastSection(true);
     int i(0);
+    QSqlQuery query(QSqlDatabase::database("myconnection"));
+    query.exec("select Book.Bname,BookForRent.Bno from Book,BookForRent where "
+               "Book.ISBN=BookForRent.ISBN and BookForRent.Bposi=\""+stud->get_id()+"\"");
+
     while(query.next())
     {
         if(ui->tableWidget_2->rowCount()<i+1)
@@ -297,7 +240,7 @@ void studentMainWindow::on_pushButton_5_clicked()//refresh
     query.exec("SELECT ReturnRecord.RRno,ReturnRecord.operNo,BorrowRecord.Bno,ReturnRecord.returnTime "
                "FROM ReturnRecord,BorrowRecord "
                "WHERE ReturnRecord.BRno=BorrowRecord.BRno "
-               "AND where BorrowRecord.Rno = \""+stud->get_id()+"\"");
+               "AND BorrowRecord.Rno = \""+stud->get_id()+"\"");
     ui->tableWidget_4->clear();
     i=settable(query,ui->tableWidget_4,hheader,i);
     rmrow(i,ui->tableWidget_4);
@@ -309,20 +252,19 @@ void studentMainWindow::on_pushButton_5_clicked()//refresh
     query.exec("SELECT renewrecord.NRno,renewrecord.operNo,BorrowRecord.Bno,renewrecord.restartTime "
                "FROM renewrecord,BorrowRecord "
                "WHERE renewrecord.BRno=BorrowRecord.BRno "
-               "AND where BorrowRecord.Rno = \""+stud->get_id()+"\"");
+               "AND BorrowRecord.Rno = \""+stud->get_id()+"\"");
     ui->tableWidget_5->clear();
     i=settable(query,ui->tableWidget_5,rheader,i);
     rmrow(i,ui->tableWidget_5);
 
-    ui->tableWidget_2->show();
     ui->tableWidget_3->show();
     ui->tableWidget_4->show();
     ui->tableWidget_5->show();
 }
 
-void studentMainWindow::on_pushButton_4_clicked()
+void studentMainWindow::on_pushButton_4_clicked()  //renew books
 {
-    if(stud->get_debt()>1)
+    if(stud->get_debt()>0)
     {
         QMessageBox::about(this,"debt","You are in debt");
         return;
@@ -350,5 +292,7 @@ void studentMainWindow::on_pushButton_12_clicked()
     }
     stud->set_dept(ui->lineEdit_6->text());
     stud->save();
+    QMessageBox::about(this,"change info","successful");
 }
+
 

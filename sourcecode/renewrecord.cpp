@@ -26,7 +26,7 @@ void RenewRecord::save() const{
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("insert into renewrecord(operNo,BRno,restartTime) values("
                "\""+operno+"\","
-               "\""+brno+"\","
+               ""+brno+","
                "\""+restart_time+"\""
                ")"
                 );
