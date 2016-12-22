@@ -7,7 +7,6 @@ dnewbook::dnewbook(QWidget *parent) :
 {
     ui->setupUi(this);
     setAttribute(Qt::WA_DeleteOnClose);
-
 }
 
 dnewbook::~dnewbook()

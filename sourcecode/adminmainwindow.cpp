@@ -204,7 +204,7 @@ void adminMainWindow::on_pushButton_5_clicked()
         }
        rmrow(i,ui->tableWidget_2);
     }
-     ui->tableWidget_2->show();
+    ui->tableWidget_2->show();
 }
 
 void adminMainWindow::on_action_triggered()
@@ -301,12 +301,18 @@ void adminMainWindow::on_pushButton_2_clicked()
 
 void adminMainWindow::on_pushButton_17_clicked()
 {
+    QSqlQuery query(QSqlDatabase::database("myconnection"));
+    int i(0);
+    QStringList bheader;
+    bheader<<"流水号"<<"操作者"<<"读者"<<"书编号"<<"借书时间";
+    QStringList hheader;
+    hheader<<"流水号"<<"操作者"<<"读者"<<"书编号"<<"还书时间";
+    QStringList rheader;
+    rheader<<"流水号"<<"操作者"<<"读者"<<"书编号"<<"续借时间";
     if(ui->lineEdit_5->text().isEmpty())
     {
         //jieshu huanshu
         i=0;
-        QStringList bheader;
-        bheader<<"流水号"<<"操作者"<<"读者"<<"书编号"<<"借书时间";
         query.exec("select BRno,operNo,Rno,Bno,startTime from BorrowRecord");
         ui->tableWidget_3->clear();
         i=settable(query,ui->tableWidget_3,bheader,i);
@@ -314,8 +320,6 @@ void adminMainWindow::on_pushButton_17_clicked()
 
         //huan shu
         i=0;
-        QStringList hheader;
-        hheader<<"流水号"<<"操作者"<<"读者"<<"书编号"<<"还书时间";
         query.exec("SELECT ReturnRecord.RRno,ReturnRecord.operNo,BorrowRecord.Rno,BorrowRecord.Bno,ReturnRecord.returnTime "
                    "FROM ReturnRecord,BorrowRecord "
                    "WHERE ReturnRecord.BRno=BorrowRecord.BRno ");
@@ -325,21 +329,21 @@ void adminMainWindow::on_pushButton_17_clicked()
 
         //xujie
         i=0;
-        QStringList hheader;
-        hheader<<"流水号"<<"操作者"<<"读者"<<"书编号"<<"续借时间";
-        query.exec("SELECT renewrecord.NRno,renewrecord.operNo,BorrowRecord.Bno,renewrecord.restartTime "
+        query.exec("SELECT renewrecord.NRno,renewrecord.operNo,BorrowRecord.Rno,BorrowRecord.Bno,renewrecord.restartTime "
                    "FROM renewrecord,BorrowRecord "
                    "WHERE renewrecord.BRno=BorrowRecord.BRno ");
         ui->tableWidget_8->clear();
-        i=settable(query,ui->tableWidget_8,hheader,i);
+        i=settable(query,ui->tableWidget_8,rheader,i);
         rmrow(i,ui->tableWidget_8);
+        ui->tableWidget_3->show();
+        ui->tableWidget_7->show();
+        ui->tableWidget_8->show();
+        return;
     }
     else if(ui->comboBox_5->currentText()=="student id")
     {
         //jieshu huanshu
         i=0;
-        QStringList bheader;
-        bheader<<"流水号"<<"操作者"<<"读者"<<"书编号"<<"借书时间";
         query.exec("select BRno,operNo,Rno,Bno,startTime from BorrowRecord where Rno = \""+ui->lineEdit_5->text()+"\"");
         ui->tableWidget_3->clear();
         i=settable(query,ui->tableWidget_3,bheader,i);
@@ -347,34 +351,28 @@ void adminMainWindow::on_pushButton_17_clicked()
 
         //huan shu
         i=0;
-        QStringList hheader;
-        hheader<<"流水号"<<"操作者"<<"读者"<<"书编号"<<"还书时间";
         query.exec("SELECT ReturnRecord.RRno,ReturnRecord.operNo,BorrowRecord.Rno,BorrowRecord.Bno,ReturnRecord.returnTime "
                    "FROM ReturnRecord,BorrowRecord "
                    "WHERE ReturnRecord.BRno=BorrowRecord.BRno "
-                   "AND where BorrowRecord.Rno = \""+ui->lineEdit_5->text()+"\"");
+                   "AND BorrowRecord.Rno = \""+ui->lineEdit_5->text()+"\"");
         ui->tableWidget_7->clear();
         i=settable(query,ui->tableWidget_7,hheader,i);
         rmrow(i,ui->tableWidget_7);
 
         //xujie
         i=0;
-        QStringList hheader;
-        hheader<<"流水号"<<"操作者"<<"读者"<<"书编号"<<"续借时间";
-        query.exec("SELECT renewrecord.NRno,renewrecord.operNo,BorrowRecord.Bno,renewrecord.restartTime "
+        query.exec("SELECT renewrecord.NRno,renewrecord.operNo,BorrowRecord.Rno,BorrowRecord.Bno,renewrecord.restartTime "
                    "FROM renewrecord,BorrowRecord "
                    "WHERE renewrecord.BRno=BorrowRecord.BRno "
-                   "AND where BorrowRecord.Rno = \""+ui->lineEdit_5->text()+"\"");
+                   "AND BorrowRecord.Rno = \""+ui->lineEdit_5->text()+"\"");
         ui->tableWidget_8->clear();
-        i=settable(query,ui->tableWidget_8,hheader,i);
+        i=settable(query,ui->tableWidget_8,rheader,i);
         rmrow(i,ui->tableWidget_8);
     }
     else  //bno
     {
         //jieshu huanshu
         i=0;
-        QStringList bheader;
-        bheader<<"流水号"<<"操作者"<<"读者"<<"书编号"<<"借书时间";
         query.exec("select BRno,operNo,Rno,Bno,startTime from BorrowRecord where Bno = \""+ui->lineEdit_5->text()+"\"");
         ui->tableWidget_3->clear();
         i=settable(query,ui->tableWidget_3,bheader,i);
@@ -382,26 +380,22 @@ void adminMainWindow::on_pushButton_17_clicked()
 
         //huan shu
         i=0;
-        QStringList hheader;
-        hheader<<"流水号"<<"操作者"<<"读者"<<"书编号"<<"还书时间";
         query.exec("SELECT ReturnRecord.RRno,ReturnRecord.operNo,BorrowRecord.Rno,BorrowRecord.Bno,ReturnRecord.returnTime "
                    "FROM ReturnRecord,BorrowRecord "
                    "WHERE ReturnRecord.BRno=BorrowRecord.BRno "
-                   "AND where BorrowRecord.Bno = \""+ui->lineEdit_5->text()+"\"");
+                   "AND BorrowRecord.Bno = \""+ui->lineEdit_5->text()+"\"");
         ui->tableWidget_7->clear();
         i=settable(query,ui->tableWidget_7,hheader,i);
         rmrow(i,ui->tableWidget_7);
 
         //xujie
         i=0;
-        QStringList hheader;
-        hheader<<"流水号"<<"操作者"<<"读者"<<"书编号"<<"续借时间";
-        query.exec("SELECT renewrecord.NRno,renewrecord.operNo,BorrowRecord.Bno,renewrecord.restartTime "
+        query.exec("SELECT renewrecord.NRno,renewrecord.operNo,BorrowRecord.Rno,BorrowRecord.Bno,renewrecord.restartTime "
                    "FROM renewrecord,BorrowRecord "
                    "WHERE renewrecord.BRno=BorrowRecord.BRno "
-                   "AND where BorrowRecord.Bno = \""+ui->lineEdit_5->text()+"\"");
+                   "AND BorrowRecord.Bno = \""+ui->lineEdit_5->text()+"\"");
         ui->tableWidget_8->clear();
-        i=settable(query,ui->tableWidget_8,hheader,i);
+        i=settable(query,ui->tableWidget_8,rheader,i);
         rmrow(i,ui->tableWidget_8);
     }
     ui->tableWidget_3->show();

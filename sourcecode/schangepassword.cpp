@@ -17,7 +17,7 @@ schangepassword::~schangepassword()
 
 void schangepassword::on_pushButton_11_clicked() //ok
 {
-    if(ui->lineEdit->text()==man->get_passwd())
+    if(ui->lineEdit_13->text()==s->get_passwd())
     {
         s->set_passwd(ui->knewpasswordwidget->password());
         s->save();

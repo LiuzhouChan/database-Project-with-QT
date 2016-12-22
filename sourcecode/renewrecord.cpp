@@ -27,7 +27,7 @@ void RenewRecord::save() const{
     query.exec("insert into renewrecord(operNo,BRno,restartTime) values("
                "\""+operno+"\","
                "\""+brno+"\","
-               "\""+restart_time+"\","
+               "\""+restart_time+"\""
                ")"
                 );
 }

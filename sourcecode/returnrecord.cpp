@@ -26,7 +26,7 @@ void ReturnRecord::save() const{
     query.exec("insert into ReturnRecord(operNo,BRno,returnTime) values("
                "\""+operno+"\","
                "\""+brno+"\","
-               "\""+return_time+"\","
+               "\""+return_time+"\""
                ")"
                 );
 }

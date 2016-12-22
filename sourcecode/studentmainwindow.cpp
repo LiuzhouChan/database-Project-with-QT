@@ -242,7 +242,7 @@ void studentMainWindow::on_pushButton_3_clicked()
     int row=ui->tableWidget_2->currentRow();
     if(row>-1)
     {
-        book b(ui->tableWidget_2->item(row,1));
+        book b(ui->tableWidget_2->item(row,1)->text());
         stud->borrowBook(*stud,b);
         on_pushButton_5_clicked();
     }
@@ -270,12 +270,12 @@ void studentMainWindow::on_pushButton_5_clicked()//refresh
         QString name=query.value(0).toString();
         QString booknumber=query.value(1).toString();
         QString brno;
-        QDate startday=ulastborrow(brno,booknumber);
-        QDate dueday=startday.addDays(umaxday());
+        QDateTime startday=ulastborrow(brno,booknumber);
+        QDateTime dueday=startday.addDays(umaxday());
         ui->tableWidget_2->setItem(i,0,new QTableWidgetItem(name));
         ui->tableWidget_2->setItem(i,1,new QTableWidgetItem(booknumber));
-        ui->tableWidget_2->setItem(i,2,new QTableWidgetItem(startday.toString()));
-        ui->tableWidget_2->setItem(i,3,new QTableWidgetItem(dueday.toString()));
+        ui->tableWidget_2->setItem(i,2,new QTableWidgetItem(startday.toString("yyyy-MM-dd HH:mm:ss")));
+        ui->tableWidget_2->setItem(i,3,new QTableWidgetItem(dueday.toString("yyyy-MM-dd HH:mm:ss")));
         ++i;
    }
     rmrow(i,ui->tableWidget_2);
@@ -304,14 +304,14 @@ void studentMainWindow::on_pushButton_5_clicked()//refresh
 
     //xujie
     i=0;
-    QStringList hheader;
-    hheader<<"流水号"<<"操作者"<<"书编号"<<"续借时间";
+    QStringList rheader;
+    rheader<<"流水号"<<"操作者"<<"书编号"<<"续借时间";
     query.exec("SELECT renewrecord.NRno,renewrecord.operNo,BorrowRecord.Bno,renewrecord.restartTime "
                "FROM renewrecord,BorrowRecord "
                "WHERE renewrecord.BRno=BorrowRecord.BRno "
                "AND where BorrowRecord.Rno = \""+stud->get_id()+"\"");
     ui->tableWidget_5->clear();
-    i=settable(query,ui->tableWidget_5,hheader,i);
+    i=settable(query,ui->tableWidget_5,rheader,i);
     rmrow(i,ui->tableWidget_5);
 
     ui->tableWidget_2->show();
@@ -330,7 +330,7 @@ void studentMainWindow::on_pushButton_4_clicked()
     int row=ui->tableWidget_2->currentRow();
     if(row>-1)
     {
-        book b(ui->tableWidget_2->item(row,1));
+        book b(ui->tableWidget_2->item(row,1)->text());
         stud->renewBook(*stud,b);
         on_pushButton_5_clicked();
     }

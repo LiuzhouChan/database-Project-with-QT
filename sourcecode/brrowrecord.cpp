@@ -36,7 +36,7 @@ void brrowRecord::save() const{
                "\""+operno+"\","
                "\""+rno+"\","
                "\""+bno+"\","
-               "\""+start_time+"\","
+               "\""+start_time+"\""
                ")"
                 );
 }

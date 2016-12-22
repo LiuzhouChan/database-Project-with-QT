@@ -8,5 +8,5 @@
 void rmrow(int i,QTableWidget * table);
 int settable(QSqlQuery &query,QTableWidget* table, QStringList &header,int i);
 int umaxday();
-QDate ulastborrow(QString &brno,const QString &bookno);
+QDateTime ulastborrow(QString &brno,const QString &bookno);
 #endif // UTIL_H

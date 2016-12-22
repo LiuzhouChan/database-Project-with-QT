@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "student.h"
+#include <QMessageBox>
 namespace Ui {
 class schangepassword;
 }

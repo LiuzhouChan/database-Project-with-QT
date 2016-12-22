@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <property name="tabsClosable">
        <bool>false</bool>
@@ -254,16 +254,16 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="label_2">
+             <widget class="QLabel" name="label_3">
               <property name="text">
-               <string>续借记录</string>
+               <string>还书记录</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="label_3">
+             <widget class="QLabel" name="label_2">
               <property name="text">
-               <string>还书记录</string>
+               <string>续借记录</string>
               </property>
              </widget>
             </item>

@@ -16,7 +16,7 @@ dmodifybook::dmodifybook(QWidget *parent,book *boo,manager *man):
     ui->lineEdit_6->setText(b->get_price());
     ui->lineEdit_9->setText(b->get_bookno());
     ui->lineEdit_7->setText(b->get_publish());
-    if(b->get_state()=="")//in library
+    if(b->get_state()=="NULL")//in library
     {
         ui->lineEdit_8->setText("shelf:"+b->get_sno());
         ui->lineEdit_8->setReadOnly(false);
@@ -61,24 +61,23 @@ void dmodifybook::on_pushButton_2_clicked()
         if(s->get_debt()>0)
         {
             QMessageBox::about(this,"debt","Can not borrow this book since this student is in debt");
-            delete s;
         }
         else if(s->get_max()<=s->get_booknum())
         {
             QMessageBox::about(this,"book number",
                               "Can not borrow this book since this student in max borrow number");
-            delete s;
         }
         else
         {
             m->borrowbook(s,b);
             QMessageBox::about(this,"borrow book",
                               "sucessful");
-            delete s;
         }
+        delete s;
     }
     if(ui->radioButton->isChecked()) //return book
     {
+
         student *s=new student(b->get_state());
         m->returnbook(s,b);
         delete s;
@@ -89,15 +88,20 @@ void dmodifybook::on_pushButton_2_clicked()
         if(s->get_debt()>0)
         {
             QMessageBox::about(this,"debt","Can not borrow this book since this student is in debt");
-            delete s;
         }
         else
         {
             m->renewbook(s,b);
             QMessageBox::about(this,"borrow book",
                               "sucessful");
-            delete s;
         }
+        delete s;
+    }
+    else
+    {
+        m->modifybook(*b,ui->lineEdit->text(),ui->lineEdit_2->text(),ui->lineEdit_3->text(),
+                      ui->lineEdit_4->text(),ui->kdatecombobox->date().toString("yyyy-MM-dd"),ui->lineEdit_6->text()
+                      ,ui->lineEdit_9->text(),ui->lineEdit_7->text(),"NULL");
     }
     this->close();
 }

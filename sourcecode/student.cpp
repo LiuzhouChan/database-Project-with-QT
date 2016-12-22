@@ -118,7 +118,7 @@ void student::borrowBook(const account &a, book &b)
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     QDateTime date=QDateTime::currentDateTime();
-    brrowRecord brecord(a.get_id(),get_id(),b.get_bookno(),date.toString("yyyy-MM-dd HH:mm:ss"));
+    brrowRecord brecord(a.get_id(),get_id(),b.get_bookno(),date.toString("yyyy-MM-dd hh:mm:ss"));
     brecord.save();
     query.exec("update BookForRent "
                "set Bposi = \""+get_id()+"\" "
@@ -138,7 +138,7 @@ void student::returnBook(const account &a, book &b)
     ReturnRecord r(a.get_id(),brno,date.toString("yyyy-MM-dd HH:mm:ss"));
     r.save();
     query.exec("update BookForRent "
-               "set Bposi = \"null\", "
+               "set Bposi = null "
                "where Bno = \""+b.get_bookno()+"\" ");
     query.exec("select * from Fine");
     if(query.next())
@@ -161,7 +161,7 @@ void student::renewBook(const account &a, book &b)
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("select BRno from BorrowRecord where "
-               "Bno=\""+b.get_bookno()+"\" order by startTime decrease");
+               "Bno=\""+b.get_bookno()+"\" order by startTime desc");
     QString brno;
     if(query.next())
     {
