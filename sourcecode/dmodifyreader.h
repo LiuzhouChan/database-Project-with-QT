@@ -9,6 +9,7 @@
 #include <kdatecombobox.h>
 #include <QRadioButton>
 #include <QSpinBox>
+#include <QMessageBox>
 namespace Ui {
 class dmodifyreader;
 }
