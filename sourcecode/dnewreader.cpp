@@ -24,6 +24,13 @@ void dnewreader::on_pushButton_3_clicked()
 void dnewreader::on_pushButton_2_clicked()
 {
     //ok
+    QSqlQuery query(QSqlDatabase::database("myconnection"));
+    query.exec("select * from Reader where Rno=\""+ui->lineEdit_2->text()+"\"");
+    if(query.next())
+    {
+        QMessageBox::about(this,"Reader","This Reader number is already used, please try another one");
+        return;
+    }
     int sex;
     if(ui->radioButton->isChecked())
     {
@@ -37,7 +44,7 @@ void dnewreader::on_pushButton_2_clicked()
               ui->lineEdit->text(),ui->kdatecombobox->date().toString("yyyy-MM-dd"),QString::number(sex)
               ,ui->lineEdit_6->text(),ui->spinBox->value(),0);
     s.save_new();
-    QMessageBox::about(this,"add new reader","successful");
+    QMessageBox::about(this,"Add new reader","Successful");
     this->close();
 
 }

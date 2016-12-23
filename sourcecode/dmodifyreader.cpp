@@ -48,6 +48,13 @@ void dmodifyreader::on_pushButton_2_clicked()
         sex="1";
     }
 
+    QSqlQuery query(QSqlDatabase::database("myconnection"));
+    query.exec("select * from Reader where Rno=\""+ui->lineEdit_2->text()+"\"");
+    if(query.next())
+    {
+        QMessageBox::about(this,"Reader","This Reader number is already used, please try another one");
+        return;
+    }
     m->modifyreader(*s,ui->lineEdit_3->text(),ui->lineEdit->text(),ui->kdatecombobox->date().toString("yyyy-MM-dd"),
                     sex,ui->lineEdit_6->text(),ui->spinBox->value(),ui->lineEdit_8->text().toDouble());
     this->close();

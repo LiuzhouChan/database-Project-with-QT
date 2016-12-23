@@ -54,6 +54,13 @@ void dmodifybook::on_pushButton_2_clicked()
     //ok
     if(ui->radioButton_2->isChecked())//in library, borrow book
     {
+        QSqlQuery query(QSqlDatabase::database("myconnection"));
+        query.exec("select * from BookForRent where Bno=\""+ui->lineEdit_9->text()+"\"");
+        if(query.next())
+        {
+            QMessageBox::about(this,"book","This book number is already used, please try another one");
+            return;
+        }
         m->modifybook(*b,ui->lineEdit->text(),ui->lineEdit_2->text(),ui->lineEdit_3->text(),
                       ui->lineEdit_4->text(),ui->kdatecombobox->date().toString("yyyy-MM-dd"),ui->lineEdit_6->text()
                       ,ui->lineEdit_9->text(),ui->lineEdit_7->text(),"NULL");
@@ -99,6 +106,13 @@ void dmodifybook::on_pushButton_2_clicked()
     }
     else
     {
+        QSqlQuery query(QSqlDatabase::database("myconnection"));
+        query.exec("select * from BookForRent where Bno=\""+ui->lineEdit_9->text()+"\"");
+        if(query.next())
+        {
+            QMessageBox::about(this,"book","This book number is already used, please try another one");
+            return;
+        }
         m->modifybook(*b,ui->lineEdit->text(),ui->lineEdit_2->text(),ui->lineEdit_3->text(),
                       ui->lineEdit_4->text(),ui->kdatecombobox->date().toString("yyyy-MM-dd"),ui->lineEdit_6->text()
                       ,ui->lineEdit_9->text(),ui->lineEdit_7->text(),"NULL");

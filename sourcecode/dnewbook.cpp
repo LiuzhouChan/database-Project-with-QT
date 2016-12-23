@@ -22,6 +22,13 @@ void dnewbook::on_pushButton_3_clicked()
 void dnewbook::on_pushButton_2_clicked()
 {
     //ok
+    QSqlQuery query(QSqlDatabase::database("myconnection"));
+    query.exec("select * from BookForRent where Bno=\""+ui->lineEdit_9->text()+"\"");
+    if(query.next())
+    {
+        QMessageBox::about(this,"book","This book number is already used, please try another one");
+        return;
+    }
     book b(ui->lineEdit->text(),ui->lineEdit_2->text(),ui->lineEdit_3->text()
            ,ui->lineEdit_4->text(),ui->kdatecombobox->date().toString("yyyy-MM-dd"),ui->lineEdit_6->text(),
            ui->lineEdit_9->text(),ui->lineEdit_7->text(),"null");

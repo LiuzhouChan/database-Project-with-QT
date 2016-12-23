@@ -7,8 +7,6 @@ dsqlip::dsqlip(QWidget *parent) :
     database_name("sqlproject")
 {
     ui->setupUi(this);
-    setAttribute(Qt::WA_DeleteOnClose);
-
     ui->serverip->setText(server_ip);
     ui->sqlusername->setText(user_name);
     ui->sqlpassword->setText(pass_wd);
