@@ -2,7 +2,13 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+#include "dsqlip.h"
+#include <QString>
+#include <QMessageBox>
+#include "adminmainwindow.h"
+#include "studentmainwindow.h"
+#include "manager.h"
+#include "student.h"
 namespace Ui {
 class MainWindow;
 }
@@ -15,8 +21,16 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+private slots:
+    void on_actionSQL_server_IP_triggered();
+
+    void on_actionAbout_QT_triggered();
+
+    void on_loginButton_clicked();
+
 private:
     Ui::MainWindow *ui;
+    dsqlip *ip;
 };
 
 #endif // MAINWINDOW_H
