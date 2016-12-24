@@ -4,65 +4,17 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql  KWidgetsAddons
+QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = sourcecode
 TEMPLATE = app
 
+
 SOURCES += main.cpp\
-        mainwindow.cpp \
-    adminmainwindow.cpp \
-    studentmainwindow.cpp \
-    manager.cpp \
-    student.cpp \
-    book.cpp \
-    util.cpp \
-    brrowrecord.cpp \
-    returnrecord.cpp \
-    renewrecord.cpp \
-    account.cpp \
-    dmodifybook.cpp \
-    dnewbook.cpp \
-    dnewreader.cpp \
-    dfinemanager.cpp \
-    dsqlip.cpp \
-    dchangepassword.cpp \
-    dmodifyreader.cpp \
-    schangepassword.cpp
+        mainwindow.cpp
 
-HEADERS  += mainwindow.h \
-    adminmainwindow.h \
-    studentmainwindow.h \
-    manager.h \
-    student.h \
-    book.h \
-    util.h \
-    brrowrecord.h \
-    returnrecord.h \
-    renewrecord.h \
-    account.h \
-    dmodifybook.h \
-    dnewbook.h \
-    dnewreader.h \
-    dfinemanager.h \
-    dsqlip.h \
-    dchangepassword.h \
-    dmodifyreader.h \
-    schangepassword.h
+HEADERS  += mainwindow.h
 
-FORMS    += mainwindow.ui \
-    adminmainwindow.ui \
-    studentmainwindow.ui \
-    dmodifybook.ui \
-    dnewbook.ui \
-    dnewreader.ui \
-    dfinemanager.ui \
-    dsqlip.ui \
-    dchangepassword.ui \
-    dmodifyreader.ui \
-    schangepassword.ui
-
-RESOURCES += \
-    icon.qrc
+FORMS    += mainwindow.ui
