@@ -34,6 +34,7 @@ dmodifybook::dmodifybook(QWidget *parent,book *boo,manager *man):
         ui->lineEdit_4->setReadOnly(true);
         ui->lineEdit_3->setReadOnly(true);
         ui->lineEdit_2->setReadOnly(true);
+        ui->lineEdit_9->setReadOnly(true);
     }
 }
 
@@ -56,7 +57,7 @@ void dmodifybook::on_pushButton_2_clicked()
     {
         QSqlQuery query(QSqlDatabase::database("myconnection"));
         query.exec("select * from BookForRent where Bno=\""+ui->lineEdit_9->text()+"\"");
-        if(query.next())
+        if(query.next()&&ui->lineEdit_9->text()!=b->get_bookno())
         {
             QMessageBox::about(this,"book","This book number is already used, please try another one");
             return;
@@ -108,7 +109,7 @@ void dmodifybook::on_pushButton_2_clicked()
     {
         QSqlQuery query(QSqlDatabase::database("myconnection"));
         query.exec("select * from BookForRent where Bno=\""+ui->lineEdit_9->text()+"\"");
-        if(query.next())
+        if(query.next()&&ui->lineEdit_9->text()!=b->get_bookno())
         {
             QMessageBox::about(this,"book","This book number is already used, please try another one");
             return;
