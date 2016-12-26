@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: project
 -- ------------------------------------------------------
--- Server version	5.7.15
+-- Server version 5.7.15
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -204,7 +204,7 @@ CREATE TABLE `ReturnRecord` (
   PRIMARY KEY (`RRno`),
   UNIQUE KEY `RRno_UNIQUE` (`RRno`),
   KEY `FK2_idx` (`BRno`),
-  CONSTRAINT `FK2` FOREIGN KEY (`BRno`) REFERENCES `BorrowRecord` (`BRno`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK2` FOREIGN KEY (`BRno`) REFERENCES `BorrowRecord` (`BRno`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -257,7 +257,7 @@ CREATE TABLE `renewrecord` (
   PRIMARY KEY (`NRno`),
   UNIQUE KEY `NRno_UNIQUE` (`NRno`),
   KEY `FK1_idx` (`BRno`),
-  CONSTRAINT `FK1` FOREIGN KEY (`BRno`) REFERENCES `BorrowRecord` (`BRno`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK1` FOREIGN KEY (`BRno`) REFERENCES `BorrowRecord` (`BRno`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -279,4 +279,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-22  9:50:02
+-- Dump completed on 2016-12-27  2:30:39
