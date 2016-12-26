@@ -1,1 +1,0 @@
-# database-Project-with-QT
