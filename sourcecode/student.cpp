@@ -133,7 +133,6 @@ void student::returnBook(const account &a, book &b)
     QDateTime lastTime=b.lastborrow(brno);
     int day;
     double rate;
-    double fine;
     QDateTime date=QDateTime::currentDateTime();
     ReturnRecord r(a.get_id(),brno,date.toString("yyyy-MM-dd HH:mm:ss"));
     r.save();
@@ -149,9 +148,9 @@ void student::returnBook(const account &a, book &b)
     auto days=lastTime.daysTo(date);
     if(days>day)
     {
-        fine=(days-day)*rate;
+        debt+=(days-day)*rate;
         query.exec("update Reader "
-                   "set Rdebt = Rdebt+"+QString::number(fine)+" "
+                   "set Rdebt = "+QString::number(debt)+" "
                    "where Rno = \""+get_id()+"\" ");
     }
     --num;

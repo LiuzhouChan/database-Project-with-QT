@@ -101,13 +101,17 @@ void dmodifybook::on_pushButton_2_clicked()
         student *s=new student(b->get_state());
         if(s->get_debt()>0)
         {
-            QMessageBox::about(this,"debt","Can not borrow this book since this student is in debt");
+            QMessageBox::about(this,"debt","Can not renew this book since this student is in debt");
+        }
+        else if(QDateTime::currentDateTime()>b->duedate())
+        {
+            QMessageBox::about(this,"out of date","Can not renew this book since this book is out of date");
         }
         else
         {
             m->renewbook(s,b);
-            QMessageBox::about(this,"borrow book",
-                              "sucessful");
+            QMessageBox::about(this,"Renew book",
+                              "sucessfully");
         }
         delete s;
     }

@@ -151,7 +151,7 @@ void studentMainWindow::on_pushButton_2_clicked()
         {
             book *b=new book(bno);
             stud->borrowBook(*stud,*b);
-            QMessageBox::about(this,"Borrow book","successful");
+            QMessageBox::about(this,"Borrow book","successfully borrow this book");
             delete b;
             on_pushButton_clicked();
         }
@@ -276,6 +276,11 @@ void studentMainWindow::on_pushButton_4_clicked()  //renew books
     if(row>-1)
     {
         book b(ui->tableWidget_2->item(row,1)->text());
+        if(QDateTime::currentDateTime()>b.duedate())
+        {
+            QMessageBox::about(this,"out of date","This book is out of date and can not been renew");
+            return;
+        }
         stud->renewBook(*stud,b);
         on_pushButton_5_clicked();
     }
@@ -295,7 +300,7 @@ void studentMainWindow::on_pushButton_12_clicked()
     }
     stud->set_dept(ui->lineEdit_6->text());
     stud->save();
-    QMessageBox::about(this,"change info","successful");
+    QMessageBox::about(this,"change info","successfully change the personal information");
 }
 
 
