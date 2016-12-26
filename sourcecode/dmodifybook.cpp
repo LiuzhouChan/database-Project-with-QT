@@ -68,7 +68,7 @@ void dmodifybook::on_pushButton_2_clicked()
         query.exec("select * from Reader where Rno=\""+ui->lineEdit_8->text()+"\"");
         if(!query.next())
         {
-            QMessageBox::about(this,"reader","There is no student who's student number is"+ui->lineEdit_8->text());
+            QMessageBox::about(this,"reader","There is no student who's student number is "+ui->lineEdit_8->text());
             return;
         }
         student *s = new student(ui->lineEdit_8->text());

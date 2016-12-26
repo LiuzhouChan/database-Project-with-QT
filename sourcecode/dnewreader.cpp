@@ -24,6 +24,12 @@ void dnewreader::on_pushButton_3_clicked()
 void dnewreader::on_pushButton_2_clicked()
 {
     //ok
+    if(ui->lineEdit->text().isEmpty()||ui->lineEdit_2->text().isEmpty()||ui->lineEdit_3->text().isEmpty()||
+            ui->lineEdit_6->text().isEmpty())
+    {
+        QMessageBox::about(this,"loss of info","You should edit all the lines");
+        return;
+    }
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("select * from Reader where Rno=\""+ui->lineEdit_2->text()+"\"");
     if(query.next())
