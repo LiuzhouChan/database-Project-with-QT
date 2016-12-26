@@ -65,6 +65,12 @@ void dmodifybook::on_pushButton_2_clicked()
         m->modifybook(*b,ui->lineEdit->text(),ui->lineEdit_2->text(),ui->lineEdit_3->text(),
                       ui->lineEdit_4->text(),ui->kdatecombobox->date().toString("yyyy-MM-dd"),ui->lineEdit_6->text()
                       ,ui->lineEdit_9->text(),ui->lineEdit_7->text(),"NULL");
+        query.exec("select * from Reader where Rno=\""+ui->lineEdit_8->text()+"\"");
+        if(!query.next())
+        {
+            QMessageBox::about(this,"reader","There is no student who's student number is"+ui->lineEdit_8->text());
+            return;
+        }
         student *s = new student(ui->lineEdit_8->text());
         if(s->get_debt()>0)
         {

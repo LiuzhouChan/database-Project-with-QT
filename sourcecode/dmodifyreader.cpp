@@ -50,7 +50,7 @@ void dmodifyreader::on_pushButton_2_clicked()
 
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("select * from Reader where Rno=\""+ui->lineEdit_2->text()+"\"");
-    if(query.next())
+    if(query.next()&&ui->lineEdit_2->text()!=s->get_id())
     {
         QMessageBox::about(this,"Reader","This Reader number is already used, please try another one");
         return;

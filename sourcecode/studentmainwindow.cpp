@@ -7,20 +7,6 @@ studentMainWindow::studentMainWindow(QWidget *parent,student * ss) :
 {
     ui->setupUi(this);
     setAttribute(Qt::WA_DeleteOnClose);
-    if(stud->get_sex()=="0")
-    {
-        ui->radioButton_3->setChecked(true);
-    }
-    else
-    {
-        ui->radioButton_4->setChecked(true);
-    }
-    ui->lineEdit_3->setText(stud->get_name());
-    ui->lineEdit_4->setText(stud->get_id());
-    ui->kdatecombobox->setDate(QDate::fromString(stud->get_birth(),"yyyy-MM-dd"));
-    ui->lineEdit_6->setText(stud->get_dept());
-    ui->lineEdit_7->setText(QString::number(stud->get_max()));
-    ui->lineEdit_8->setText(QString::number(stud->get_debt()));
     on_pushButton_5_clicked();
 }
 
@@ -193,6 +179,23 @@ void studentMainWindow::on_pushButton_3_clicked() //return books
 
 void studentMainWindow::on_pushButton_5_clicked()//refresh
 {
+    //personal info display
+    if(stud->get_sex()=="0")
+    {
+        ui->radioButton_3->setChecked(true);
+    }
+    else
+    {
+        ui->radioButton_4->setChecked(true);
+    }
+    ui->lineEdit_3->setText(stud->get_name());
+    ui->lineEdit_4->setText(stud->get_id());
+    ui->kdatecombobox->setDate(QDate::fromString(stud->get_birth(),"yyyy-MM-dd"));
+    ui->lineEdit_6->setText(stud->get_dept());
+    ui->lineEdit_7->setText(QString::number(stud->get_max()));
+    ui->lineEdit_8->setText(QString::number(stud->get_debt()));
+
+
     QStringList header;
     header<<"Name"<<"Book NO."<<"Start date"<<"Due date";
     ui->tableWidget_2->clear();
