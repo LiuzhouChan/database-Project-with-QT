@@ -4,6 +4,7 @@
 #include <QSqlQuery>
 #include <QVariant>
 #include <QDate>
+#include "bookfactory.h"
 
 class book
 {
@@ -11,23 +12,22 @@ private:
     QString name;
     QString ISBN;
     QString auther;
-    QString sno;
     QString date;
     QString price;
     QString bookno;
     QString publish;
     QString state;
-    QString type;
+    BookType *type;
 public:
     book(const QString &pname,const QString &pISBN
-         ,const QString &pauther,const QString &psno,const QString &pdate
+         ,const QString &pauther,const QString &stype,const QString &pdate
          ,const QString &pprice,const QString &pbookno,
          const QString &ppublish,const QString &pstate);
     book(const QString &bnoo);
     void set_name(const QString & s);
     void set_isbn(const QString & s);
     void set_auther(const QString & s);
-    void set_sno(const QString & s);
+//    void set_sno(const QString & s);
     void set_date(const QString & s);
     void set_price(const QString & s);
     void set_bookno(const QString & s);

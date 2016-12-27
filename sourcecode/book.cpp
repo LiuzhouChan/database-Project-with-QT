@@ -2,20 +2,16 @@
 #include <QSqlQuery>
 
 //position is the shelf number, while state is in the table of BookForRent
-book::book(const QString &pname,const QString &pISBN
-           ,const QString &pauther,const QString &psno, const QString &pdate
-           ,const QString &pprice, const QString &pbookno,
-           const QString &ppublish,const QString &pstate) :
+book::book(const QString &pname, const QString &pISBN
+           , const QString &pauther, const QString &stype, const QString &pdate
+           , const QString &pprice, const QString &pbookno,
+           const QString &ppublish, const QString &pstate) :
             name(pname),ISBN(pISBN),auther(pauther),
-            sno(psno),date(pdate),price(pprice),bookno(pbookno),
+            date(pdate),price(pprice),bookno(pbookno),
             publish(ppublish),state(pstate),type("")
 {
-    QSqlQuery query(QSqlDatabase::database("myconnection"));
-    query.exec("select Stype from Shelf where Sno=\""+sno+"\" ");
-    if(query.next())
-    {
-        type = query.value(0).toString();
-    }
+    BookFactory b;
+    type=b.createBook(stype);
 }
 
 book::book(const QString &bnoo):bookno(bnoo)
@@ -112,7 +108,7 @@ QString book::get_auther()const
 
 QString book::get_type()const
 {
-    return type;
+    return type->getType();
 }
 
 QString book::get_date()const
@@ -139,7 +135,7 @@ QString book::get_state()const
 
 QString book::get_sno()const
 {
-    return sno;
+    return type->getShelfnumber();
 }
 
 QDateTime book::lastborrow(QString &brno) const

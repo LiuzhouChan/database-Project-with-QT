@@ -37,7 +37,12 @@ SOURCES += main.cpp\
     computerbook.cpp \
     financebook.cpp \
     physicsbook.cpp \
-    bookfactory.cpp
+    bookfactory.cpp \
+    managerstudentfactory.cpp \
+    sustechfactory.cpp \
+    reader.cpp \
+    svipstudent.cpp \
+    vipstudent.cpp
 
 HEADERS  += mainwindow.h \
     adminmainwindow.h \
@@ -64,7 +69,12 @@ HEADERS  += mainwindow.h \
     computerbook.h \
     financebook.h \
     physicsbook.h \
-    bookfactory.h
+    bookfactory.h \
+    managerstudentfactory.h \
+    sustechfactory.h \
+    reader.h \
+    svipstudent.h \
+    vipstudent.h
 
 FORMS    += mainwindow.ui \
     adminmainwindow.ui \
