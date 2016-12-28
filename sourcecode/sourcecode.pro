@@ -39,10 +39,11 @@ SOURCES += main.cpp\
     physicsbook.cpp \
     bookfactory.cpp \
     managerstudentfactory.cpp \
-    sustechfactory.cpp \
-    reader.cpp \
     svipstudent.cpp \
-    vipstudent.cpp
+    vipstudent.cpp \
+    reader.cpp \
+    managerfactory.cpp \
+    studentfactory.cpp
 
 HEADERS  += mainwindow.h \
     adminmainwindow.h \
@@ -71,10 +72,11 @@ HEADERS  += mainwindow.h \
     physicsbook.h \
     bookfactory.h \
     managerstudentfactory.h \
-    sustechfactory.h \
-    reader.h \
     svipstudent.h \
-    vipstudent.h
+    vipstudent.h \
+    reader.h \
+    managerfactory.h \
+    studentfactory.h
 
 FORMS    += mainwindow.ui \
     adminmainwindow.ui \

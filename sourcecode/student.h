@@ -8,13 +8,10 @@
 #include "brrowrecord.h"
 #include "returnrecord.h"
 #include "renewrecord.h"
-
-class student:public account
+#include "reader.h"
+class student:public account,public Reader
 {
 private:
-    QString name;
-    QString birth;
-    QString sex;
     QString dept;
     int max_num;
     int num;
@@ -22,19 +19,13 @@ private:
 public:
     student(const QString & id);
     student(const QString &hid,const QString &hpassword,const QString &hname
-            ,const QString &hbirth, const QString &hsex, const QString &hdept
+            ,const QString &hbirth, const QString &hsex,const int level, const QString &hdept
             ,const int hmax_num,const double hdebt);
 
-    void set_name(const QString &s);
-    void set_birth(const QString &s);
-    void set_sex(const QString &s);
     void set_dept(const QString &s);
     void set_debt(const double s);
     void set_max(const int s);
 
-    QString get_name()const;
-    QString get_birth()const;
-    QString get_sex()const;
     QString get_dept()const;
     double get_debt()const;
     int get_max()const;

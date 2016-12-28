@@ -42,7 +42,7 @@
        <item>
         <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>Shelf number</string>
+          <string>Type</string>
          </property>
         </widget>
        </item>
@@ -88,7 +88,33 @@
         <widget class="QLineEdit" name="lineEdit_3"/>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_4"/>
+        <widget class="QComboBox" name="comboBox">
+         <item>
+          <property name="text">
+           <string>Computer</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Finance</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Math</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Environment</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Physics</string>
+          </property>
+         </item>
+        </widget>
        </item>
        <item>
         <widget class="KDateComboBox" name="kdatecombobox"/>
