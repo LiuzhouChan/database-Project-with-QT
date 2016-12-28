@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>358</width>
-    <height>332</height>
+    <width>379</width>
+    <height>356</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -64,6 +64,13 @@
         <widget class="QLabel" name="label_6">
          <property name="text">
           <string>Max book number</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_9">
+         <property name="text">
+          <string>level</string>
          </property>
         </widget>
        </item>
@@ -163,6 +170,16 @@
         </layout>
        </item>
        <item>
+        <widget class="KRatingWidget" name="kratingwidget">
+         <property name="maxRating">
+          <number>3</number>
+         </property>
+         <property name="halfStepsEnabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QLineEdit" name="lineEdit_8">
          <property name="readOnly">
           <bool>true</bool>
@@ -211,6 +228,11 @@
    <class>KDateComboBox</class>
    <extends>QComboBox</extends>
    <header>kdatecombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KRatingWidget</class>
+   <extends>QFrame</extends>
+   <header>kratingwidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

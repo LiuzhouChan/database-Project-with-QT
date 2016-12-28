@@ -7,7 +7,7 @@ dmodifybook::dmodifybook(QWidget *parent,book *boo,manager *man):
 {
     ui->setupUi(this);
     setAttribute(Qt::WA_DeleteOnClose);
-
+    ui->comboBox->setCurrentText(b->get_type());
     ui->lineEdit->setText(b->get_name());
     ui->lineEdit_2->setText(b->get_isbn());
     ui->lineEdit_3->setText(b->get_auther());

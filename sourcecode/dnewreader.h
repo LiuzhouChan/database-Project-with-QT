@@ -8,6 +8,7 @@
 #include <QSpinBox>
 #include <kdatecombobox.h>
 #include <QMessageBox>
+#include "managerstudentfactory.h"
 namespace Ui {
 class dnewreader;
 }
