@@ -1,7 +1,10 @@
 #ifndef COMPUTERBOOK_H
 #define COMPUTERBOOK_H
 #include "booktype.h"
-
+#include <QSqlQuery>
+#include <QTableWidget>
+#include <QHeaderView>
+#include <QString>
 class ComputerBook:public BookType
 {
 public:

@@ -7,19 +7,19 @@ BookFactory::BookFactory()
 virtual BookType* BookFactory::createBook(const QString & s)
 {
     switch (s) {
-    case "Computer":
+    case "computer":
         return new ComputerBook();
         break;
-    case "Finance":
+    case "finance":
         return new FinanceBook();
         break;
-    case "Math":
+    case "math":
         return new MathBook();
         break;
-    case "Environment":
+    case "environment":
         return new EnvironmentBook();
         break;
-    case "Physics":
+    case "physics":
         return new PhysicsBook();
         break;
     default:

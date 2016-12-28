@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: project
 -- ------------------------------------------------------
--- Server version 5.7.15
+-- Server version	5.7.15
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -174,6 +174,7 @@ CREATE TABLE `Reader` (
   `Rdept` varchar(50) NOT NULL,
   `BmaxNum` int(11) NOT NULL DEFAULT '5',
   `Rdebt` double NOT NULL DEFAULT '0',
+  `level` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`Rno`),
   UNIQUE KEY `Rno_UNIQUE` (`Rno`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -185,7 +186,7 @@ CREATE TABLE `Reader` (
 
 LOCK TABLES `Reader` WRITE;
 /*!40000 ALTER TABLE `Reader` DISABLE KEYS */;
-INSERT INTO `Reader` VALUES ('20160000','1234','lwd','1996-05-17',0,'computer science',5,0),('20160001','1234','cy','1996-05-16',0,'computer science',5,0),('20160002','1234','clz','1996-05-15',1,'computer science',5,0),('20160003','1234','deiw','1996-05-14',1,'computer science',5,1);
+INSERT INTO `Reader` VALUES ('20160000','1234','lwd','1996-05-17',0,'computer science',5,0,1),('20160001','1234','cy','1996-05-16',0,'computer science',5,0,1),('20160002','1234','clz','1996-05-15',1,'computer science',5,0,1),('20160003','1234','deiw','1996-05-14',1,'computer science',5,1,1);
 /*!40000 ALTER TABLE `Reader` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -238,7 +239,7 @@ CREATE TABLE `Shelf` (
 
 LOCK TABLES `Shelf` WRITE;
 /*!40000 ALTER TABLE `Shelf` DISABLE KEYS */;
-INSERT INTO `Shelf` VALUES ('00000000','politics'),('00000001','economy'),('00000002','PE'),('00000003','environment'),('00000004','literature'),('00000005','electric'),('00000006','math'),('00000007','computer'),('00000008','chemistry'),('00000009','biology');
+INSERT INTO `Shelf` VALUES ('00000000','politics'),('00000001','economy'),('00000002','PE'),('00000003','environment'),('00000004','literature'),('00000005','electric'),('00000006','math'),('00000007','computer'),('00000008','chemistry'),('00000009','biology'),('00000010','finance'),('00000011','physics');
 /*!40000 ALTER TABLE `Shelf` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -279,4 +280,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-27  2:30:39
+-- Dump completed on 2016-12-28 16:56:44

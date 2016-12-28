@@ -1,7 +1,10 @@
 #ifndef ENVIRONMENTBOOK_H
 #define ENVIRONMENTBOOK_H
-#include ""QString"
 #include "booktype.h"
+#include <QSqlQuery>
+#include <QTableWidget>
+#include <QHeaderView>
+#include <QString>
 
 class EnvironmentBook:public BookType
 {

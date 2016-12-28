@@ -1,7 +1,10 @@
 #ifndef FINANCEBOOK_H
 #define FINANCEBOOK_H
 #include "booktype.h"
-
+#include <QSqlQuery>
+#include <QTableWidget>
+#include <QHeaderView>
+#include <QString>
 class FinanceBook:public BookType
 {
 public:

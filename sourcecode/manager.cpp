@@ -3,7 +3,6 @@
 manager::manager(const QString &hid,const QString &hpasswd):
     account(hid,hpasswd)
 {
-
 }
 
 void manager::save(){

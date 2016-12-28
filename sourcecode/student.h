@@ -9,7 +9,7 @@
 #include "returnrecord.h"
 #include "renewrecord.h"
 #include "reader.h"
-class student:public account,public Reader
+class student:public account
 {
 private:
     QString dept;

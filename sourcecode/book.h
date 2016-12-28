@@ -5,7 +5,7 @@
 #include <QVariant>
 #include <QDate>
 #include "bookfactory.h"
-
+#include "student.h"
 class book
 {
 private:
@@ -28,6 +28,7 @@ public:
     void set_isbn(const QString & s);
     void set_auther(const QString & s);
 //    void set_sno(const QString & s);
+    void set_type(const QString &s);
     void set_date(const QString & s);
     void set_price(const QString & s);
     void set_bookno(const QString & s);

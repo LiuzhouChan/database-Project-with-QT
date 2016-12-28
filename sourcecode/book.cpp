@@ -8,7 +8,7 @@ book::book(const QString &pname, const QString &pISBN
            const QString &ppublish, const QString &pstate) :
             name(pname),ISBN(pISBN),auther(pauther),
             date(pdate),price(pprice),bookno(pbookno),
-            publish(ppublish),state(pstate),type("")
+            publish(ppublish),state(pstate)
 {
     BookFactory b;
     type=b.createBook(stype);
@@ -17,17 +17,19 @@ book::book(const QString &pname, const QString &pISBN
 book::book(const QString &bnoo):bookno(bnoo)
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
-    query.exec("select Book.Bname,Book.ISBN,Book.Bauthor,Book.Sno,"
+    query.exec("select Book.Bname,Book.ISBN,Book.Bauthor,Shelf.Stype,"
                "Book.Bdate,Book.Bprice,Book.Bpublisher,"
                "BookForRent.Bposi"
-               " from Book,BookForRent where BookForRent.ISBN=Book.ISBN and "
-               "BookForRent.Bno=\""+bnoo+"\"");
+               " from Book,BookForRent,Shelf where BookForRent.ISBN=Book.ISBN and "
+               "BookForRent.Bno=\""+bnoo+"\"and Shelf.Sno=Book.Sno");
     if(query.next())
     {
+
         name=query.value(0).toString();
         ISBN=query.value(1).toString();
         auther=query.value(2).toString();
-        sno=query.value(3).toString();
+        BookFactory b;
+        type=b.createBook(query.value(3).toString());
         date=query.value(4).toString();
         price=query.value(5).toString(),
         publish=query.value(6).toString();
@@ -37,14 +39,15 @@ book::book(const QString &bnoo):bookno(bnoo)
             state="NULL";
         }
     }
-    query.exec("select Stype from Shelf where Sno=\""+sno+"\" ");
-    if(query.next())
-    {
-        type = query.value(0).toString();
-    }
 
 }
 
+void book::set_type(const QString &s)
+{
+    delete type;
+    BookFactory b;
+    type=b.createBook(stype);
+}
 
 void book::set_name(const QString & s)
 {
@@ -163,18 +166,18 @@ QDateTime book::lastborrow(QString &brno) const
     return lastTime;
 
 }
-
+//after finish the student class
 QDateTime book::duedate() const
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     int day;
-    query.exec("select maxday from Fine");
+    query.exec("select Bposi from BookForRent where Bno=\""+bookno+"\""); //sss
     if(query.next())
     {
         day=query.value(0).toInt();
     }
     QString brno;
-    return lastborrow(brno).addDays(day);
+    return lastborrow(brno).addDays();
 }
 
 void book::save()
@@ -182,7 +185,7 @@ void book::save()
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("update Book "
                "set Bname = \""+name+"\", "
-               "Sno= \""+sno+"\", "
+               "Sno= \""+type->getShelfnumber()+"\", "
                "Bpublisher= \""+publish+"\", "
                "Bauthor = \""+auther+"\", "
                "Bdate= \""+date+"\", "
@@ -210,7 +213,7 @@ void book::save_new()
     query.exec("insert into Book values("
                "\""+ISBN+"\","
                "\""+name+"\","
-               "\""+sno+"\","
+               "\""+type->getShelfnumber()+"\","
                "\""+publish+"\","
                "\""+auther+"\","
                "\""+date+"\","
