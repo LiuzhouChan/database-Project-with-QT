@@ -317,7 +317,10 @@
   </action>
   <action name="action_2">
    <property name="text">
-    <string>修改密码</string>
+    <string>个人信息</string>
+   </property>
+   <property name="toolTip">
+    <string>个人信息</string>
    </property>
   </action>
  </widget>

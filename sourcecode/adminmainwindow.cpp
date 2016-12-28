@@ -12,7 +12,7 @@ adminMainWindow::adminMainWindow(QWidget *parent,manager *m) :
 
 adminMainWindow::~adminMainWindow()
 {
-    this->parentWidget()->show();
+    delete man;
     delete ui;
 }
 
@@ -211,8 +211,8 @@ void adminMainWindow::on_action_triggered()
 
 void adminMainWindow::on_action_2_triggered()
 {
-    dchangepassword *ch=new dchangepassword(this,man);
-    ch->show();
+    dmanager *dm=new dmanager(this,man);
+    dm->show();
 }
 
 void adminMainWindow::on_pushButton_4_clicked()
@@ -261,7 +261,8 @@ void adminMainWindow::on_pushButton_7_clicked()
     int row=ui->tableWidget_2->currentRow();
     if(row>=0)
     {
-        student *s = new student(ui->tableWidget_2->item(row,0)->text());
+        ManagerStudentFactory mf;
+        student *s = mf.createStudent(ui->tableWidget_2->item(row,0)->text());
     //    student *s = new student(ui->tableWidget_2->item(row,0)->text(),ui->tableWidget_2->item(row,1)->text(),
     //                             ui->tableWidget_2->item(row,2)->text(),ui->tableWidget_2->item(row,3)->text(),
     //                             ui->tableWidget_2->item(row,4)->text(),ui->tableWidget_2->item(row,5)->text(),

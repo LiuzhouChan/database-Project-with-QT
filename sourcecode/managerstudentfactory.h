@@ -6,6 +6,7 @@
 #include "manager.h"
 #include "reader.h"
 #include <QSqlQuery>
+class manager;
 class ManagerStudentFactory
 {
 public:

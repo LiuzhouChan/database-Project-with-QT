@@ -11,7 +11,7 @@
 #include "renewrecord.h"
 #include "reader.h"
 
-class student:public account
+class student:public account,public Reader
 {
 private:
     QString dept;

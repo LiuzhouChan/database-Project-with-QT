@@ -44,7 +44,8 @@ SOURCES += main.cpp\
     reader.cpp \
     managerfactory.cpp \
     studentfactory.cpp \
-    readerfactory.cpp
+    readerfactory.cpp \
+    dmanager.cpp
 
 HEADERS  += mainwindow.h \
     adminmainwindow.h \
@@ -78,7 +79,8 @@ HEADERS  += mainwindow.h \
     reader.h \
     managerfactory.h \
     studentfactory.h \
-    readerfactory.h
+    readerfactory.h \
+    dmanager.h
 
 FORMS    += mainwindow.ui \
     adminmainwindow.ui \
@@ -90,7 +92,8 @@ FORMS    += mainwindow.ui \
     dsqlip.ui \
     dchangepassword.ui \
     dmodifyreader.ui \
-    schangepassword.ui
+    schangepassword.ui \
+    dmanager.ui
 
 RESOURCES += \
     icon.qrc

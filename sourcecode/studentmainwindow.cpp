@@ -188,6 +188,8 @@ void studentMainWindow::on_pushButton_5_clicked()//refresh
     {
         ui->radioButton_4->setChecked(true);
     }
+    ui->kratingwidget->setRating(stud->get_level());
+    ui->kratingwidget->setEnabled(false);
     ui->lineEdit_3->setText(stud->get_name());
     ui->lineEdit_4->setText(stud->get_id());
     ui->kdatecombobox->setDate(QDate::fromString(stud->get_birth(),"yyyy-MM-dd"));
@@ -276,7 +278,7 @@ void studentMainWindow::on_pushButton_4_clicked()  //renew books
     if(row>-1)
     {
         book b(ui->tableWidget_2->item(row,1)->text());
-        if(QDateTime::currentDateTime()>b.duedate())
+        if(QDateTime::currentDateTime()>b.duedate(stud))
         {
             QMessageBox::about(this,"out of date","This book is out of date and can not been renew");
             return;
