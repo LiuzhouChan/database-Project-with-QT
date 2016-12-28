@@ -78,7 +78,7 @@ int student::get_booknum()const
 {
     return num;
 }
-void student::save()const
+virtual void student::save()const
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("update Reader "
@@ -92,7 +92,7 @@ void student::save()const
                "where Rno = \""+get_id()+"\" ");
 }
 
-void student::save_new()const
+virtual void student::save_new()const
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("insert into Reader values("
@@ -109,8 +109,16 @@ void student::save_new()const
                 );
 }
 
-void student::borrowBook(const account &a, book &b)
+virtual int student::borrowBook(const account &a, book &b)
 {
+    if(get_booknum()>=get_max())
+    {
+        return 2;  //book is too much
+    }
+    else if(get_debt()>0)
+    {
+        return 1;  //debt
+    }
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     QDateTime date=QDateTime::currentDateTime();
     brrowRecord brecord(a.get_id(),get_id(),b.get_bookno(),date.toString("yyyy-MM-dd hh:mm:ss"));
@@ -119,9 +127,10 @@ void student::borrowBook(const account &a, book &b)
                "set Bposi = \""+get_id()+"\" "
                "where Bno = \""+b.get_bookno()+"\" ");
     ++num;
+    return 0;
 }
 
-void student::returnBook(const account &a, book &b)
+virtual void student::returnBook(const account &a, book &b)
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     QString brno;
@@ -151,8 +160,16 @@ void student::returnBook(const account &a, book &b)
     --num;
 }
 
-void student::renewBook(const account &a, book &b)
+virtual int student::renewBook(const account &a, book &b)
 {
+    if(get_debt()>0)
+    {
+        return 1;
+    }
+    else if(QDateTime::currentDateTime()>b.duedate(*this))
+    {
+        return 2;
+    }
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("select BRno from BorrowRecord where "
                "Bno=\""+b.get_bookno()+"\" order by startTime desc");
@@ -164,4 +181,5 @@ void student::renewBook(const account &a, book &b)
     QDateTime date=QDateTime::currentDateTime();
     RenewRecord r(a.get_id(),brno,date.toString("yyyy-MM-dd HH:mm:ss"));
     r.save();
+    return 0;
 }

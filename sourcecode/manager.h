@@ -33,13 +33,13 @@ public:
                     , const QString &pprice, const QString &pbookno,
                     const QString &ppublish, const QString &pstate);
 
-    void borrowbook(Reader *s,book *b);
-    void returnbook(Reader *s,book *b);
-    void renewbook(Reader *s,book *b);
+    virtual int borrowbook(Reader *s,book *b);
+    virtual void returnbook(Reader *s,book *b);
+    virtual int renewbook(Reader *s,book *b);
 
-    void borrowBook(const account &a, book &b);
-    void returnBook(const account &a, book &b);
-    void renewBook(const account &a, book &b);
+    virtual int borrowBook(const account &a, book &b);
+    virtual void returnBook(const account &a, book &b);
+    virtual int renewBook(const account &a, book &b);
 
 
     void deleteBook(const QString &bookno);

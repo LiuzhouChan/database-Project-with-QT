@@ -7,7 +7,7 @@ class Reader
 {
 public:
     virtual ~Reader();
-    virtual void borrowBook(const account &a, book &b)=0;
+    virtual int borrowBook(const account &a, book &b)=0;
     virtual void returnBook(const account &a, book &b)=0;
     virtual void renewBook(const account &a, book &b)=0;
 };

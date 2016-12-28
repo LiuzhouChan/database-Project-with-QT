@@ -91,27 +91,27 @@
         <widget class="QComboBox" name="comboBox">
          <item>
           <property name="text">
-           <string>Computer</string>
+           <string>computer</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Finance</string>
+           <string>finance</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Math</string>
+           <string>math</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Environment</string>
+           <string>environment</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Physics</string>
+           <string>physics</string>
           </property>
          </item>
         </widget>

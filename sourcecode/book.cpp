@@ -174,10 +174,10 @@ QDateTime book::duedate(account &ss) const
     query.exec("select Bposi from BookForRent where Bno=\""+bookno+"\""); //sss
     if(query.next())
     {
-        day=query.value(0).toInt()*ss;
+        day=query.value(0).toInt();
     }
     QString brno;
-    return lastborrow(brno).addDays(day*account.get_level());
+    return lastborrow(brno).addDays(day*ss.get_level());
 }
 
 void book::save()

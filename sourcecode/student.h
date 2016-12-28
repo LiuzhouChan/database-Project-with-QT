@@ -36,9 +36,9 @@ public:
     virtual void save()const;    //change the information of student
     virtual void save_new()const; //insert a new student
 
-    virtual void borrowBook(const account &a, book &b);
+    virtual int borrowBook(const account &a, book &b);
     virtual void returnBook(const account &a, book &b);
-    virtual void renewBook(const account &a, book &b);
+    virtual int renewBook(const account &a, book &b);
 };
 
 #endif // STUDENT_H

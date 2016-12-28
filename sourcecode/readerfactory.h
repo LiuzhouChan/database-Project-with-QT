@@ -4,6 +4,8 @@
 #include "student.h"
 #include "manager.h"
 #include "reader.h"
+#include <QSqlQuery>
+#include "managerstudentfactory.h"
 class ReaderFactory
 {
 public:
