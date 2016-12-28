@@ -43,7 +43,8 @@ SOURCES += main.cpp\
     vipstudent.cpp \
     reader.cpp \
     managerfactory.cpp \
-    studentfactory.cpp
+    studentfactory.cpp \
+    readerfactory.cpp
 
 HEADERS  += mainwindow.h \
     adminmainwindow.h \
@@ -76,7 +77,8 @@ HEADERS  += mainwindow.h \
     vipstudent.h \
     reader.h \
     managerfactory.h \
-    studentfactory.h
+    studentfactory.h \
+    readerfactory.h
 
 FORMS    += mainwindow.ui \
     adminmainwindow.ui \

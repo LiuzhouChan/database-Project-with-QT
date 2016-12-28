@@ -167,17 +167,17 @@ QDateTime book::lastborrow(QString &brno) const
 
 }
 //after finish the student class
-QDateTime book::duedate() const
+QDateTime book::duedate(account &ss) const
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     int day;
     query.exec("select Bposi from BookForRent where Bno=\""+bookno+"\""); //sss
     if(query.next())
     {
-        day=query.value(0).toInt();
+        day=query.value(0).toInt()*ss;
     }
     QString brno;
-    return lastborrow(brno).addDays();
+    return lastborrow(brno).addDays(day*account.get_level());
 }
 
 void book::save()

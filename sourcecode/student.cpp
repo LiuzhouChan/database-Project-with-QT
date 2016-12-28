@@ -7,6 +7,11 @@ student::student(const QString &hid, const QString &hpassword, const QString &hn
 {
 }
 
+virtual student::~student()
+{
+
+}
+
 student::student(const QString & id):
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
@@ -19,6 +24,7 @@ student::student(const QString & id):
         set_name(query.value(2).toString());
         set_birth(query.value(3).toString());
         set_sex(query.value(4).toString());
+        set_level(query.value(8).toInt());
         dept=query.value(5).toString();
         max_num=query.value(6).toInt();
         debt=query.value(7).toDouble();
@@ -97,7 +103,8 @@ void student::save_new()const
                "\""+get_sex()+"\","
                "\""+dept+"\","
                ""+QString::number(max_num)+","
-               ""+QString::number(debt)+""
+               ""+QString::number(debt)+","
+               ""+QString::number(get_level())+""
                ")"
                 );
 }
@@ -130,7 +137,7 @@ void student::returnBook(const account &a, book &b)
     query.exec("select * from Fine");
     if(query.next())
     {
-        day=query.value(0).toInt();
+        day=query.value(0).toInt()*get_level();
         rate=query.value(1).toDouble();
     }
     auto days=lastTime.daysTo(date);

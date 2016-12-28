@@ -47,7 +47,7 @@ public:
     QString get_state()const;
     QString get_type()const;
     QDateTime lastborrow(QString &brno) const;
-    QDateTime duedate() const;
+    QDateTime duedate(account &ss) const;
     void save();
     void save_new();
 

@@ -5,10 +5,12 @@
 #include <QSqlQuery>
 #include "book.h"
 #include <QDate>
+#include <QDateTime>
 #include "brrowrecord.h"
 #include "returnrecord.h"
 #include "renewrecord.h"
 #include "reader.h"
+
 class student:public account
 {
 private:
@@ -17,6 +19,7 @@ private:
     int num;
     double debt;
 public:
+    virtual ~student();
     student(const QString & id);
     student(const QString &hid,const QString &hpassword,const QString &hname
             ,const QString &hbirth, const QString &hsex,const int level, const QString &hdept
@@ -30,12 +33,12 @@ public:
     double get_debt()const;
     int get_max()const;
     int get_booknum() const;
-    void save()const;    //change the information of student
-    void save_new()const; //insert a new student
+    virtual void save()const;    //change the information of student
+    virtual void save_new()const; //insert a new student
 
-    void borrowBook(const account &a, book &b);
-    void returnBook(const account &a, book &b);
-    void renewBook(const account &a, book &b);
+    virtual void borrowBook(const account &a, book &b);
+    virtual void returnBook(const account &a, book &b);
+    virtual void renewBook(const account &a, book &b);
 };
 
 #endif // STUDENT_H
