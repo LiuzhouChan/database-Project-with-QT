@@ -17,7 +17,7 @@
 #include <QTableWidgetItem>
 #include "schangepassword.h"
 #include <QPushButton>
-
+#include "account.h"
 namespace Ui {
 class studentMainWindow;
 }

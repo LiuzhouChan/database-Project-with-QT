@@ -2,8 +2,8 @@
 #include "ui_mainwindow.h"
 
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
+MainWindow::MainWindow(QWidget *parent, MSfactory *mf) :
+    QMainWindow(parent),mf(mf),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -42,22 +42,19 @@ void MainWindow::on_loginButton_clicked()
         {
             login=1;
             this->hide();
-
-            ManagerStudentFactory mf;
             if(query.value(8).toString()=="0")//if it is manager
             {
-                manager *man=mf.createManager(ui->lineEdit_2->text());
-                adminMainWindow *admin = new adminMainWindow(this,man);
+                manager *man=mf->createManager(ui->lineEdit_2->text());
+                adminMainWindow *admin = new adminMainWindow(this,man,mf);
                 admin->show();
             }
             else    //student
             {
-                student *stu=mf.createStudent(ui->lineEdit_2->text());
+                student *stu=mf->createStudent(ui->lineEdit_2->text());
                 studentMainWindow *studen=new studentMainWindow(this,stu);
                 studen->show();
             }
         }
-
     }
 
 

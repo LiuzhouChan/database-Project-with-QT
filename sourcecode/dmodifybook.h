@@ -10,6 +10,7 @@
 #include <QRadioButton>
 #include <QMessageBox>
 #include "readerfactory.h"
+#include "msfactory.h"
 namespace Ui {
 class dmodifybook;
 }
@@ -19,7 +20,7 @@ class dmodifybook : public QDialog
     Q_OBJECT
 
 public:
-    explicit dmodifybook(QWidget *parent,book *boo,manager *man);
+    explicit dmodifybook(QWidget *parent,book *boo,manager *man,MSfactory *mf);
     ~dmodifybook();
 
 private slots:
@@ -30,6 +31,7 @@ private slots:
 private:
     book *b;
     manager * m;
+    MSfactory *mf;
     Ui::dmodifybook *ui;
 };
 

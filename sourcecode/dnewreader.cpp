@@ -1,8 +1,8 @@
 #include "dnewreader.h"
 #include "ui_dnewreader.h"
 
-dnewreader::dnewreader(QWidget *parent) :
-    QDialog(parent),
+dnewreader::dnewreader(QWidget *parent, MSfactory *mf) :
+    QDialog(parent),mf(mf),
     ui(new Ui::dnewreader)
 {
     ui->setupUi(this);
@@ -46,8 +46,7 @@ void dnewreader::on_pushButton_2_clicked()
     {
         sex=1;
     }
-    ManagerStudentFactory mf;
-    student *s = mf.createStudent(ui->lineEdit_2->text(),ui->lineEdit_3->text(),
+    student *s = mf->createStudent(ui->lineEdit_2->text(),ui->lineEdit_3->text(),
                      ui->lineEdit->text(),ui->kdatecombobox->date().toString("yyyy-MM-dd"),QString::number(sex),
                                   ui->kratingwidget->rating()
                      ,ui->lineEdit_6->text(),ui->spinBox->value(),0);

@@ -6,7 +6,7 @@ manager::manager(const QString &hid, const QString &hpassword, const QString &hn
 {
 }
 
-manager::manager(const QString &s)
+manager::manager(const QString &s):account()
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("select * from Reader where Rno=\""+s+"\"");
@@ -49,12 +49,11 @@ void manager::save_new()
                 );
 }
 
-void manager::addNewReader(const QString &hid,const QString &hpassword,const QString &hname
-                  ,const QString &hbirth, const QString &hsex,const int hlevel, const QString &hdept
-                  ,const int hmax_num,const int hdebt)
+void manager::addNewReader(MSfactory *mf, const QString &hid, const QString &hpassword, const QString &hname
+                  , const QString &hbirth, const QString &hsex, const int hlevel, const QString &hdept
+                  , const int hmax_num, const int hdebt)
 {
-    ManagerStudentFactory m;
-    student *s=m.createStudent(hid,hpassword,hname,hbirth,hsex,hlevel,hdept,hmax_num,hdebt);
+    student *s=mf->createStudent(hid,hpassword,hname,hbirth,hsex,hlevel,hdept,hmax_num,hdebt);
     s->save_new();
     delete s;
 }

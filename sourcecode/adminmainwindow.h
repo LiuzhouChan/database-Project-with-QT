@@ -17,6 +17,7 @@
 #include "dmodifybook.h"
 #include "dmodifyreader.h"
 #include "dmanager.h"
+#include "msfactory.h"
 namespace Ui {
 class adminMainWindow;
 }
@@ -26,7 +27,7 @@ class adminMainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit adminMainWindow(QWidget *parent, manager *m);
+    explicit adminMainWindow(QWidget *parent, manager *m,MSfactory *mf);
     ~adminMainWindow();
 private slots:
     void on_pushButton_clicked();
@@ -52,8 +53,10 @@ private slots:
     void on_pushButton_17_clicked();
 
 private:
-    Ui::adminMainWindow *ui;
     manager *man;
+    MSfactory *mf;
+    Ui::adminMainWindow *ui;
+
 };
 
 #endif // ADMINMAINWINDOW_H

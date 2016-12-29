@@ -11,6 +11,7 @@ private:
     QString birth;
     QString sex;
     int level;
+
 public:
     account();
     account(const QString &hid,const QString &hpasswd,const QString &name,const QString &birth,

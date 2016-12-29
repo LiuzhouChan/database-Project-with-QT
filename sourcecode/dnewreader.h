@@ -8,7 +8,7 @@
 #include <QSpinBox>
 #include <kdatecombobox.h>
 #include <QMessageBox>
-#include "managerstudentfactory.h"
+#include "msfactory.h"
 namespace Ui {
 class dnewreader;
 }
@@ -18,7 +18,7 @@ class dnewreader : public QDialog
     Q_OBJECT
 
 public:
-    explicit dnewreader(QWidget *parent = 0);
+    explicit dnewreader(QWidget *parent,MSfactory *mf);
     ~dnewreader();
 
 private slots:
@@ -27,6 +27,7 @@ private slots:
     void on_pushButton_2_clicked();
 
 private:
+    MSfactory *mf;
     Ui::dnewreader *ui;
 };
 

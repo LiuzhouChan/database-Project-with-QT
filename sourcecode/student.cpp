@@ -12,7 +12,7 @@ student::~student()
 
 }
 
-student::student(const QString & id)
+student::student(const QString & id):account()
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("select * from Reader where Rno=\""+id+"\"");

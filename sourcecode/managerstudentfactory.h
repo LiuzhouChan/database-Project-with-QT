@@ -1,13 +1,14 @@
 #ifndef MANAGERSTUDENTFACTORY_H
 #define MANAGERSTUDENTFACTORY_H
+#include "msfactory.h"
+#include "reader.h"
 #include "student.h"
+#include "manager.h"
 #include "vipstudent.h"
 #include "svipstudent.h"
-#include "manager.h"
-#include "reader.h"
 #include <QSqlQuery>
-class manager;
-class ManagerStudentFactory
+//class manager;
+class ManagerStudentFactory:public MSfactory
 {
 public:
     virtual student* createStudent(const QString &hid,const QString &hpassword,const QString &hname

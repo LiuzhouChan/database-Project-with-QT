@@ -1,8 +1,8 @@
 #include "dmodifybook.h"
 #include "ui_dmodifybook.h"
 
-dmodifybook::dmodifybook(QWidget *parent,book *boo,manager *man):
-    QDialog(parent),b(boo),m(man),
+dmodifybook::dmodifybook(QWidget *parent, book *boo, manager *man, MSfactory *mf):
+    QDialog(parent),b(boo),m(man),mf(mf),
     ui(new Ui::dmodifybook)
 {
     ui->setupUi(this);
@@ -70,7 +70,7 @@ void dmodifybook::on_pushButton_2_clicked()
             QMessageBox::about(this,"reader","There is no Reader who's number is "+ui->lineEdit_8->text());
             return;
         }
-        Reader *s=ReaderFactory::createReader(ui->lineEdit_8->text());
+        Reader *s=ReaderFactory::createReader(mf,ui->lineEdit_8->text());
         int re(m->borrowbook(s,b));
         if(re==1)
         {
@@ -89,14 +89,13 @@ void dmodifybook::on_pushButton_2_clicked()
     }
     if(ui->radioButton->isChecked()) //return book
     {
-
-        student *s=new student(b->get_state());
+        Reader *s=ReaderFactory::createReader(mf,b->get_state());
         m->returnbook(s,b);
         delete s;
     }
     if(ui->radioButton_3->isChecked()) //renew book
     {
-        Reader *s=ReaderFactory::createReader(b->get_state());
+        Reader *s=ReaderFactory::createReader(mf,b->get_state());
         int re(m->renewbook(s,b));
         if(re==1)
         {

@@ -5,11 +5,11 @@
 #include "manager.h"
 #include "reader.h"
 #include <QSqlQuery>
-#include "managerstudentfactory.h"
+#include "msfactory.h"
 class ReaderFactory
 {
 public:
-    static Reader* createReader(const QString & s);
+    static Reader* createReader(MSfactory *mf,const QString &s);
 };
 
 #endif // READERFACTORY_H

@@ -1,9 +1,9 @@
 #include "adminmainwindow.h"
 #include "ui_adminmainwindow.h"
 
-adminMainWindow::adminMainWindow(QWidget *parent,manager *m) :
-    QMainWindow(parent),
-    ui(new Ui::adminMainWindow),man(m)
+adminMainWindow::adminMainWindow(QWidget *parent, manager *m, MSfactory *mf) :
+    QMainWindow(parent),man(m),mf(mf),
+    ui(new Ui::adminMainWindow)
 {
     ui->setupUi(this);
     setAttribute(Qt::WA_DeleteOnClose);
@@ -223,7 +223,7 @@ void adminMainWindow::on_pushButton_4_clicked()
 
 void adminMainWindow::on_pushButton_6_clicked()
 {
-    dnewreader *e=new dnewreader(this);
+    dnewreader *e=new dnewreader(this,mf);
     e->show();
 }
 
@@ -250,7 +250,7 @@ void adminMainWindow::on_pushButton_3_clicked()
     //    }
 
 
-        dmodifybook *mb=new dmodifybook(this,new book(bno),man);
+        dmodifybook *mb=new dmodifybook(this,new book(bno),man,mf);
         mb->show();
     }
 
@@ -261,8 +261,7 @@ void adminMainWindow::on_pushButton_7_clicked()
     int row=ui->tableWidget_2->currentRow();
     if(row>=0)
     {
-        ManagerStudentFactory mf;
-        student *s = mf.createStudent(ui->tableWidget_2->item(row,0)->text());
+        student *s = mf->createStudent(ui->tableWidget_2->item(row,0)->text());
     //    student *s = new student(ui->tableWidget_2->item(row,0)->text(),ui->tableWidget_2->item(row,1)->text(),
     //                             ui->tableWidget_2->item(row,2)->text(),ui->tableWidget_2->item(row,3)->text(),
     //                             ui->tableWidget_2->item(row,4)->text(),ui->tableWidget_2->item(row,5)->text(),

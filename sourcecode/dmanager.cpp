@@ -57,5 +57,5 @@ void dmanager::on_pushButton_12_clicked()
 void dmanager::on_pushButton_13_clicked()
 {
     dchangepassword *dc=new dchangepassword(this,mm);
-    dc.show();
+    dc->show();
 }

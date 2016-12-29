@@ -23,25 +23,39 @@ QString account::get_id() const
     return id;
 }
 
-QString account::get_passwd()const
+QString account::get_passwd() const
 {
     return passwd;
 }
 
+
 void account::set_name(const QString &s)
 {
     name=s;
+}
+QString account::get_name() const
+{
+    return name;
 }
 
 void account::set_birth(const QString &s)
 {
     birth=s;
 }
-
+QString account::get_birth() const
+{
+    return birth;
+}
 void account::set_sex(const QString &s)
 {
     sex=s;
 }
+
+QString account::get_sex() const
+{
+    return sex;
+}
+
 void account::set_level(const int s)
 {
     level=s;

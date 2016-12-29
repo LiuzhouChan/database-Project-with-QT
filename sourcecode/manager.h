@@ -2,11 +2,12 @@
 #define MANAGER_H
 #include <QString>
 #include <QSqlQuery>
-#include "student.h"
 #include "account.h"
-#include "book.h"
-#include "managerstudentfactory.h"
 #include "reader.h"
+#include "book.h"
+#include "student.h"
+#include "msfactory.h"
+class MSfactory;
 class manager:public account,public Reader
 {
 public:
@@ -15,7 +16,7 @@ public:
     manager(const QString&s);
     void save();
     void save_new();
-    void addNewReader(const QString &hid, const QString &hpassword, const QString &hname
+    void addNewReader(MSfactory *mf,const QString &hid, const QString &hpassword, const QString &hname
                       , const QString &hbirth, const QString &hsex, const int hlevel, const QString &hdept
                       , const int hmax_num, const int hdebt);
 
