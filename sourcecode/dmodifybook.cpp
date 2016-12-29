@@ -11,7 +11,6 @@ dmodifybook::dmodifybook(QWidget *parent,book *boo,manager *man):
     ui->lineEdit->setText(b->get_name());
     ui->lineEdit_2->setText(b->get_isbn());
     ui->lineEdit_3->setText(b->get_auther());
-    ui->lineEdit_4->setText(b->get_sno());
     ui->kdatecombobox->setDate(QDate::fromString(b->get_date(),"yyyy-MM-dd"));
     ui->lineEdit_6->setText(b->get_price());
     ui->lineEdit_9->setText(b->get_bookno());
@@ -31,7 +30,6 @@ dmodifybook::dmodifybook(QWidget *parent,book *boo,manager *man):
         ui->lineEdit->setReadOnly(true);
         ui->lineEdit_7->setReadOnly(true);
         ui->lineEdit_6->setReadOnly(true);
-        ui->lineEdit_4->setReadOnly(true);
         ui->lineEdit_3->setReadOnly(true);
         ui->lineEdit_2->setReadOnly(true);
         ui->lineEdit_9->setReadOnly(true);

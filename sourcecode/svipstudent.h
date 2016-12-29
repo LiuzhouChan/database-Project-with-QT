@@ -5,9 +5,11 @@
 class SVIPStudent:public VIPStudent
 {
 public:
-    SVIPStudent(const QString &hid, const QString &hpassword, const QString &hname,
-                const QString &hbirth, const QString &hsex, const int level, const QString
-                &hdept, const int hmax_num, const double hdebt);
+    SVIPStudent(const QString &hid,const QString &hpassword,const QString &hname
+                             ,const QString &hbirth, const QString &hsex,const int level, const QString &hdept
+                             ,const int hmax_num,const double hdebt);
+    SVIPStudent(const QString &id);
+
 };
 
 #endif // SVIPSTUDENT_H

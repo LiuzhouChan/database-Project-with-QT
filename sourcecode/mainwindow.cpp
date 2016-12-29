@@ -1,8 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QSql>
-#include <QSqlDatabase>
-#include <QSqlQuery>
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -37,41 +35,32 @@ void MainWindow::on_loginButton_clicked()
 {
     int login=0;
     QSqlQuery query(QSqlDatabase::database("myconnection"));
-    query.exec("select Mon,password from Manager");
-    while(query.next())
+    query.exec("select * from Reader where Rno=\""+ui->lineEdit_2->text()+"\"");
+    if(query.next())
     {
-        QString name = query.value(0).toString();
-        QString password = query.value(1).toString();
-        if(name==ui->lineEdit_2->text() && password==ui->lineEdit_3->text())
+        if(query.value(1).toString()==ui->lineEdit_3->text())
         {
             login=1;
             this->hide();
-            manager * man=new manager(name,password);
-            adminMainWindow *admin = new adminMainWindow(this,man);
-            admin->show();
-            return;
+
+            ManagerStudentFactory mf;
+            if(query.value(8).toString()=="0")//if it is manager
+            {
+                manager *man=mf.createManager(ui->lineEdit_2->text());
+                adminMainWindow *admin = new adminMainWindow(this,man);
+                admin->show();
+            }
+            else    //student
+            {
+                student *stu=mf.createStudent(ui->lineEdit_2->text());
+                studentMainWindow *studen=new studentMainWindow(this,stu);
+                studen->show();
+            }
         }
+
     }
 
-    query.exec("select * from Reader");
-    while(query.next())
-    {
-        QString name = query.value(0).toString();
-        QString password = query.value(1).toString();
-        if(name==ui->lineEdit_2->text() && password==ui->lineEdit_3->text())
-        {
-            login=1;
-            this->hide();
-            student *stu=new student(query.value(0).toString(),query.value(1).toString()
-                                     ,query.value(2).toString()
-                                    ,query.value(3).toString(),query.value(4).toString(),
-                                     query.value(5).toString()
-                                    ,query.value(6).toInt(),query.value(7).toDouble());
-            studentMainWindow *studen=new studentMainWindow(this,stu);
-            studen->show();
-            return;
-        }
-    }
+
     if(login==0)
     {
         ui->statusBar->showMessage("Either the username or password is uncorrect",5000);

@@ -2,7 +2,7 @@
 #define READER_H
 #include "book.h"
 #include "account.h"
-
+class book;
 class Reader
 {
 public:

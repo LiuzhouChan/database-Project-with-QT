@@ -7,12 +7,12 @@ student::student(const QString &hid, const QString &hpassword, const QString &hn
 {
 }
 
-virtual student::~student()
+student::~student()
 {
 
 }
 
-student::student(const QString & id):
+student::student(const QString & id)
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("select * from Reader where Rno=\""+id+"\"");
@@ -30,7 +30,7 @@ student::student(const QString & id):
         debt=query.value(7).toDouble();
     }
 
-    query.exec("select count(*) from BookForRent where Bposi=\""+get_id()+"\"");
+    query.exec("select count(*) from BookForRent where Bposi=\""+id+"\"");
     if(query.next())
     {
         num=query.value(0).toInt();
@@ -46,17 +46,8 @@ void student::set_debt(const double s){
     debt=s;
 }
 
-QString student::get_name()const{
-    return name;
-}
 
-QString student::get_birth()const{
-    return birth;
-}
 
-QString student::get_sex()const{
-    return sex;
-}
 
 QString student::get_dept()const{
     return dept;
@@ -78,7 +69,7 @@ int student::get_booknum()const
 {
     return num;
 }
-virtual void student::save()const
+void student::save()const
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("update Reader "
@@ -92,7 +83,7 @@ virtual void student::save()const
                "where Rno = \""+get_id()+"\" ");
 }
 
-virtual void student::save_new()const
+void student::save_new()const
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("insert into Reader values("
@@ -109,7 +100,7 @@ virtual void student::save_new()const
                 );
 }
 
-virtual int student::borrowBook(const account &a, book &b)
+int student::borrowBook(const account &a, book &b)
 {
     if(get_booknum()>=get_max())
     {
@@ -130,7 +121,7 @@ virtual int student::borrowBook(const account &a, book &b)
     return 0;
 }
 
-virtual void student::returnBook(const account &a, book &b)
+void student::returnBook(const account &a, book &b)
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     QString brno;
@@ -160,7 +151,7 @@ virtual void student::returnBook(const account &a, book &b)
     --num;
 }
 
-virtual int student::renewBook(const account &a, book &b)
+int student::renewBook(const account &a, book &b)
 {
     if(get_debt()>0)
     {

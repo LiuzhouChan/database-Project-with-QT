@@ -278,7 +278,7 @@ void studentMainWindow::on_pushButton_4_clicked()  //renew books
     if(row>-1)
     {
         book b(ui->tableWidget_2->item(row,1)->text());
-        if(QDateTime::currentDateTime()>b.duedate(stud))
+        if(QDateTime::currentDateTime()>b.duedate(*stud))
         {
             QMessageBox::about(this,"out of date","This book is out of date and can not been renew");
             return;

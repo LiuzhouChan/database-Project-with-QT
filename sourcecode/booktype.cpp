@@ -1,11 +1,10 @@
 #include "booktype.h"
 
-BookType::BookType()
+BookType::BookType(const QString &type):type(type)
 {
-
 }
 
-virtual BookType::~BookType()
+BookType::~BookType()
 {
 
 }

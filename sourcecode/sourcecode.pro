@@ -42,8 +42,6 @@ SOURCES += main.cpp\
     svipstudent.cpp \
     vipstudent.cpp \
     reader.cpp \
-    managerfactory.cpp \
-    studentfactory.cpp \
     readerfactory.cpp \
     dmanager.cpp
 
@@ -77,8 +75,6 @@ HEADERS  += mainwindow.h \
     svipstudent.h \
     vipstudent.h \
     reader.h \
-    managerfactory.h \
-    studentfactory.h \
     readerfactory.h \
     dmanager.h
 

@@ -1,54 +1,65 @@
 #include "managerstudentfactory.h"
 
 
-virtual student* ManagerStudentFactory::createStudent(const QString &hid,const QString &hpassword,const QString &hname
+student* ManagerStudentFactory::createStudent(const QString &hid,const QString &hpassword,const QString &hname
                                                       ,const QString &hbirth, const QString &hsex,const int level,
                                                       const QString &hdept
                                                       ,const int hmax_num,const double hdebt)
 {
-    switch (level)
+    if(level==1)
     {
-    case 1:
         return new student(hid,hpassword,hname,hbirth, hsex,level,hdept,hmax_num,hdebt);
-    case 2:
-        return new VIPStudent(hid,hpassword,hname,hbirth, hsex,level,hdept,hmax_num,hdebt);
-    case 3:
-        return new SVIPStudent(hid,hpassword,hname,hbirth, hsex,level,hdept,hmax_num,hdebt);
-    default:
-        return NULL;
-        break;
     }
+    else if(level==2)
+    {
+        return new VIPStudent(hid,hpassword,hname,hbirth, hsex,level,hdept,hmax_num,hdebt);
+    }
+    else if(level==3)
+    {
+        return new SVIPStudent(hid,hpassword,hname,hbirth, hsex,level,hdept,hmax_num,hdebt);
+    }
+    else
+    {
+        return NULL;
+    }
+
+
 }
 
-virtual student* ManagerStudentFactory::createStudent(const QString &hid)
+student* ManagerStudentFactory::createStudent(const QString &hid)
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
-    query.exec("select level from Reader where Rno=\""+id+"\"");
+    query.exec("select level from Reader where Rno=\""+hid+"\"");
     if(query.next())
     {
-        QString level(query.value(0).toInt());
-        switch (level)
+        int level(query.value(0).toInt());
+        if(level==1)
         {
-        case 1:
             return new student(hid);
-        case 2:
+        }
+        else if(level==2)
+        {
             return new VIPStudent(hid);
-        case 3:
+        }
+        else if(level==3)
+        {
             return new SVIPStudent(hid);
-        default:
-            break;
+        }
+        else
+        {
+            return NULL;
         }
     }
     return NULL;
 }
 
-virtual manager* ManagerStudentFactory::createManager(const QString &hid,const QString &hpassword,const QString &hname
+manager* ManagerStudentFactory::createManager(const QString &hid,const QString &hpassword,const QString &hname
                                                       ,const QString &hbirth, const QString &hsex,const int level)
 {
     return new manager(hid,hpassword,hname,hbirth, hsex,level);
 }
 
-virtual manager* ManagerStudentFactory::createManager(const QString &hid)
+manager* ManagerStudentFactory::createManager(const QString &hid)
 {
     return new manager(hid);
 }

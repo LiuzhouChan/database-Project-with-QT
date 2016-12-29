@@ -1,6 +1,6 @@
 #include "computerbook.h"
 
-ComputerBook::ComputerBook():type("computer")
+ComputerBook::ComputerBook():BookType("computer")
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("select Sno from Shelf where Stype=\""+type+"\"");
@@ -10,17 +10,17 @@ ComputerBook::ComputerBook():type("computer")
     }
 }
 
-virtual QString ComputerBook::getType()
+QString ComputerBook::getType()
 {
     return type;
 }
 
-virtual QString ComputerBook::getShelfnumber()
+QString ComputerBook::getShelfnumber()
 {
     return shelfNumber;
 }
 
-virtual void ComputerBook::setShelfnumber(QString & s)
+void ComputerBook::setShelfnumber(const QString & s)
 {
     shelfNumber=s;
 }

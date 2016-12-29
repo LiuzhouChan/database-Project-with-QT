@@ -1,6 +1,5 @@
 #include "reader.h"
 
-virtual Reader::~Reader()
+Reader::~Reader()
 {
-
 }

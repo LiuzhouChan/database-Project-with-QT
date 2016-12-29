@@ -4,25 +4,30 @@ BookFactory::BookFactory()
 {
 
 }
-virtual BookType* BookFactory::createBook(const QString & s)
+BookType* BookFactory::createBook(const QString & s)
 {
-    switch (s) {
-    case "computer":
+    if(s=="computer")
+    {
         return new ComputerBook();
-        break;
-    case "finance":
+    }
+    else if(s=="finance")
+    {
         return new FinanceBook();
-        break;
-    case "math":
+    }
+    else if(s=="math")
+    {
         return new MathBook();
-        break;
-    case "environment":
+    }
+    else if(s=="environment")
+    {
         return new EnvironmentBook();
-        break;
-    case "physics":
+    }
+    else if(s=="physics")
+    {
         return new PhysicsBook();
-        break;
-    default:
-        break;
+    }
+    else
+    {
+        return NULL;
     }
 }

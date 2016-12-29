@@ -9,7 +9,7 @@ manager::manager(const QString &hid, const QString &hpassword, const QString &hn
 manager::manager(const QString &s)
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
-    query.exec("select * from Reader where Rno=\""+id+"\"");
+    query.exec("select * from Reader where Rno=\""+s+"\"");
 
     if(query.next())
     {
@@ -100,24 +100,24 @@ void manager::modifybook(book &b,const QString &pname,const QString &pISBN
     b.save();
 }
 
-virtual int manager::borrowbook(Reader *s, book *b)
+int manager::borrowbook(Reader *s, book *b)
 {
     return s->borrowBook(*this,*b);
 }
 
-virtual void manager::returnbook(Reader *s, book *b)
+void manager::returnbook(Reader *s, book *b)
 {
     s->returnBook(*this,*b);
 }
 
-virtual int manager::renewbook(Reader *s, book *b)
+int manager::renewbook(Reader *s, book *b)
 {
     return s->renewBook(*this,*b);
 }
 
 
 
-virtual int manager::borrowBook(const account &a, book &b)
+int manager::borrowBook(const account &a, book &b)
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     QDateTime date=QDateTime::currentDateTime();
@@ -129,7 +129,7 @@ virtual int manager::borrowBook(const account &a, book &b)
     return 0;
 }
 
-virtual void manager::returnBook(const account &a, book &b)
+void manager::returnBook(const account &a, book &b)
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     QString brno;
@@ -142,7 +142,7 @@ virtual void manager::returnBook(const account &a, book &b)
                "where Bno = \""+b.get_bookno()+"\" ");
 }
 
-virtual int manager::renewBook(const account &a, book &b)
+int manager::renewBook(const account &a, book &b)
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("select BRno from BorrowRecord where "

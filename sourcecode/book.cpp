@@ -1,5 +1,5 @@
 #include "book.h"
-#include <QSqlQuery>
+
 
 //position is the shelf number, while state is in the table of BookForRent
 book::book(const QString &pname, const QString &pISBN
@@ -46,7 +46,7 @@ void book::set_type(const QString &s)
 {
     delete type;
     BookFactory b;
-    type=b.createBook(stype);
+    type=b.createBook(s);
 }
 
 void book::set_name(const QString & s)
@@ -64,10 +64,6 @@ void book::set_auther(const QString & s)
     auther=s;
 }
 
-void book::set_sno(const QString & s)
-{
-    sno=s;
-}
 
 void book::set_date(const QString & s)
 {

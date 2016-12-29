@@ -8,11 +8,11 @@ protected:
     QString type;
     QString shelfNumber;
 public:
-    BookType();
+    BookType(const QString &type);
     virtual ~BookType();
     virtual QString getType()=0;
     virtual QString getShelfnumber()=0;
-    virtual void setShelfnumber(QString & s)=0;
+    virtual void setShelfnumber(const QString & s)=0;
 };
 
 #endif // BOOKTYPE_H

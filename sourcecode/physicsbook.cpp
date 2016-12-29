@@ -1,6 +1,6 @@
 #include "physicsbook.h"
 
-PhysicsBook::PhysicsBook():type("physics")
+PhysicsBook::PhysicsBook():BookType("physics")
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("select Sno from Shelf where Stype=\""+type+"\"");
@@ -9,17 +9,17 @@ PhysicsBook::PhysicsBook():type("physics")
         shelfNumber=query.value(0).toString();
     }
 }
-virtual QString PhysicsBook::getType()
+QString PhysicsBook::getType()
 {
     return type;
 }
 
-virtual QString PhysicsBook::getShelfnumber()
+QString PhysicsBook::getShelfnumber()
 {
     return shelfNumber;
 }
 
-virtual void PhysicsBook::setShelfnumber(const QString &s)
+void PhysicsBook::setShelfnumber(const QString &s)
 {
     shelfNumber=s;
 }

@@ -1,6 +1,6 @@
 #include "environmentbook.h"
 
-EnvironmentBook::EnvironmentBook():type("environment")
+EnvironmentBook::EnvironmentBook():BookType("environment")
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("select Sno from Shelf where Stype=\""+type+"\"");
@@ -10,17 +10,17 @@ EnvironmentBook::EnvironmentBook():type("environment")
     }
 }
 
-virtual QString EnvironmentBook::getType()
+QString EnvironmentBook::getType()
 {
     return type;
 }
 
-virtual QString EnvironmentBook::getShelfnumber()
+QString EnvironmentBook::getShelfnumber()
 {
     return shelfNumber;
 }
 
-virtual void EnvironmentBook::setShelfnumber(const QString &s)
+void EnvironmentBook::setShelfnumber(const QString &s)
 {
     shelfNumber=s;
 }

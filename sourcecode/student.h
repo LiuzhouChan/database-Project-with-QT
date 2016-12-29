@@ -10,7 +10,7 @@
 #include "returnrecord.h"
 #include "renewrecord.h"
 #include "reader.h"
-
+class book;
 class student:public account,public Reader
 {
 private:

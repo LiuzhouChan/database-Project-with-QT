@@ -52,7 +52,7 @@ int account::get_level() const
     return level;
 }
 
-virtual account::~account()
+account::~account()
 {
 
 }

@@ -1,6 +1,6 @@
 #include "financebook.h"
 
-FinanceBook::FinanceBook():type("finance")
+FinanceBook::FinanceBook():BookType("finance")
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("select Sno from Shelf where Stype=\""+type+"\"");
@@ -9,17 +9,17 @@ FinanceBook::FinanceBook():type("finance")
         shelfNumber=query.value(0).toString();
     }
 }
-virtual QString FinanceBook::getType()
+QString FinanceBook::getType()
 {
     return type;
 }
 
-virtual QString FinanceBook::getShelfnumber()
+QString FinanceBook::getShelfnumber()
 {
     return shelfNumber;
 }
 
-virtual void FinanceBook::setShelfnumber(const QString &s)
+void FinanceBook::setShelfnumber(const QString &s)
 {
     shelfNumber=s;
 }
