@@ -1,14 +1,18 @@
 #include "student.h"
 
 student::student(const QString &hid, const QString &hpassword, const QString &hname
-                 , const QString &hbirth, const QString &hsex, const QString &hdept
+                 , const QString &hbirth, const QString &hsex,const int level, const QString &hdept
                  , const int hmax_num, const double hdebt):
-    account(hid,hpassword),name(hname),birth(hbirth),
-    sex(hsex),dept(hdept),max_num(hmax_num),debt(hdebt),num(0)
+    account(hid,hpassword,hname,hbirth,hsex,level),dept(hdept),max_num(hmax_num),debt(hdebt),num(0)
 {
 }
 
-student::student(const QString & id):account("","")
+student::~student()
+{
+
+}
+
+student::student(const QString & id)
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("select * from Reader where Rno=\""+id+"\"");
@@ -17,32 +21,22 @@ student::student(const QString & id):account("","")
     {
         set_id(query.value(0).toString());
         set_passwd(query.value(1).toString());
-        name=query.value(2).toString();
-        birth=query.value(3).toString();
-        sex=query.value(4).toString();
+        set_name(query.value(2).toString());
+        set_birth(query.value(3).toString());
+        set_sex(query.value(4).toString());
+        set_level(query.value(8).toInt());
         dept=query.value(5).toString();
         max_num=query.value(6).toInt();
         debt=query.value(7).toDouble();
     }
 
-    query.exec("select count(*) from BookForRent where Bposi=\""+get_id()+"\"");
+    query.exec("select count(*) from BookForRent where Bposi=\""+id+"\"");
     if(query.next())
     {
         num=query.value(0).toInt();
     }
 }
 
-void student::set_name(const QString &s){
-    name=s;
-}
-
-void student::set_birth(const QString &s){
-    birth=s;
-}
-
-void student::set_sex(const QString &s){
-    sex=s;
-}
 
 void student::set_dept(const QString &s){
     dept=s;
@@ -52,17 +46,8 @@ void student::set_debt(const double s){
     debt=s;
 }
 
-QString student::get_name()const{
-    return name;
-}
 
-QString student::get_birth()const{
-    return birth;
-}
 
-QString student::get_sex()const{
-    return sex;
-}
 
 QString student::get_dept()const{
     return dept;
@@ -89,9 +74,9 @@ void student::save()const
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("update Reader "
                "set password = \""+get_passwd()+"\", "
-               "Rname= \""+name+"\", "
-               "Rbirth= \""+birth+"\", "
-               "Rsex = "+sex+", "
+               "Rname= \""+get_name()+"\", "
+               "Rbirth= \""+get_birth()+"\", "
+               "Rsex = "+get_sex()+", "
                "Rdept= \""+dept+"\", "
                "BmaxNum= "+QString::number(max_num)+", "
                "Rdebt= "+QString::number(debt)+" "
@@ -104,18 +89,27 @@ void student::save_new()const
     query.exec("insert into Reader values("
                "\""+get_id()+"\","
                "\""+get_passwd()+"\","
-               "\""+name+"\","
-               "\""+birth+"\","
-               "\""+sex+"\","
+               "\""+get_name()+"\","
+               "\""+get_birth()+"\","
+               "\""+get_sex()+"\","
                "\""+dept+"\","
                ""+QString::number(max_num)+","
-               ""+QString::number(debt)+""
+               ""+QString::number(debt)+","
+               ""+QString::number(get_level())+""
                ")"
                 );
 }
 
-void student::borrowBook(const account &a, book &b)
+int student::borrowBook(const account &a, book &b)
 {
+    if(get_booknum()>=get_max())
+    {
+        return 2;  //book is too much
+    }
+    else if(get_debt()>0)
+    {
+        return 1;  //debt
+    }
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     QDateTime date=QDateTime::currentDateTime();
     brrowRecord brecord(a.get_id(),get_id(),b.get_bookno(),date.toString("yyyy-MM-dd hh:mm:ss"));
@@ -124,6 +118,7 @@ void student::borrowBook(const account &a, book &b)
                "set Bposi = \""+get_id()+"\" "
                "where Bno = \""+b.get_bookno()+"\" ");
     ++num;
+    return 0;
 }
 
 void student::returnBook(const account &a, book &b)
@@ -142,7 +137,7 @@ void student::returnBook(const account &a, book &b)
     query.exec("select * from Fine");
     if(query.next())
     {
-        day=query.value(0).toInt();
+        day=query.value(0).toInt()*get_level();
         rate=query.value(1).toDouble();
     }
     auto days=lastTime.daysTo(date);
@@ -156,8 +151,16 @@ void student::returnBook(const account &a, book &b)
     --num;
 }
 
-void student::renewBook(const account &a, book &b)
+int student::renewBook(const account &a, book &b)
 {
+    if(get_debt()>0)
+    {
+        return 1;
+    }
+    else if(QDateTime::currentDateTime()>b.duedate(*this))
+    {
+        return 2;
+    }
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("select BRno from BorrowRecord where "
                "Bno=\""+b.get_bookno()+"\" order by startTime desc");
@@ -169,4 +172,5 @@ void student::renewBook(const account &a, book &b)
     QDateTime date=QDateTime::currentDateTime();
     RenewRecord r(a.get_id(),brno,date.toString("yyyy-MM-dd HH:mm:ss"));
     r.save();
+    return 0;
 }

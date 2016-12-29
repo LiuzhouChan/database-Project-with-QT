@@ -9,7 +9,7 @@
 #include <QPushButton>
 #include <QRadioButton>
 #include <QMessageBox>
-
+#include "readerfactory.h"
 namespace Ui {
 class dmodifybook;
 }

@@ -7,7 +7,7 @@ dmodifyreader::dmodifyreader(QWidget *parent, student *ss, manager *mm) :
 {
     ui->setupUi(this);
     setAttribute(Qt::WA_DeleteOnClose);
-
+    ui->kratingwidget->setRating(s->get_level());
     ui->lineEdit->setText(s->get_name());
     ui->lineEdit_2->setText(s->get_id());
     ui->lineEdit_3->setText(s->get_passwd());
@@ -56,7 +56,8 @@ void dmodifyreader::on_pushButton_2_clicked()
         return;
     }
     m->modifyreader(*s,ui->lineEdit_3->text(),ui->lineEdit->text(),ui->kdatecombobox->date().toString("yyyy-MM-dd"),
-                    sex,ui->lineEdit_6->text(),ui->spinBox->value(),ui->lineEdit_8->text().toDouble());
+                    sex,ui->lineEdit_6->text(),ui->spinBox->value(),ui->lineEdit_8->text().toDouble(),
+                    ui->kratingwidget->rating());
     this->close();
 }
 

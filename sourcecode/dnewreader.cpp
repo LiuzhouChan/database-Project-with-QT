@@ -25,7 +25,7 @@ void dnewreader::on_pushButton_2_clicked()
 {
     //ok
     if(ui->lineEdit->text().isEmpty()||ui->lineEdit_2->text().isEmpty()||ui->lineEdit_3->text().isEmpty()||
-            ui->lineEdit_6->text().isEmpty())
+            ui->lineEdit_6->text().isEmpty()||ui->kratingwidget->rating()==0)
     {
         QMessageBox::about(this,"loss of info","You should edit all the lines");
         return;
@@ -46,10 +46,13 @@ void dnewreader::on_pushButton_2_clicked()
     {
         sex=1;
     }
-    student s(ui->lineEdit_2->text(),ui->lineEdit_3->text(),
-              ui->lineEdit->text(),ui->kdatecombobox->date().toString("yyyy-MM-dd"),QString::number(sex)
-              ,ui->lineEdit_6->text(),ui->spinBox->value(),0);
-    s.save_new();
+    ManagerStudentFactory mf;
+    student *s = mf.createStudent(ui->lineEdit_2->text(),ui->lineEdit_3->text(),
+                     ui->lineEdit->text(),ui->kdatecombobox->date().toString("yyyy-MM-dd"),QString::number(sex),
+                                  ui->kratingwidget->rating()
+                     ,ui->lineEdit_6->text(),ui->spinBox->value(),0);
+    s->save_new();
+    delete s;
     QMessageBox::about(this,"Add new reader","Successful");
     this->close();
 

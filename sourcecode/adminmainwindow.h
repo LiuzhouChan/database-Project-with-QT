@@ -16,7 +16,7 @@
 #include "dnewbook.h"
 #include "dmodifybook.h"
 #include "dmodifyreader.h"
-
+#include "dmanager.h"
 namespace Ui {
 class adminMainWindow;
 }

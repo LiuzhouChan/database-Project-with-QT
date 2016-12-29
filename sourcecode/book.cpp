@@ -1,37 +1,35 @@
 #include "book.h"
-#include <QSqlQuery>
+
 
 //position is the shelf number, while state is in the table of BookForRent
-book::book(const QString &pname,const QString &pISBN
-           ,const QString &pauther,const QString &psno, const QString &pdate
-           ,const QString &pprice, const QString &pbookno,
-           const QString &ppublish,const QString &pstate) :
+book::book(const QString &pname, const QString &pISBN
+           , const QString &pauther, const QString &stype, const QString &pdate
+           , const QString &pprice, const QString &pbookno,
+           const QString &ppublish, const QString &pstate) :
             name(pname),ISBN(pISBN),auther(pauther),
-            sno(psno),date(pdate),price(pprice),bookno(pbookno),
-            publish(ppublish),state(pstate),type("")
+            date(pdate),price(pprice),bookno(pbookno),
+            publish(ppublish),state(pstate)
 {
-    QSqlQuery query(QSqlDatabase::database("myconnection"));
-    query.exec("select Stype from Shelf where Sno=\""+sno+"\" ");
-    if(query.next())
-    {
-        type = query.value(0).toString();
-    }
+    BookFactory b;
+    type=b.createBook(stype);
 }
 
 book::book(const QString &bnoo):bookno(bnoo)
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
-    query.exec("select Book.Bname,Book.ISBN,Book.Bauthor,Book.Sno,"
+    query.exec("select Book.Bname,Book.ISBN,Book.Bauthor,Shelf.Stype,"
                "Book.Bdate,Book.Bprice,Book.Bpublisher,"
                "BookForRent.Bposi"
-               " from Book,BookForRent where BookForRent.ISBN=Book.ISBN and "
-               "BookForRent.Bno=\""+bnoo+"\"");
+               " from Book,BookForRent,Shelf where BookForRent.ISBN=Book.ISBN and "
+               "BookForRent.Bno=\""+bnoo+"\"and Shelf.Sno=Book.Sno");
     if(query.next())
     {
+
         name=query.value(0).toString();
         ISBN=query.value(1).toString();
         auther=query.value(2).toString();
-        sno=query.value(3).toString();
+        BookFactory b;
+        type=b.createBook(query.value(3).toString());
         date=query.value(4).toString();
         price=query.value(5).toString(),
         publish=query.value(6).toString();
@@ -41,14 +39,15 @@ book::book(const QString &bnoo):bookno(bnoo)
             state="NULL";
         }
     }
-    query.exec("select Stype from Shelf where Sno=\""+sno+"\" ");
-    if(query.next())
-    {
-        type = query.value(0).toString();
-    }
 
 }
 
+void book::set_type(const QString &s)
+{
+    delete type;
+    BookFactory b;
+    type=b.createBook(s);
+}
 
 void book::set_name(const QString & s)
 {
@@ -65,10 +64,6 @@ void book::set_auther(const QString & s)
     auther=s;
 }
 
-void book::set_sno(const QString & s)
-{
-    sno=s;
-}
 
 void book::set_date(const QString & s)
 {
@@ -112,7 +107,7 @@ QString book::get_auther()const
 
 QString book::get_type()const
 {
-    return type;
+    return type->getType();
 }
 
 QString book::get_date()const
@@ -139,7 +134,7 @@ QString book::get_state()const
 
 QString book::get_sno()const
 {
-    return sno;
+    return type->getShelfnumber();
 }
 
 QDateTime book::lastborrow(QString &brno) const
@@ -167,18 +162,18 @@ QDateTime book::lastborrow(QString &brno) const
     return lastTime;
 
 }
-
-QDateTime book::duedate() const
+//after finish the student class
+QDateTime book::duedate(account &ss) const
 {
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     int day;
-    query.exec("select maxday from Fine");
+    query.exec("select Bposi from BookForRent where Bno=\""+bookno+"\""); //sss
     if(query.next())
     {
         day=query.value(0).toInt();
     }
     QString brno;
-    return lastborrow(brno).addDays(day);
+    return lastborrow(brno).addDays(day*ss.get_level());
 }
 
 void book::save()
@@ -186,7 +181,7 @@ void book::save()
     QSqlQuery query(QSqlDatabase::database("myconnection"));
     query.exec("update Book "
                "set Bname = \""+name+"\", "
-               "Sno= \""+sno+"\", "
+               "Sno= \""+type->getShelfnumber()+"\", "
                "Bpublisher= \""+publish+"\", "
                "Bauthor = \""+auther+"\", "
                "Bdate= \""+date+"\", "
@@ -214,7 +209,7 @@ void book::save_new()
     query.exec("insert into Book values("
                "\""+ISBN+"\","
                "\""+name+"\","
-               "\""+sno+"\","
+               "\""+type->getShelfnumber()+"\","
                "\""+publish+"\","
                "\""+auther+"\","
                "\""+date+"\","

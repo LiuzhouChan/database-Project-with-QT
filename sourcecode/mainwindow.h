@@ -9,6 +9,10 @@
 #include "studentmainwindow.h"
 #include "manager.h"
 #include "student.h"
+#include <QSql>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+
 namespace Ui {
 class MainWindow;
 }

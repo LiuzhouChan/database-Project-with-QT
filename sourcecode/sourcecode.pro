@@ -30,7 +30,20 @@ SOURCES += main.cpp\
     dsqlip.cpp \
     dchangepassword.cpp \
     dmodifyreader.cpp \
-    schangepassword.cpp
+    schangepassword.cpp \
+    booktype.cpp \
+    mathbook.cpp \
+    environmentbook.cpp \
+    computerbook.cpp \
+    financebook.cpp \
+    physicsbook.cpp \
+    bookfactory.cpp \
+    managerstudentfactory.cpp \
+    svipstudent.cpp \
+    vipstudent.cpp \
+    reader.cpp \
+    readerfactory.cpp \
+    dmanager.cpp
 
 HEADERS  += mainwindow.h \
     adminmainwindow.h \
@@ -50,7 +63,20 @@ HEADERS  += mainwindow.h \
     dsqlip.h \
     dchangepassword.h \
     dmodifyreader.h \
-    schangepassword.h
+    schangepassword.h \
+    booktype.h \
+    mathbook.h \
+    environmentbook.h \
+    computerbook.h \
+    financebook.h \
+    physicsbook.h \
+    bookfactory.h \
+    managerstudentfactory.h \
+    svipstudent.h \
+    vipstudent.h \
+    reader.h \
+    readerfactory.h \
+    dmanager.h
 
 FORMS    += mainwindow.ui \
     adminmainwindow.ui \
@@ -62,7 +88,8 @@ FORMS    += mainwindow.ui \
     dsqlip.ui \
     dchangepassword.ui \
     dmodifyreader.ui \
-    schangepassword.ui
+    schangepassword.ui \
+    dmanager.ui
 
 RESOURCES += \
     icon.qrc
